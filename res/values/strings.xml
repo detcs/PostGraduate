@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TestViewPager2</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <!-- note -->
+	<string name="today_rec">今日推荐</string>
+	<string name="diary">今天是复习的第1天</string>
+	<string name="course_choose">你只能选择四门科目</string>
+	<string name="english">英语</string>
+	<string name="politics">政治</string>
+	<string name="math">数学</string>
+	<string name="professional_course">专业课</string>
+	<string name="complete">完成</string>
+	<string name="back">返回</string>
+	<string name="reverse_review">倒序复习</string>
+	<string name="ebbinghaus_review">艾宾浩斯曲线复习</string>
+	<string name="get">get</string>
+	<string name="collect">收藏</string>
+	<string name="master">掌握</string>
+	<string name="unmaster">未掌握</string>
+	<string name="date">2015.1.25</string>
+	<string name="problems">重难点</string>
+	<string name="myfootprint">我的足迹</string>
+	
+	<!-- functions square -->
+	<string name="essence">精华</string>
+	<string name="square">广场</string>
+	<string name="vip">vip</string>
+	<string name="backup">备份</string>
+</resources>
