@@ -20,6 +20,10 @@
 	<string name="collect">收藏</string>
 	<string name="master">掌握</string>
 	<string name="unmaster">未掌握</string>
+	<string name="remark">备注</string>
+	<string name="clock">打卡</string>
+	<string name="day">天</string>
+	<string name="task_complete">你已完成今天的所有任务</string>
 	<string name="date">2015.1.25</string>
 	<string name="problems">重难点</string>
 	<string name="myfootprint">我的足迹</string>

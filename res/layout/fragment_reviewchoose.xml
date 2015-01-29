@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
    >
+   
    <LinearLayout
        	android:id="@+id/review_choose"
        	android:orientation="horizontal"
@@ -25,5 +26,11 @@
     		android:layout_weight="1"
            />
        </LinearLayout> 
-
+	<GridView
+	    android:id="@+id/exercise_timeline_grid"
+       	android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:numColumns="3"
+    	android:layout_above="@id/review_choose"
+       />
 </RelativeLayout>

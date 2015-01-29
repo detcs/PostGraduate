@@ -26,10 +26,31 @@
     		android:layout_weight="1"
            />
        </LinearLayout> 
+       <LinearLayout
+           android:id="@+id/remark_linear"
+           android:layout_above="@id/direction_choose"
+            android:layout_width="match_parent"
+	    	android:layout_height="wrap_content" 
+	    	android:orientation="vertical">
+       <TextView
+            android:text="@string/remark"
+	        android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	
+           />
+        <TextView
+            android:id="@+id/remark_content"
+            android:text="remark_context"
+	        android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	
+           />
+       
+       </LinearLayout>
         <ImageView
-        android:src="@drawable/year"
-        android:layout_width="match_parent"
-    	android:layout_height="match_parent"
-    	android:layout_above="@id/direction_choose"
+            android:id="@+id/review_img"
+	        android:layout_width="match_parent"
+	    	android:layout_height="match_parent"
+	    	android:layout_above="@id/remark_linear"
         />
 </RelativeLayout>

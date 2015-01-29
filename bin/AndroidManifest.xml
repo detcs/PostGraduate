@@ -15,7 +15,7 @@
         android:theme="@android:style/Theme.Black.NoTitleBar" 
         >
         <activity
-            android:name="com.example.testviewpager2.MainActivity"
+            android:name="com.pages.viewpager.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,6 +38,25 @@
             android:label="@string/app_name" >
            
         </activity>
+        <activity
+            android:name="com.pages.funsquare.essence.EssenseActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.pages.funsquare.square.SquareActivity"
+          
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.pages.funsquare.reserve.ReservedActivity"
+            >
+        </activity>
     </application>
-
+ 	<uses-permission android:name="android.permission.INTERNET" />
+ 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 </manifest>

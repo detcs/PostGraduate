@@ -5,11 +5,21 @@ import java.util.List;
 
 
 
+
+
+
+
+
 import com.example.testviewpager2.R;
+import com.pages.funsquare.essence.EssenseActivity;
+import com.pages.funsquare.reserve.ReservedActivity;
+import com.pages.funsquare.square.SquareActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -52,7 +62,7 @@ public class ButtonsGridViewAdapter extends BaseAdapter{
 	    // to reinflate it. We only inflate a new View when the convertView supplied 
 	    // by ListView is null. 
 	    if (convertView == null) { 
-	        convertView = mInflater.inflate(R.layout.button_func_item, null); 
+	        convertView = mInflater.inflate(R.layout.itme_button_func, null); 
 	        //Log.v("tag", "positon " + position + " convertView is null, " + "new: " + convertView); 
 	        // Creates a ViewHolder and store references to the two children views 
 	        // we want to bind data to. 
@@ -65,7 +75,47 @@ public class ButtonsGridViewAdapter extends BaseAdapter{
 	        holder = (ViewHolder) convertView.getTag(); 
 	    } 
 	    // Bind the data efficiently with the holder. 
-	    holder.button.setText(names.get(position)); 
+	    holder.button.setText(names.get(position));
+	    if(names.get(position).equals(context.getResources().getString(R.string.essence)))
+	    {
+	    	holder.button.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					// TODO Auto-generated method stub
+					Intent intent=new Intent();
+					intent.setClass(context,EssenseActivity.class);
+					context.startActivity(intent);
+				}
+			});
+	    }
+	    else if(names.get(position).equals(context.getResources().getString(R.string.square)))
+	    {
+	    	holder.button.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					// TODO Auto-generated method stub
+					Intent intent=new Intent();
+					intent.setClass(context,SquareActivity.class);
+					context.startActivity(intent);
+				}
+			});
+	    }
+	    else if(names.get(position).equals(context.getResources().getString(R.string.backup)))
+	    {
+	    	holder.button.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					// TODO Auto-generated method stub
+					Intent intent=new Intent();
+					intent.setClass(context,ReservedActivity.class);
+					context.startActivity(intent);
+				}
+			});
+	    }
+	    
 	    return convertView; 
 	}
 	static class ViewHolder { 

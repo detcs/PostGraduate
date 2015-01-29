@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <TextView
+        android:text="@string/task_complete"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_weight="5"
+    	android:gravity="center"
+        />
+	<Button
+	    android:id="@+id/goto_clock_btn"
+	    android:text="@string/clock"
+	    android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_weight="1"
+    	android:gravity="center"
+	    />
+</LinearLayout>

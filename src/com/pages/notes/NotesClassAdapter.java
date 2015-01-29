@@ -2,8 +2,8 @@ package com.pages.notes;
 
 import java.util.List;
 
-import com.example.testviewpager2.MainActivity;
 import com.example.testviewpager2.R;
+import com.pages.viewpager.MainActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -48,7 +48,7 @@ public class NotesClassAdapter extends BaseAdapter{
 	    // to reinflate it. We only inflate a new View when the convertView supplied 
 	    // by ListView is null. 
 	    if (convertView == null) { 
-	        convertView = mInflater.inflate(R.layout.button_func_item, null); 
+	        convertView = mInflater.inflate(R.layout.itme_button_func, null); 
 	        // Creates a ViewHolder and store references to the two children views 
 	        // we want to bind data to. 
 	        holder = new ViewHolder(); 
