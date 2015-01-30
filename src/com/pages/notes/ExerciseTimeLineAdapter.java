@@ -3,7 +3,7 @@ package com.pages.notes;
 import java.io.File;
 import java.util.List;
 
-import com.example.testviewpager2.R;
+import com.app.ydd.R;
 import com.pages.notes.NotesClassAdapter.ViewHolder;
 import com.squareup.picasso.Picasso;
 

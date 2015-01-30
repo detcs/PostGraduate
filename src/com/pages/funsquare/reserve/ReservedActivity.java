@@ -1,6 +1,6 @@
 package com.pages.funsquare.reserve;
 
-import com.example.testviewpager2.R;
+import com.app.ydd.R;
 import com.view.util.SysCall;
 
 import android.app.Activity;

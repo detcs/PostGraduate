@@ -7,7 +7,7 @@ import com.android.volley.RequestQueue;
 import com.data.model.Exercise;
 import com.data.model.Information;
 import com.data.model.Material;
-import com.example.testviewpager2.R;
+import com.app.ydd.R;
 import com.view.util.MyAdapter;
 import com.view.util.ViewGenerator;
 

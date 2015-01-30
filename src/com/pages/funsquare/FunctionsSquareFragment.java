@@ -3,7 +3,7 @@ package com.pages.funsquare;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.testviewpager2.R;
+import com.app.ydd.R;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

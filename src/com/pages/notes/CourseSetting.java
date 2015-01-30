@@ -2,7 +2,7 @@ package com.pages.notes;
 
 
 
-import com.example.testviewpager2.R;
+import com.app.ydd.R;
 
 import android.app.Activity;
 import android.os.Bundle;

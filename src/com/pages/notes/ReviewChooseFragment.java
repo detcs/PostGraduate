@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.testviewpager2.R;
+import com.app.ydd.R;
 
 import android.os.Bundle;
 import android.os.Environment;

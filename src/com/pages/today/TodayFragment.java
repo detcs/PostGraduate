@@ -1,6 +1,6 @@
 package com.pages.today;
 
-import com.example.testviewpager2.R;
+import com.app.ydd.R;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

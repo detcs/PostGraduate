@@ -2,7 +2,7 @@ package com.pages.funsquare.square;
 
 
 import com.data.model.Post;
-import com.example.testviewpager2.R;
+import com.app.ydd.R;
 import com.view.util.MyAdapter;
 
 import android.app.Activity;

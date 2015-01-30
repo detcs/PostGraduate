@@ -3,7 +3,7 @@ package com.pages.viewpager;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.testviewpager2.R;
+import com.app.ydd.R;
 import com.pages.funsquare.ButtonsGridViewAdapter;
 import com.pages.funsquare.FunctionsSquareFragment;
 import com.pages.notes.CourseSetting;

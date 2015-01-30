@@ -2,7 +2,7 @@ package com.pages.funsquare.square;
 
 
 
-import com.example.testviewpager2.R;
+import com.app.ydd.R;
 import com.pages.funsquare.square.SquareFragment.PubOrDetail;
 import com.pages.funsquare.square.SquareInformFragment.InformDetail;
 

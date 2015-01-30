@@ -10,7 +10,7 @@ import java.util.List;
 
 
 
-import com.example.testviewpager2.R;
+import com.app.ydd.R;
 import com.pages.funsquare.essence.EssenseActivity;
 import com.pages.funsquare.reserve.ReservedActivity;
 import com.pages.funsquare.square.SquareActivity;
@@ -62,7 +62,7 @@ public class ButtonsGridViewAdapter extends BaseAdapter{
 	    // to reinflate it. We only inflate a new View when the convertView supplied 
 	    // by ListView is null. 
 	    if (convertView == null) { 
-	        convertView = mInflater.inflate(R.layout.itme_button_func, null); 
+	        convertView = mInflater.inflate(R.layout.item_button_func, null); 
 	        //Log.v("tag", "positon " + position + " convertView is null, " + "new: " + convertView); 
 	        // Creates a ViewHolder and store references to the two children views 
 	        // we want to bind data to. 

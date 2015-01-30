@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.testviewpager2.R;
+import com.app.ydd.R;
 import com.squareup.picasso.Picasso;
 
 import android.os.Bundle;
