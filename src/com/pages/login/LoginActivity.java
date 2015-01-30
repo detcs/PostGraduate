@@ -31,6 +31,7 @@ import com.sina.weibo.sdk.openapi.models.User;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -38,6 +39,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginActivity extends Activity{
@@ -46,7 +48,7 @@ public class LoginActivity extends Activity{
 	Button qqLogin;
 	EditText phone;
 	EditText password;
-	Button register;
+	TextView register;
 	Button phoneLogin;
 	//weibo
 		 private AuthInfo mAuthInfo;
@@ -60,7 +62,7 @@ public class LoginActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		if(UserConfigs.getAccount()==null)
+		if(UserConfigs.getAccount()!=null)//debug
 		{
 			setContentView(R.layout.activity_login);
 			phone=(EditText)findViewById(R.id.username_edit);
@@ -74,6 +76,18 @@ public class LoginActivity extends Activity{
 				public void onClick(View arg0) {
 					// TODO Auto-generated method stub
 					weiboLogin();
+				}
+			});
+			register=(TextView)findViewById(R.id.register_link);
+			register.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
+			register.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					// TODO Auto-generated method stub
+					Intent intent=new Intent();
+					intent.setClass(LoginActivity.this, RegisterActivity.class);
+					startActivity(intent);
 				}
 			});
 		}

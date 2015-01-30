@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+     <com.pages.notes.camera.MySurfaceView
+        android:id="@+id/mySurfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+     <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent" >
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content" >
+
+             <TextView
+                 android:id="@+id/closeView"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="close" />
+
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_alignParentBottom="true" >
+
+             <TextView
+                 android:id="@+id/pickView"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="從相冊選取" />
+
+             <Button
+                 android:id="@+id/takeBu"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="take" />
+
+         </LinearLayout>
+
+     </RelativeLayout>
+
+</FrameLayout>

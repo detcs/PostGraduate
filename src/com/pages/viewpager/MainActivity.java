@@ -11,6 +11,7 @@ import com.pages.notes.ExerciseActivity;
 import com.pages.notes.FootPrintActivity;
 import com.pages.notes.NoteFragment;
 import com.pages.notes.NotesClassAdapter;
+import com.pages.notes.camera.CameraActivity;
 import com.pages.today.TodayFragment;
 
 import android.app.Activity;
@@ -228,11 +229,11 @@ public class MainActivity extends FragmentActivity {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				Log.i("filp",""+arg0.getId()+" button 1");
-				/*
+				
 				Intent intent=new Intent();
-				intent.setClass(MainActivity.this, ExerciseActivity.class);
+				intent.setClass(MainActivity.this, CameraActivity.class);
 				startActivity(intent);
-				*/
+				
 			}
 		});
 		GridView gv=(GridView)v.findViewById(R.id.notes_grid);
