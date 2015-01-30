@@ -37,6 +37,7 @@ public class CourseSettingFragment extends Fragment {
 	
 	EditText professEdit;
 	Button complete;
+	CourseSettingInfo info;
 //	int[] englishButtonIds={R.id.english1,R.id.english2,R.id.english3};
 //	int[] englishChooseImgIds={R.id.english1_choose,R.id.english2_choose,R.id.english3_choose};
 	
@@ -45,7 +46,7 @@ public class CourseSettingFragment extends Fragment {
 			Bundle saveInstanceState) {
 		
 		View rootView = inflater.inflate(R.layout.fragment_course_set, container, false);
-		
+		info=new CourseSettingInfo();
 		english1=(Button)rootView.findViewById(R.id.english1);
 		english2=(Button)rootView.findViewById(R.id.english2);
 		english3=(Button)rootView.findViewById(R.id.english3);
@@ -61,6 +62,7 @@ public class CourseSettingFragment extends Fragment {
 				imgEng1.setVisibility(View.VISIBLE);
 				imgEng2.setVisibility(View.INVISIBLE);
 				imgEng3.setVisibility(View.INVISIBLE);
+				info.setEnglish("english1");
 			}
 		});
 		english2.setOnClickListener(new OnClickListener() {
@@ -145,14 +147,15 @@ public class CourseSettingFragment extends Fragment {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				makeCourseFileDir();
+				info.storeToConfig();
+				makeCourseFileDir(info);
 			}
 		});
 		return rootView;
 	}
-	private void makeCourseFileDir()
+	private void makeCourseFileDir(CourseSettingInfo info)
 	{
-		if   (DataConstants.SD_PATH!=null)      //如果SD卡存在，则获取跟目录
+		if(DataConstants.SD_PATH!=null)      //如果SD卡存在，则获取跟目录
 		{                               
 			DataConstants.SD_PATH = Environment.getExternalStorageDirectory().toString();//获取跟目录 
 			String dirPath=DataConstants.SD_PATH+"/"+DataConstants.PHOTO_DIR_PATH;

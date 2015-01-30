@@ -17,6 +17,17 @@
     <string name="user_nickname">nickname</string>
     <string name="user_verify">verify</string>
     <string name="user_id">userid</string>
+    <string name="course_english_name">courseEnglishName</string>
+    <string name="course_math_name">courseMathName</string>
+    <string name="course_politics_name">coursePoliticsName</string>
+    <string name="course_profess1_name">courseProfess1Name</string>
+    <string name="course_profess2_name">courseProfess2Name</string>
+    <!-- database -->
+     <string name="db_photo_name">dbPicName</string>
+     <string name="db_photo_base64">dbPicBase64</string>
+     <string name="db_remark">dbRemark</string>
+     <string name="db_time">dbTime</string>
+     <string name="db_flag">dbFlag</string>
     <!-- login -->
     <string name="account">账号</string>
     <string name="password">密码</string>

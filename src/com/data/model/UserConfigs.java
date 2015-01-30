@@ -98,6 +98,56 @@ public class UserConfigs
 	{		
 		return sp.getString(context.getResources().getString(R.string.is_first_take_photo),null);
 	}
+	public static void storeCourseEnglishName(String englishName)
+	{
+		editor= sp.edit();//获取编辑器
+		editor.putString(context.getResources().getString(R.string.course_english_name),englishName);
+		editor.commit();//提交修改
+	}
+	public static String getCourseEnglishName()
+	{		
+		return sp.getString(context.getResources().getString(R.string.course_english_name),null);
+	}
+	public static void storeCourseMathName(String mathName)
+	{
+		editor= sp.edit();//获取编辑器
+		editor.putString(context.getResources().getString(R.string.course_math_name),mathName);
+		editor.commit();//提交修改
+	}
+	public static String getCourseMathName()
+	{		
+		return sp.getString(context.getResources().getString(R.string.course_math_name),null);
+	}
+	public static void storeCoursePoliticsName(String politicsName)
+	{
+		editor= sp.edit();//获取编辑器
+		editor.putString(context.getResources().getString(R.string.course_politics_name),politicsName);
+		editor.commit();//提交修改
+	}
+	public static String getCoursePoliticsName()
+	{		
+		return sp.getString(context.getResources().getString(R.string.course_politics_name),null);
+	}
+	public static void storeCourseProfessOneName(String professName)
+	{
+		editor= sp.edit();//获取编辑器
+		editor.putString(context.getResources().getString(R.string.course_profess1_name),professName);
+		editor.commit();//提交修改
+	}
+	public static String getCourseProfessOneName()
+	{		
+		return sp.getString(context.getResources().getString(R.string.course_profess1_name),null);
+	}
+	public static void storeCourseProfessTwoName(String professName)
+	{
+		editor= sp.edit();//获取编辑器
+		editor.putString(context.getResources().getString(R.string.course_profess2_name),professName);
+		editor.commit();//提交修改
+	}
+	public static String getCourseProfessTwoName()
+	{		
+		return sp.getString(context.getResources().getString(R.string.course_profess2_name),null);
+	}
 	
 
 }
