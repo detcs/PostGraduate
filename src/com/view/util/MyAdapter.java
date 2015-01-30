@@ -1,72 +1,92 @@
 package com.view.util;
 
-import com.android.volley.RequestQueue;
-
-
+import com.app.ydd.R;
 import com.data.model.DataBuffer;
-import com.data.model.GloableData;
-import com.pages.funsquare.essence.EssenseFragment;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+/*
+ * author:wsy
+ * time:2015/1/29
+ * last change:2015/1/29
+ * 
+ * */
+
 public class MyAdapter extends BaseAdapter {
 	private Context context;
-	private DataBuffer<?> buffer;
-	private RequestQueue requestQueue;
+	private DataBuffer buffer;
 	private int type;
 
-	public MyAdapter(Context context, int dataType, RequestQueue requestQueue) {
+	public MyAdapter(Context context, int dataType) {
 		// TODO Auto-generated constructor stub
 		this.context = context;
-		this.requestQueue = requestQueue;
-		this.type = type;
+		type = dataType;
 		init();
 	}
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
-		// return buffer.getCount();
 		return buffer.getCount();
 	}
 
 	@Override
-	public Object getItem(int position) {
-		// TODO Auto-generated method stub
-
-		return null;
+	public ViewGenerator getItem(int position) {
+		return buffer.getDataItem(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
 		return position;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
-		// ViewGenerator generator = buffer.getDataItem(position);
-		// return generator.getBriefView();
-		TextView textView = new TextView(context);
-		textView.setText("textView: " + position);
-		return textView;
+		ViewHolder holder;
+		if (null == convertView) {
+			convertView = LayoutInflater.from(context).inflate(
+					R.layout.essense_list_item, parent, false);
+			holder = new ViewHolder();
+			holder.title = (TextView) convertView.findViewById(R.id.titleView);
+			holder.author = (TextView) convertView
+					.findViewById(R.id.authorView);
+			holder.time = (TextView) convertView.findViewById(R.id.timeView);
+			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder) convertView.getTag();
+		}
+		ViewGenerator vg = getItem(position);
+		String author = ViewGenerator.DEFAULT_AUTHOR;
+		String title = ViewGenerator.DEFAULT_TITLE;
+		String time = ViewGenerator.DEFAULT_TIME;
+		if (null != vg) {
+			author = vg.getAuthor();
+			title = vg.getTitle();
+			time = vg.getTime();
+		}
+		holder.author.setText(author);
+		holder.title.setText(title);
+		holder.time.setText(time);
+		return convertView;
+	}
+
+	static class ViewHolder {
+		TextView title;
+		TextView author;
+		TextView time;
 	}
 
 	// *********************init*********************
 	private void init() {
-
+		initVariable();
 	}
 
-	// *********************util*********************
-	private String getURL(int page, int limit, int type) {
-		String reStr = GloableData.URL + EssenseFragment.PATH
-				+ GloableData.getParam() + "&page=" + page + "&limit=" + limit
-				+ "&type=" + type;
-		return reStr;
+	private void initVariable() {
+		// init buffer
+		buffer = new DataBuffer(type, this);
 	}
 }

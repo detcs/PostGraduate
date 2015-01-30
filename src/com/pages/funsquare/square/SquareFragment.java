@@ -1,8 +1,8 @@
 package com.pages.funsquare.square;
 
 
-import com.data.model.Post;
 import com.app.ydd.R;
+import com.data.model.Post;
 import com.view.util.MyAdapter;
 
 import android.app.Activity;
@@ -74,7 +74,7 @@ public class SquareFragment extends Fragment {
 
 	private void initListView() {
 		Context context = getActivity().getBaseContext();
-		postAdapter = new MyAdapter(context, Post.TYPE, null);
+		postAdapter = new MyAdapter(context, Post.TYPE);
 		listView1.setAdapter(postAdapter);
 	}
 

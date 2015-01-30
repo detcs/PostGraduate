@@ -1,11 +1,7 @@
 package com.pages.funsquare.essence;
 
-
 import com.app.ydd.R;
 import com.view.util.ViewGenerator;
-
-import android.app.Activity;
-
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -41,7 +37,7 @@ public class EssenseActivity extends FragmentActivity implements
 	@Override
 	public void switchToDetail(ViewGenerator viewGenerator) {
 		// TODO Auto-generated method stub
-		//todo
+		// todo
 		EssenseDetailFragment fragment = new EssenseDetailFragment();
 		FragmentManager manager = getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();

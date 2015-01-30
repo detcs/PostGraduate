@@ -1,7 +1,5 @@
 package com.data.model;
 
-import android.view.View;
-
 import com.view.util.ViewGenerator;
 
 /*
@@ -10,35 +8,39 @@ import com.view.util.ViewGenerator;
  * */
 public class Material implements ViewGenerator {
 	public static final int TYPE = 0;
+	private String author;
+	private String title;
+	private String time;
 
-	@Override
-	public View getBriefView() {
-		// TODO Auto-generated method stub
-		return null;
+	public Material() {
+		// TODO Auto-generated constructor stub
+		author = "wsy";
+		title = "material";
+		time = "2015-1-29";
+	}
+
+	public Material(String title, String author, String time) {
+		this.title = title;
+		this.time = time;
+		this.author = author;
 	}
 
 	@Override
-	public View getDetailView() {
+	public String getTitle() {
 		// TODO Auto-generated method stub
-		return null;
+		return title;
 	}
 
 	@Override
-	public void releaseBrief() {
+	public String getAuthor() {
 		// TODO Auto-generated method stub
-
+		return author;
 	}
 
 	@Override
-	public void releaseDetail() {
+	public String getTime() {
 		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void release() {
-		// TODO Auto-generated method stub
-
+		return time;
 	}
 
 }

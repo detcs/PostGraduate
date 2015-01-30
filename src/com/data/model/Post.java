@@ -1,7 +1,5 @@
 package com.data.model;
 
-import android.view.View;
-
 import com.view.util.ViewGenerator;
 
 /*
@@ -12,33 +10,21 @@ public class Post implements ViewGenerator {
 	public static final int TYPE = 3;
 
 	@Override
-	public View getBriefView() {
+	public String getTitle() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public View getDetailView() {
+	public String getAuthor() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void releaseBrief() {
+	public String getTime() {
 		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void releaseDetail() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void release() {
-		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 }

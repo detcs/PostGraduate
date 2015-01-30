@@ -16,11 +16,12 @@
 
 package com.pages.login;
 
+import com.sina.weibo.sdk.auth.Oauth2AccessToken;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 
 /**
  * 该类定义了微博授权时所需要的参数。
