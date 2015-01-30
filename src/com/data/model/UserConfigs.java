@@ -88,6 +88,16 @@ public class UserConfigs
 	{		
 		return sp.getString(context.getResources().getString(R.string.user_id),null);
 	}
+	public static void storeIsFirstTakePhoto(String is)
+	{
+		editor= sp.edit();//获取编辑器
+		editor.putString(context.getResources().getString(R.string.is_first_take_photo),is);
+		editor.commit();//提交修改
+	}
+	public static String getIsFirstTakePhoto()
+	{		
+		return sp.getString(context.getResources().getString(R.string.is_first_take_photo),null);
+	}
 	
 
 }

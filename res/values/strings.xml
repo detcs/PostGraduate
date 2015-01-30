@@ -35,15 +35,28 @@
     <string name="female">女</string>
     <string name="complete">完成</string>
     <!-- note -->
+    <string name="first_use">firstUse</string>
 	<string name="today_rec">今日推荐</string>
 	<string name="diary">今天是复习的第1天</string>
 	<string name="course_choose">你只能选择四门科目</string>
+	<string name="english_dir">EnglishDir</string>
 	<string name="english">英语</string>
+	<string name="english1">英语1</string>
+	<string name="english2">英语2</string>
+	<string name="english3">英语3</string>
 	<string name="politics">政治</string>
+	<string name="politics_dir">PoliticsDir</string>
 	<string name="math">数学</string>
+	<string name="math_dir">MathDir</string>
+	<string name="math1">数学1</string>
+	<string name="math2">数学2</string>
+	<string name="math3">数学3</string>
 	<string name="professional_course">专业课</string>
-	
+	<string name="profess_dir1">ProfessDir1</string>
+	<string name="profess_dir2">ProfessDir2</string>
+	<string name="input_professional_course">请输入专业课名称</string>
 	<string name="back">返回</string>
+	<string name="is_first_take_photo">isFirstTakePhoto</string>
 	<string name="reverse_review">倒序复习</string>
 	<string name="ebbinghaus_review">艾宾浩斯曲线复习</string>
 	<string name="get">get</string>

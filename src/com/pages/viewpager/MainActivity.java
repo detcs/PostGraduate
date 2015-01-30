@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.app.ydd.R;
+import com.data.model.UserConfigs;
 import com.pages.funsquare.ButtonsGridViewAdapter;
 import com.pages.funsquare.FunctionsSquareFragment;
 import com.pages.notes.CourseSetting;
@@ -189,6 +190,8 @@ public class MainActivity extends FragmentActivity {
 	    }
 	public void initNoteView(View v)
 	{
+		final boolean isFirstUse=UserConfigs.getIsFirstTakePhoto()==null?true:false;
+		
 		TextView diary=(TextView)v.findViewById(R.id.diary);
 		diary.setOnClickListener(new OnClickListener() {
 			
@@ -217,7 +220,14 @@ public class MainActivity extends FragmentActivity {
 				// TODO Auto-generated method stub
 				Intent intent=new Intent();
 				intent.setClass(MainActivity.this, ExerciseActivity.class);
-				intent.putExtra("tag", getResources().getString(R.string.today_rec));
+				if(isFirstUse)
+				{
+					intent.putExtra("tag", getResources().getString(R.string.first_use));
+				}
+				else
+				{
+					intent.putExtra("tag", getResources().getString(R.string.today_rec));
+				}
 				startActivity(intent);
 			}
 		});

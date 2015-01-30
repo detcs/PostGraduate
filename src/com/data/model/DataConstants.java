@@ -5,6 +5,8 @@ public class DataConstants {
 	public final static String TAG="flip";
 	public final static String USER_OPTIONS="userOptions";
 	//public final static String DEVICE_ID=Settings.Secure.getString(getContentResolver(),Settings.Secure.ANDROID_ID);;
+	public  static String SD_PATH=null;
+	public  static String PHOTO_DIR_PATH="Android/data/ydd";
 	//sina weibo
 	public final static String WEIBO_APP_KEY="77238273";
 	public static final String REDIRECT_URL = "http://s1.smartjiangsu.com:89/index.html";// 应用的回调页 

@@ -25,7 +25,19 @@ public class ExerciseActivity extends FragmentActivity{
 		setContentView(R.layout.activity_exercise);
 		Intent intent=getIntent();
 		String tag=intent.getStringExtra("tag");
-		if(tag.equals(getResources().getString(R.string.today_rec)))
+		if(tag.equals(getResources().getString(R.string.first_use)))
+		{
+			frame=(FrameLayout)findViewById(R.id.exercise_frame);
+			fragment=new CourseSettingFragment();
+//			Bundle bundle = new Bundle();  
+//	        bundle.putString("type", getResources().getString(R.string.today_rec));  
+//	        fragment.setArguments(bundle);
+			fm=getSupportFragmentManager();
+			FragmentTransaction trans = fm.beginTransaction();  
+			trans.replace(R.id.exercise_frame, fragment);
+			trans.commit();
+		}
+		else if(tag.equals(getResources().getString(R.string.today_rec)))
 		{
 			frame=(FrameLayout)findViewById(R.id.exercise_frame);
 			fragment=new ReviewFragment();

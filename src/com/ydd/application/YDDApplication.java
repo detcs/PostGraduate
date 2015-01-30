@@ -1,11 +1,14 @@
 package com.ydd.application;
 
+import java.io.File;
+
 import com.data.model.DataConstants;
 import com.data.model.UserConfigs;
 import com.pages.login.LoginActivity;
 
 import android.app.Application;
 import android.content.Intent;
+import android.os.Environment;
 import android.util.Log;
 
 public class YDDApplication extends Application{
@@ -16,7 +19,20 @@ public class YDDApplication extends Application{
 		super.onCreate();
 		Log.e(DataConstants.TAG,"app create");
 		initUserConfig();
+		initSD();
 		
+	}
+	private void initSD()
+	{
+		boolean sdCardExist = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);   //判断sd卡是否存在 
+		if   (sdCardExist)      //如果SD卡存在，则获取跟目录
+		{                               
+			DataConstants.SD_PATH = Environment.getExternalStorageDirectory().toString();//获取跟目录 
+			File dir=new File(DataConstants.SD_PATH+"/"+DataConstants.PHOTO_DIR_PATH);
+			if(!dir.exists())
+				dir.mkdir();
+		}   
+				
 	}
 	private void initUserConfig()
 	{

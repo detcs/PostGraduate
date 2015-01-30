@@ -62,7 +62,7 @@ public class LoginActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		if(UserConfigs.getAccount()!=null)//debug
+		if(UserConfigs.getAccount()==null)//debug
 		{
 			setContentView(R.layout.activity_login);
 			phone=(EditText)findViewById(R.id.username_edit);
