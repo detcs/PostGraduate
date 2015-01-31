@@ -5,7 +5,10 @@ import java.util.List;
 
 import com.app.ydd.R;
 import com.data.model.DataConstants;
+import com.data.model.DatabaseHelper;
+import com.data.model.UserConfigs;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
@@ -35,7 +38,7 @@ public class CourseSettingFragment extends Fragment {
 	Button politics;
 	ImageView imgPolitic;
 	
-	EditText professEdit;
+	EditText professEdit1;
 	Button complete;
 	CourseSettingInfo info;
 //	int[] englishButtonIds={R.id.english1,R.id.english2,R.id.english3};
@@ -62,7 +65,7 @@ public class CourseSettingFragment extends Fragment {
 				imgEng1.setVisibility(View.VISIBLE);
 				imgEng2.setVisibility(View.INVISIBLE);
 				imgEng3.setVisibility(View.INVISIBLE);
-				info.setEnglish("english1");
+				info.setEnglish("1");
 			}
 		});
 		english2.setOnClickListener(new OnClickListener() {
@@ -73,6 +76,7 @@ public class CourseSettingFragment extends Fragment {
 				imgEng1.setVisibility(View.INVISIBLE);
 				imgEng2.setVisibility(View.VISIBLE);
 				imgEng3.setVisibility(View.INVISIBLE);
+				info.setEnglish("2");
 			}
 		});
 		english3.setOnClickListener(new OnClickListener() {
@@ -83,6 +87,7 @@ public class CourseSettingFragment extends Fragment {
 				imgEng1.setVisibility(View.INVISIBLE);
 				imgEng2.setVisibility(View.INVISIBLE);
 				imgEng3.setVisibility(View.VISIBLE);
+				info.setEnglish("3");
 			}
 		});
 		
@@ -101,6 +106,7 @@ public class CourseSettingFragment extends Fragment {
 				imgMath1.setVisibility(View.VISIBLE);
 				imgMath2.setVisibility(View.INVISIBLE);
 				imgMath3.setVisibility(View.INVISIBLE);
+				info.setMath("1");
 			}
 		});
 		math2.setOnClickListener(new OnClickListener() {
@@ -111,6 +117,7 @@ public class CourseSettingFragment extends Fragment {
 				imgMath1.setVisibility(View.INVISIBLE);
 				imgMath2.setVisibility(View.VISIBLE);
 				imgMath3.setVisibility(View.INVISIBLE);
+				info.setMath("2");
 			}
 		});
 		math3.setOnClickListener(new OnClickListener() {
@@ -121,6 +128,7 @@ public class CourseSettingFragment extends Fragment {
 				imgMath1.setVisibility(View.INVISIBLE);
 				imgMath2.setVisibility(View.INVISIBLE);
 				imgMath3.setVisibility(View.VISIBLE);
+				info.setMath("3");
 			}
 		});
 		
@@ -136,19 +144,22 @@ public class CourseSettingFragment extends Fragment {
 					imgPolitic.setVisibility(View.VISIBLE);
 				else
 					imgPolitic.setVisibility(View.INVISIBLE);
-				
+				info.setPolitics("politics");
 			}
 		});
 		
-		professEdit=(EditText)rootView.findViewById(R.id.input_profess_course);
+		professEdit1=(EditText)rootView.findViewById(R.id.input_profess_course);
 		complete=(Button)rootView.findViewById(R.id.complete_choose);
 		complete.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
+				info.setProfess1(professEdit1.getText().toString());
 				info.storeToConfig();
 				makeCourseFileDir(info);
+				UserConfigs.storeIsFirstTakePhoto("no");
+				getActivity().finish();
 			}
 		});
 		return rootView;
@@ -157,14 +168,48 @@ public class CourseSettingFragment extends Fragment {
 	{
 		if(DataConstants.SD_PATH!=null)      //如果SD卡存在，则获取跟目录
 		{                               
+			DatabaseHelper dbHelper = new DatabaseHelper(getActivity());//这段代码放到Activity类中才用this
+			SQLiteDatabase db = dbHelper.getWritableDatabase();
+			
 			DataConstants.SD_PATH = Environment.getExternalStorageDirectory().toString();//获取跟目录 
 			String dirPath=DataConstants.SD_PATH+"/"+DataConstants.PHOTO_DIR_PATH;
 			File dir=new File(dirPath+"/"+getResources().getString(R.string.english_dir));
 			if(!dir.exists())
+			{
 				dir.mkdir();
+				dbHelper.createCourseTable(getActivity(),db, getResources().getString(R.string.db_english_table));
+			}
 			dir=new File(dirPath+"/"+getResources().getString(R.string.politics_dir));
 			if(!dir.exists())
+			{
 				dir.mkdir();
+				dbHelper.createCourseTable(getActivity(),db, getResources().getString(R.string.db_politics_table));
+			}
+			dir=new File(dirPath+"/"+getResources().getString(R.string.profess_dir1));
+			if(!dir.exists())
+			{
+				dir.mkdir();
+				dbHelper.createCourseTable(getActivity(),db, getResources().getString(R.string.db_profess1_table));
+			}
+			if(info.getMath()!=null)
+			{
+				dir=new File(dirPath+"/"+getResources().getString(R.string.math_dir));
+				if(!dir.exists())
+				{
+					dir.mkdir();
+					dbHelper.createCourseTable(getActivity(),db, getResources().getString(R.string.db_math_table));
+				}
+			}
+			if(info.getProfess2()!=null)
+			{
+				dir=new File(dirPath+"/"+getResources().getString(R.string.profess_dir2));
+				if(!dir.exists())
+				{
+					dir.mkdir();
+					dbHelper.createCourseTable(getActivity(),db, getResources().getString(R.string.db_profess2_table));
+				}
+			}
+			db.close();
 		}   
 	}
 }

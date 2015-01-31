@@ -17,18 +17,22 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class ExerciseTimeLineAdapter extends BaseAdapter {
 
 	List<String> paths;
 	Context context;
 	LayoutInflater mInflater;
- 	public ExerciseTimeLineAdapter(List<String> paths,Context context) {
+	List<String> dates;
+ 	public ExerciseTimeLineAdapter(List<String> paths,Context context,List<String> dates) {
 		super();
 		this.paths = paths;
 		this.context=context;
 		mInflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		this.dates=dates;
 	}
 
 	@Override
@@ -61,7 +65,9 @@ public class ExerciseTimeLineAdapter extends BaseAdapter {
 	        // Creates a ViewHolder and store references to the two children views 
 	        // we want to bind data to. 
 	        holder = new ViewHolder(); 
-	        holder.img = (ImageView) convertView.findViewById(R.id.exercise_timeline_img); 
+	        holder.grid=(GridView)convertView.findViewById(R.id.exercise_timeline_item_grid);
+	        holder.day=(TextView)convertView.findViewById(R.id.exercise_timeline_date);
+	        //holder.img = (ImageView) convertView.findViewById(R.id.exercise_timeline_img); 
 	        convertView.setTag(holder); 
 	    } else { 
 	       // Get the ViewHolder back to get fast access to the TextView 
@@ -69,25 +75,65 @@ public class ExerciseTimeLineAdapter extends BaseAdapter {
 	        holder = (ViewHolder) convertView.getTag(); 
 	    }
 	    // Bind the data efficiently with the holder.
-	   // Bitmap bitmap=BitmapFactory.decodeFile(paths.get(position));
-	   // .setText(); 
-	    Picasso.with(context).load(new File(paths.get(position))).resize(200, 200).into(holder.img);
-//	    holder.img.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View arg0) {
-//				// TODO Auto-generated method stub
-//				Intent intent=new Intent();
-//				intent.setClass(context, ExerciseActivity.class);
-//				intent.putExtra("tag", "");
-//				context.startActivity(intent);
-//			}
-//		});
+	    holder.grid.setAdapter(new GridAdapter(null));
+	    holder.day.setText(dates.get(position));
 	    return convertView; 
 	}
 	static class ViewHolder { 
 
-	    ImageView img; 
+		TextView day;
+	    GridView grid;
 
+	} 
+	class GridAdapter extends BaseAdapter
+	{
+
+		List<String> imgPaths;
+		
+		public GridAdapter(List<String> imgPaths) {
+			super();
+			this.imgPaths = imgPaths;
+		}
+
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return imgPaths.size();
+		}
+
+		@Override
+		public Object getItem(int arg0) {
+			// TODO Auto-generated method stub
+			return imgPaths.get(arg0);
+		}
+
+		@Override
+		public long getItemId(int arg0) {
+			// TODO Auto-generated method stub
+			return arg0;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			// TODO Auto-generated method stub
+			GridViewHolder holder; 
+		    if (convertView == null) { 
+		        convertView = mInflater.inflate(R.layout.item_timeline_grid_item, null); 
+		        holder = new GridViewHolder(); 
+		        holder.img = (ImageView) convertView.findViewById(R.id.exercise_timeline_img); 
+		        convertView.setTag(holder); 
+		    } else { 
+		        holder = (GridViewHolder) convertView.getTag(); 
+		    }
+		    // Bind the data efficiently with the holder.
+
+		    Picasso.with(context).load(new File(imgPaths.get(position))).resize(200, 200).into(holder.img);
+		    return convertView; 
+		}
+		
+	}
+	static class GridViewHolder { 
+
+	    ImageView img; 
 	} 
 }

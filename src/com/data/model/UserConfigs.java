@@ -98,13 +98,13 @@ public class UserConfigs
 	{		
 		return sp.getString(context.getResources().getString(R.string.is_first_take_photo),null);
 	}
-	public static void storeCourseEnglishName(String englishName)
+	public static void storeCourseEnglishName(String englishName)//1,2,3
 	{
 		editor= sp.edit();//获取编辑器
 		editor.putString(context.getResources().getString(R.string.course_english_name),englishName);
 		editor.commit();//提交修改
 	}
-	public static String getCourseEnglishName()
+	public static String getCourseEnglishName()//1,2,3
 	{		
 		return sp.getString(context.getResources().getString(R.string.course_english_name),null);
 	}

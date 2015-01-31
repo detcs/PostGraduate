@@ -3,6 +3,7 @@ package com.pages.notes;
 import java.util.List;
 
 import com.app.ydd.R;
+import com.data.model.UserConfigs;
 import com.pages.viewpager.MainActivity;
 
 import android.content.Context;
@@ -61,6 +62,7 @@ public class NotesClassAdapter extends BaseAdapter{
 	    } 
 	    // Bind the data efficiently with the holder. 
 	    holder.button.setText(names.get(position)); 
+	    final int pos=position;
 	    holder.button.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -68,7 +70,16 @@ public class NotesClassAdapter extends BaseAdapter{
 				// TODO Auto-generated method stub
 				Intent intent=new Intent();
 				intent.setClass(context, ExerciseActivity.class);
-				intent.putExtra("tag", "");
+				boolean isFirstUse=UserConfigs.getIsFirstTakePhoto()==null?true:false;
+				if(isFirstUse)
+				{
+					intent.putExtra("tag", context.getResources().getString(R.string.first_use));
+				}
+				else
+				{
+					intent.putExtra("course_name",names.get(pos));
+					intent.putExtra("tag", context.getResources().getString(R.string.note_class));
+				}
 				context.startActivity(intent);
 			}
 		});

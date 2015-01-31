@@ -190,7 +190,7 @@ public class MainActivity extends FragmentActivity {
 	    }
 	public void initNoteView(View v)
 	{
-		final boolean isFirstUse=UserConfigs.getIsFirstTakePhoto()==null?true:false;
+		//final boolean isFirstUse=UserConfigs.getIsFirstTakePhoto()==null?true:false;
 		
 		TextView diary=(TextView)v.findViewById(R.id.diary);
 		diary.setOnClickListener(new OnClickListener() {
@@ -220,6 +220,7 @@ public class MainActivity extends FragmentActivity {
 				// TODO Auto-generated method stub
 				Intent intent=new Intent();
 				intent.setClass(MainActivity.this, ExerciseActivity.class);
+				boolean isFirstUse=UserConfigs.getIsFirstTakePhoto()==null?true:false;
 				if(isFirstUse)
 				{
 					intent.putExtra("tag", getResources().getString(R.string.first_use));
@@ -260,7 +261,17 @@ public class MainActivity extends FragmentActivity {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				Intent intent=new Intent();
-				intent.setClass(MainActivity.this, FootPrintActivity.class);
+				
+				boolean isFirstUse=UserConfigs.getIsFirstTakePhoto()==null?true:false;
+				if(isFirstUse)
+				{
+					intent.putExtra("tag", getResources().getString(R.string.first_use));
+					intent.setClass(MainActivity.this, ExerciseActivity.class);
+				}
+				else
+				{
+					intent.setClass(MainActivity.this, FootPrintActivity.class);
+				}
 				startActivity(intent);
 			}
 		});

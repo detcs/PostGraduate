@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.app.ydd.R;
+import com.data.model.DataConstants;
 
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,21 +19,22 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ListView;
 
 public class ReviewChooseFragment extends Fragment{
 
-	GridView exerciseTimeLine;
+	ListView exerciseTimeLine;
 	Button reviewReverse;
 	Button reviewEbbin;
 	List<String> paths;
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_reviewchoose, container, false);
-		exerciseTimeLine=(GridView)rootView.findViewById(R.id.exercise_timeline_grid);
+		exerciseTimeLine=(ListView)rootView.findViewById(R.id.exercise_timeline_list);
 		paths=new ArrayList<String>();
-		//choosePaths(getSDPath()+"/DCIM/Camera");
-		choosePaths("/storage/sdcard1/DCIM/Camera");
-		exerciseTimeLine.setAdapter(new ExerciseTimeLineAdapter(paths, getActivity()));
+		choosePaths(DataConstants.SD_PATH+"/"+DataConstants.PHOTO_DIR_PATH+"/"+getResources().getString(R.string.english_dir));
+		List<String> dates=new ArrayList<String>();
+		exerciseTimeLine.setAdapter(new ExerciseTimeLineAdapter(paths, getActivity(),dates));
 		reviewReverse=(Button)rootView.findViewById(R.id.reverse_review);
 		reviewReverse.setOnClickListener(new OnClickListener() {
 			

@@ -2,6 +2,7 @@ package com.ydd.application;
 
 import java.io.File;
 
+import com.app.ydd.R;
 import com.data.model.DataConstants;
 import com.data.model.DatabaseHelper;
 import com.data.model.UserConfigs;
@@ -9,13 +10,14 @@ import com.pages.login.LoginActivity;
 
 import android.app.Application;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.util.Log;
 
 public class YDDApplication extends Application{
 
-	//static SQLiteDatabase db = null;
+	
 	@Override
 	public void onCreate() {
 		// TODO Auto-generated method stub
@@ -23,7 +25,8 @@ public class YDDApplication extends Application{
 		Log.e(DataConstants.TAG,"app create");
 		initUserConfig();
 		initSD();
-		//initDataBase();
+		DataConstants.dbHelper= new DatabaseHelper(this);//这段代码放到Activity类中才用this
+		initDataBase();
 		
 	}
 	
@@ -45,7 +48,8 @@ public class YDDApplication extends Application{
 	}
 	private void initDataBase() 
 	{
-		DatabaseHelper database = new DatabaseHelper(this);//这段代码放到Activity类中才用this
-		SQLiteDatabase db = database.getWritableDatabase();
+		
+		SQLiteDatabase db = DataConstants.dbHelper.getReadableDatabase();
+		db.close();
 	}
 }

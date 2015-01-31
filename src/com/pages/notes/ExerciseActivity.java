@@ -50,7 +50,7 @@ public class ExerciseActivity extends FragmentActivity{
 			trans.commit();
 			
 		}
-		else
+		else if(tag.equals(getResources().getString(R.string.note_class)))
 		{
 			frame=(FrameLayout)findViewById(R.id.exercise_frame);
 			fragment=new ReviewChooseFragment();

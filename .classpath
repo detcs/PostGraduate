@@ -7,6 +7,5 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/picasso-jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/WeiboSDK"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
    >
    
    <LinearLayout
@@ -26,11 +27,9 @@
     		android:layout_weight="1"
            />
        </LinearLayout> 
-	<GridView
-	    android:id="@+id/exercise_timeline_grid"
+	<ListView
+	    android:id="@+id/exercise_timeline_list"
        	android:layout_width="match_parent"
-    	android:layout_height="match_parent"
-    	android:numColumns="3"
     	android:layout_above="@id/review_choose"
        />
 </RelativeLayout>

@@ -1,5 +1,8 @@
 package com.pages.notes;
 
+import android.util.Log;
+
+import com.data.model.DataConstants;
 import com.data.model.UserConfigs;
 
 public class CourseSettingInfo {
@@ -42,10 +45,14 @@ public class CourseSettingInfo {
 	public void storeToConfig()
 	{
 		UserConfigs.storeCourseEnglishName(english);
-		UserConfigs.storeCourseMathName(math);
 		UserConfigs.storeCoursePoliticsName(politics);
 		UserConfigs.storeCourseProfessOneName(profess1);
-		UserConfigs.storeCourseProfessTwoName(profess2);
+		Log.e(DataConstants.TAG,"storeconfig "+english+" "+politics+" "+profess1+" "+math+" "+profess2);
+		if(math!=null)
+			UserConfigs.storeCourseMathName(math);
+		
+		if(profess2!=null)
+			UserConfigs.storeCourseProfessTwoName(profess2);
 	}
 
 }
