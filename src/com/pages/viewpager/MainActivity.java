@@ -19,6 +19,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
@@ -47,6 +48,7 @@ public class MainActivity extends FragmentActivity {
 	final ArrayList<Fragment> fragList = new ArrayList<Fragment>();
 	private int[] ids=new int[]{R.drawable.biz_ad_new_version1_img0,R.drawable.biz_ad_new_version1_img1,R.drawable.biz_ad_new_version1_img2,R.drawable.biz_ad_new_version1_img3};
 	FragmentManager fm;
+	MediaPlayer mp;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -74,9 +76,16 @@ public class MainActivity extends FragmentActivity {
 			public void onPageSelected(int position) {
 				// TODO Auto-generated method stub
 				//btn.setVisibility(position==listViews.size()-1?View.VISIBLE:View.GONE);
-				if(position==1)//note
+				if(position==0)
+				{
+					initTodayView(listViews.get(position));
+				}
+				if(position!=0)//note
 	        	{
-	        		
+	        		if(mp.isPlaying())
+	        		{
+	        			mp.pause();
+	        		}
 	        	}
 	            
 			}
@@ -156,7 +165,7 @@ public class MainActivity extends FragmentActivity {
 	        	((ViewPager) view).addView(v, 0);
 	        	if(position==0)//todayfragment
 	        	{
-	        		
+	        		initTodayView(v);
 	        	}
 	        	else if(position==1)//notefragment
 	        	{
@@ -188,7 +197,35 @@ public class MainActivity extends FragmentActivity {
 	        public void startUpdate(View arg0) {
 	        }
 	    }
-	public void initNoteView(View v)
+	 
+	 public void initTodayView(View v)
+	 {
+
+		 mp = MediaPlayer.create(this, R.raw.song);
+		 final ImageView play=(ImageView)v.findViewById(R.id.music_play);
+		 play.setImageResource(R.drawable.play);
+		 TextView musicName=(TextView)v.findViewById(R.id.music_name);
+		 musicName.setText("可惜没如果");
+		 play.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				if(mp.isPlaying())
+				{
+					play.setImageResource(R.drawable.play);
+					mp.pause();
+				}
+				else
+				{
+					play.setImageResource(R.drawable.pause);
+					mp.start();
+				}
+			}
+		});
+		// mp.start();
+	 }
+	 public void initNoteView(View v)
 	{
 		//final boolean isFirstUse=UserConfigs.getIsFirstTakePhoto()==null?true:false;
 		
@@ -288,5 +325,12 @@ public class MainActivity extends FragmentActivity {
 		gv.setAdapter(new ButtonsGridViewAdapter(names, MainActivity.this));
 	}
 	 
-
+	@Override
+    protected void onDestroy() {
+        if (mp.isPlaying()) {
+            mp.stop();
+        }
+        mp.release();
+        super.onDestroy();
+    }
 }

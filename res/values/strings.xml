@@ -27,12 +27,14 @@
      <string name="dbcol_photo_base64">dbPicBase64</string>
      <string name="dbcol_remark">dbRemark</string>
      <string name="dbcol_time">dbTime</string>
+     <string name="dbcol_date">dbDate</string>
      <string name="dbcol_flag">dbFlag</string>
      <string name="db_english_table">englishTable</string>
      <string name="db_math_table">mathTable</string>
      <string name="db_politics_table">politicsTable</string>
      <string name="db_profess1_table">professOneTable</string>
      <string name="db_profess2_table">professTwoTable</string>
+     
     <!-- login -->
     <string name="account">账号</string>
     <string name="password">密码</string>

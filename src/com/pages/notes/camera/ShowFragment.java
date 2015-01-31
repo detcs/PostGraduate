@@ -100,12 +100,16 @@ public class ShowFragment extends Fragment {
 					String storePath=DataConstants.SD_PATH+"/"+DataConstants.PHOTO_DIR_PATH+"/"+getResources().getString(R.string.english_dir);
 					SimpleDateFormat sdf=new SimpleDateFormat("yyyy_MM_dd|HH:mm:ss");
 					String time=sdf.format(new Date());
+					//test date
+					sdf=new  SimpleDateFormat("yyyy_MM_dd");
+					String date=sdf.format(new Date());
+					//test date
 					String photoName=UserConfigs.getAccount()+"|"+time+".jpg";
 					try 
 					{
 						Log.e(DataConstants.TAG,"save "+storePath);
 						saveMyBitmap(storePath+"/"+photoName);
-						savePhotoRecordToDataBase(photoName, "photobase64", "remark", time, 0);
+						savePhotoRecordToDataBase(photoName, "photobase64", "remark",date, time, 0);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -135,12 +139,12 @@ public class ShowFragment extends Fragment {
                 e.printStackTrace();
         }
 }
-	private void savePhotoRecordToDataBase(String photoName,String photobase64,String remark,String time,int flag)
+	private void savePhotoRecordToDataBase(String photoName,String photobase64,String remark,String date,String time,int flag)
 	{
 		DatabaseHelper dbHelper = DataConstants.dbHelper;
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		String tableName=getResources().getString(R.string.db_english_table);
-		dbHelper.insertCourseRecord(getActivity(), db,tableName , photoName, photobase64, remark, time, flag);
+		dbHelper.insertCourseRecord(getActivity(), db,tableName , photoName, photobase64, remark,date, time, flag);
 		dbHelper.queryShowRecords(db, tableName);
 		db.close();
 	}

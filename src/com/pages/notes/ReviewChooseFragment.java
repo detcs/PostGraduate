@@ -3,10 +3,12 @@ package com.pages.notes;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 import com.app.ydd.R;
 import com.data.model.DataConstants;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
@@ -26,15 +28,21 @@ public class ReviewChooseFragment extends Fragment{
 	ListView exerciseTimeLine;
 	Button reviewReverse;
 	Button reviewEbbin;
-	List<String> paths;
+	//List<String> paths;
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_reviewchoose, container, false);
 		exerciseTimeLine=(ListView)rootView.findViewById(R.id.exercise_timeline_list);
-		paths=new ArrayList<String>();
-		choosePaths(DataConstants.SD_PATH+"/"+DataConstants.PHOTO_DIR_PATH+"/"+getResources().getString(R.string.english_dir));
+		//paths=new ArrayList<String>();
+		String tableName=getResources().getString(R.string.db_english_table);
+		//choosePaths(DataConstants.SD_PATH+"/"+DataConstants.PHOTO_DIR_PATH+"/"+tableName);
+		SQLiteDatabase db = DataConstants.dbHelper.getReadableDatabase();
+		TreeSet<String> dateSet=DataConstants.dbHelper.queryDates(getActivity(), db, tableName);
 		List<String> dates=new ArrayList<String>();
-		exerciseTimeLine.setAdapter(new ExerciseTimeLineAdapter(paths, getActivity(),dates));
+		for(String date:dateSet)
+			dates.add(date);
+		db.close();
+		exerciseTimeLine.setAdapter(new ExerciseTimeLineAdapter(getActivity(),dates));
 		reviewReverse=(Button)rootView.findViewById(R.id.reverse_review);
 		reviewReverse.setOnClickListener(new OnClickListener() {
 			
@@ -78,7 +86,7 @@ public class ReviewChooseFragment extends Fragment{
 		{
 			   if (tempList[i].isFile()) 
 			   {
-				   paths.add(tempList[i].getPath());
+				 //  paths.add(tempList[i].getPath());
 			   Log.i("flip","path"+tempList[i].getPath());
 			   }
 		}

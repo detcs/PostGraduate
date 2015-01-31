@@ -9,11 +9,14 @@ import com.data.model.UserConfigs;
 import com.pages.login.LoginActivity;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.WindowManager;
 
 public class YDDApplication extends Application{
 
@@ -25,8 +28,8 @@ public class YDDApplication extends Application{
 		Log.e(DataConstants.TAG,"app create");
 		initUserConfig();
 		initSD();
-		DataConstants.dbHelper= new DatabaseHelper(this);//这段代码放到Activity类中才用this
 		initDataBase();
+		initScreenParam();
 		
 	}
 	
@@ -48,8 +51,17 @@ public class YDDApplication extends Application{
 	}
 	private void initDataBase() 
 	{
-		
+		DataConstants.dbHelper= new DatabaseHelper(this);//这段代码放到Activity类中才用this
 		SQLiteDatabase db = DataConstants.dbHelper.getReadableDatabase();
 		db.close();
+	}
+	private void initScreenParam() 
+	{
+		DisplayMetrics dm = new DisplayMetrics();
+		WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+		wm.getDefaultDisplay().getMetrics(dm);
+		DataConstants.screenWidth = dm.widthPixels;
+		DataConstants.screenHeight = dm.heightPixels;
+		Log.e(DataConstants.TAG,"(w,h)"+dm.widthPixels+","+dm.heightPixels);
 	}
 }

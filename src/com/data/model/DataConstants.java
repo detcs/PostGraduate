@@ -8,6 +8,8 @@ public class DataConstants {
 	public  static String SD_PATH=null;
 	public  static String PHOTO_DIR_PATH="Android/data/ydd";
 	public static DatabaseHelper dbHelper ;
+	public static int screenWidth;
+	public static int screenHeight;
 	//sina weibo
 	public final static String WEIBO_APP_KEY="77238273";
 	public static final String REDIRECT_URL = "https://api.weibo.com/oauth2/default.html";//"http://s1.smartjiangsu.com/index.html";// 应用的回调页 

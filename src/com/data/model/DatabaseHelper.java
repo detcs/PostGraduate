@@ -1,5 +1,9 @@
 package com.data.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeSet;
+
 import com.app.ydd.R;
 
 import android.content.ContentValues;
@@ -37,16 +41,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     			+context.getResources().getString(R.string.dbcol_photo_base64)+" TEXT not null,"
     			+context.getResources().getString(R.string.dbcol_remark)+" TEXT not null,"
     			+context.getResources().getString(R.string.dbcol_flag)+" INTEGER,"
+    			+context.getResources().getString(R.string.dbcol_date)+" TEXT not null,"
     			+context.getResources().getString(R.string.dbcol_time)+" TEXT not null );";          
         Log.e(DataConstants.TAG, "sql:"+sql);
     	db.execSQL(sql);
     }
-    public static void insertCourseRecord(Context context,SQLiteDatabase db,String tableName,String photoname,String photobase64,String remark,String time,int flag)
+    public static void insertCourseRecord(Context context,SQLiteDatabase db,String tableName,String photoname,String photobase64,String remark,String date,String time,int flag)
     {
     	ContentValues cv=new ContentValues();
     	cv.put(context.getResources().getString(R.string.dbcol_photo_name), photoname);
     	cv.put(context.getResources().getString(R.string.dbcol_photo_base64), photobase64);
     	cv.put(context.getResources().getString(R.string.dbcol_remark), remark);
+    	cv.put(context.getResources().getString(R.string.dbcol_date), date);
     	cv.put(context.getResources().getString(R.string.dbcol_time), time);
     	cv.put(context.getResources().getString(R.string.dbcol_flag), flag);
     	long rowid=db.insert(tableName, null, cv);
@@ -93,6 +99,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	      } 
 	      result.close();
     }
+    public static TreeSet<String> queryDates(Context context,SQLiteDatabase db,String tableName)
+    {
+    	TreeSet<String> dates=new TreeSet<String>();
+    	Cursor result=db.rawQuery("SELECT "+context.getResources().getString(R.string.dbcol_date)+" FROM "+tableName,null); 
+	    result.moveToFirst(); 
+	    while (!result.isAfterLast()) { 
+	         
+	        String date=result.getString(0); 
+	        dates.add(date); 
+	       // Log.e(DataConstants.TAG,"db:query "+id+","+name);
+	        result.moveToNext(); 
+	      } 
+	      result.close();
+	      return dates;
+    }
+    public static List<String> queryPhotoNamesAtDate(Context context,SQLiteDatabase db,String tableName,String date)
+    {
+    	List<String> names=new ArrayList<String>();
+    	Cursor result=db.rawQuery("SELECT "+context.getResources().getString(R.string.dbcol_photo_name)+" FROM "+tableName+" where "+context.getResources().getString(R.string.dbcol_date)+" = '"+date+"'",null); 
+	    result.moveToFirst(); 
+	    while (!result.isAfterLast()) { 
+	         
+	        String name=result.getString(0); 
+	        names.add(name); 
+	        Log.e(DataConstants.TAG,"db:query photo name:"+name);
+	        result.moveToNext(); 
+	      } 
+	      result.close();
+	      return names;
+    }
+    
+    
     public static boolean tableIsExist(SQLiteDatabase db,String tableName)
     {
         boolean result = false;
