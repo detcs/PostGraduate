@@ -154,6 +154,9 @@ public class LoginActivity extends Activity{
 //                               && progressDialog != null) {
 //                               progressDialog.dismiss();
 //                           }
+                           		Intent intent=new Intent();
+                    			intent.setClass(getApplicationContext(), MainActivity.class);
+                    			startActivity(intent);
                        }}, 
                	new Response.ErrorListener() {
                        @Override
@@ -173,9 +176,7 @@ public class LoginActivity extends Activity{
                 AccessTokenKeeper.writeAccessToken(LoginActivity.this, mAccessToken);
                 //Toast.makeText(LoginActivity.this, R.string.weibosdk_demo_toast_auth_success, Toast.LENGTH_SHORT).show();
                 //registerSuccess();
-                Intent intent=new Intent();
-    			intent.setClass(getApplicationContext(), MainActivity.class);
-    			startActivity(intent);
+                
             } else {
                 // 以下几种情况，您会收到 Code：
                 // 1. 当您未在平台上注册的应用程序的包名与签名时；
@@ -293,7 +294,7 @@ public class LoginActivity extends Activity{
 			resultURL+=nvp.getName()+"="+nvp.getValue()+"&";
 			
 		}
-		return  "http://"+resultURL;
+		return  resultURL;
 	}
     private void parseLoginInfo(JSONObject job,String loginWay)
     {

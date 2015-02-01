@@ -6,6 +6,7 @@ import java.util.List;
 import com.app.ydd.R;
 import com.data.model.DataConstants;
 import com.data.model.DatabaseHelper;
+import com.data.model.FileDataHandler;
 import com.data.model.UserConfigs;
 
 import android.database.sqlite.SQLiteDatabase;
@@ -166,26 +167,26 @@ public class CourseSettingFragment extends Fragment {
 	}
 	private void makeCourseFileDir(CourseSettingInfo info)
 	{
-		if(DataConstants.SD_PATH!=null)      //如果SD卡存在，则获取跟目录
+		if(FileDataHandler.sdCardExist())      //如果SD卡存在
 		{                               
 			DatabaseHelper dbHelper = new DatabaseHelper(getActivity());//这段代码放到Activity类中才用this
 			SQLiteDatabase db = dbHelper.getWritableDatabase();
 			
-			DataConstants.SD_PATH = Environment.getExternalStorageDirectory().toString();//获取跟目录 
-			String dirPath=DataConstants.SD_PATH+"/"+DataConstants.PHOTO_DIR_PATH;
-			File dir=new File(dirPath+"/"+getResources().getString(R.string.english_dir));
+			String dirPath=FileDataHandler.APP_DIR_PATH;
+			File dir=new File(dirPath+"/"+getResources().getString(R.string.dir_english));
+			
 			if(!dir.exists())
 			{
 				dir.mkdir();
 				dbHelper.createCourseTable(getActivity(),db, getResources().getString(R.string.db_english_table));
 			}
-			dir=new File(dirPath+"/"+getResources().getString(R.string.politics_dir));
+			dir=new File(dirPath+"/"+getResources().getString(R.string.dir_politics));
 			if(!dir.exists())
 			{
 				dir.mkdir();
 				dbHelper.createCourseTable(getActivity(),db, getResources().getString(R.string.db_politics_table));
 			}
-			dir=new File(dirPath+"/"+getResources().getString(R.string.profess_dir1));
+			dir=new File(dirPath+"/"+getResources().getString(R.string.dir_profess1));
 			if(!dir.exists())
 			{
 				dir.mkdir();
@@ -193,7 +194,7 @@ public class CourseSettingFragment extends Fragment {
 			}
 			if(info.getMath()!=null)
 			{
-				dir=new File(dirPath+"/"+getResources().getString(R.string.math_dir));
+				dir=new File(dirPath+"/"+getResources().getString(R.string.dir_math));
 				if(!dir.exists())
 				{
 					dir.mkdir();
@@ -202,7 +203,7 @@ public class CourseSettingFragment extends Fragment {
 			}
 			if(info.getProfess2()!=null)
 			{
-				dir=new File(dirPath+"/"+getResources().getString(R.string.profess_dir2));
+				dir=new File(dirPath+"/"+getResources().getString(R.string.dir_profess2));
 				if(!dir.exists())
 				{
 					dir.mkdir();

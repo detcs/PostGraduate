@@ -1,24 +1,52 @@
 package com.pages.viewpager;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
+import net.tsz.afinal.FinalHttp;
+import net.tsz.afinal.http.AjaxCallBack;
+import net.tsz.afinal.http.HttpHandler;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.app.ydd.R;
+import com.data.model.DataConstants;
+import com.data.model.FileDataHandler;
+import com.data.model.NormalPostRequest;
 import com.data.model.UserConfigs;
 import com.pages.funsquare.ButtonsGridViewAdapter;
 import com.pages.funsquare.FunctionsSquareFragment;
+import com.pages.login.LoginActivity;
 import com.pages.notes.CourseSetting;
 import com.pages.notes.ExerciseActivity;
-import com.pages.notes.FootPrintActivity;
 import com.pages.notes.NoteFragment;
 import com.pages.notes.NotesClassAdapter;
 import com.pages.notes.camera.CameraActivity;
+import com.pages.notes.footprint.DownloadTask;
+import com.pages.notes.footprint.FootPrintActivity;
+import com.pages.notes.footprint.FootprintInfo;
 import com.pages.today.TodayFragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -40,13 +68,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity {
 
 	private com.mobovip.views.DirectionalViewPager viewPager;
 	final ArrayList<Fragment> fragList = new ArrayList<Fragment>();
-	private int[] ids=new int[]{R.drawable.biz_ad_new_version1_img0,R.drawable.biz_ad_new_version1_img1,R.drawable.biz_ad_new_version1_img2,R.drawable.biz_ad_new_version1_img3};
+	//private int[] ids=new int[]{R.drawable.biz_ad_new_version1_img0,R.drawable.biz_ad_new_version1_img1,R.drawable.biz_ad_new_version1_img2,R.drawable.biz_ad_new_version1_img3};
+	 ArrayList<View> listViews;
 	FragmentManager fm;
 	MediaPlayer mp;
 	@Override
@@ -54,12 +84,10 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		final ArrayList<View> listViews = new ArrayList<View>();
+		listViews = new ArrayList<View>();
 		
 		LayoutInflater mInflater = getLayoutInflater();
-		for(int i=0;i<ids.length;i++){
-			//listViews.add(mInflater.inflate(R.layout.fragment_layout, null));
-		}
+		
 		listViews.add(mInflater.inflate(R.layout.fragment_today, null));
 		listViews.add(mInflater.inflate(R.layout.fragment_notes, null));
 		listViews.add(mInflater.inflate(R.layout.fragment_funcs_gird, null));
@@ -76,17 +104,6 @@ public class MainActivity extends FragmentActivity {
 			public void onPageSelected(int position) {
 				// TODO Auto-generated method stub
 				//btn.setVisibility(position==listViews.size()-1?View.VISIBLE:View.GONE);
-				if(position==0)
-				{
-					initTodayView(listViews.get(position));
-				}
-				if(position!=0)//note
-	        	{
-	        		if(mp.isPlaying())
-	        		{
-	        			mp.pause();
-	        		}
-	        	}
 	            
 			}
 			
@@ -201,6 +218,15 @@ public class MainActivity extends FragmentActivity {
 	 public void initTodayView(View v)
 	 {
 
+		 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");	
+		Calendar   calendar=Calendar.getInstance();
+		//calendar.roll(Calendar.DAY_OF_YEAR,1);//tomorrow
+		String date=sdf.format(calendar.getTime());
+		//Log.e(DataConstants.TAG,"date:"+date);
+
+		
+		requestFirstPageJasonInfo(getFirstPageURL(date),date);
+		 
 		 mp = MediaPlayer.create(this, R.raw.song);
 		 final ImageView play=(ImageView)v.findViewById(R.id.music_play);
 		 play.setImageResource(R.drawable.play);
@@ -223,6 +249,7 @@ public class MainActivity extends FragmentActivity {
 				}
 			}
 		});
+		 
 		// mp.start();
 	 }
 	 public void initNoteView(View v)
@@ -333,4 +360,122 @@ public class MainActivity extends FragmentActivity {
         mp.release();
         super.onDestroy();
     }
+	private void requestFirstPageJasonInfo(String url,final String date)
+	{
+		final FootprintInfo fpInfo;
+		RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( url, null,
+            new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.e(DataConstants.TAG,"response=" + response);
+                    parseFirstPageInfo(response,date);
+                }}, 
+        	new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError arg0) {
+                   // tv_1.setText(arg0.toString());
+                    Log.i(DataConstants.TAG,"sorry,Error"+arg0.toString());
+//                    if (progressDialog.isShowing()
+//                        && progressDialog != null) {
+//                        progressDialog.dismiss();
+//                    }
+                }});
+        requestQueue.add(jsonObjectRequest);
+        //return fpInfo;
+	}
+	private String getFirstPageURL(String date)
+    {
+    	List<NameValuePair> params=new ArrayList<NameValuePair>();
+		BasicNameValuePair pair = new BasicNameValuePair("methodno","MIndex");
+		params.add(pair);
+		pair = new BasicNameValuePair("device","android");
+		params.add(pair);
+		pair = new BasicNameValuePair("deviceid","1");
+		params.add(pair);
+		pair = new BasicNameValuePair("appid","nju");
+		params.add(pair);
+		pair = new BasicNameValuePair("userid",UserConfigs.getId());
+		params.add(pair);
+		pair = new BasicNameValuePair("verify",UserConfigs.getVerify());
+		params.add(pair);
+		pair = new BasicNameValuePair("date",date);
+		params.add(pair);
+		String resultURL=DataConstants.SERVER_URL+"?";
+		for(NameValuePair nvp:params)
+		{
+			resultURL+=nvp.getName()+"="+nvp.getValue()+"&";
+			
+		}
+		Log.e(DataConstants.TAG,"fpage:"+resultURL);
+		return  resultURL;
+	}
+    private FootprintInfo parseFirstPageInfo(JSONObject job,String date)
+    {
+    	FootprintInfo fpInfo=null;
+    	try 
+    	{
+			JSONObject data=job.getJSONObject("data");
+			JSONArray indexs=data.getJSONArray("index_");
+			DownloadTask fileDownloadTask;
+			DownloadTask songDownloadTask;
+			SQLiteDatabase db = DataConstants.dbHelper.getReadableDatabase();
+			Log.e(DataConstants.TAG,"len:"+indexs.length()+"");
+			
+			for(int i=0;i<indexs.length();i++)
+			{
+				JSONObject info=indexs.getJSONObject(i);
+				JSONArray musics=info.getJSONArray("music_");
+				JSONObject music=musics.getJSONObject(0);//info.getJSONObject("music_");
+				String songName=music.getString("title_");
+				String songId=music.getString("file_");
+				String imgId=info.getString("img_");
+				String encourage=info.getString("content_");
+				String days=info.getString("days_");
+				String daysLeft=info.getString("daysLeft_");
+//				downloadHandler(DataConstants.DOWNLOAD_URL+songId,  FileDataHandler.COVER_SONG_DIR_PATH+"/"+songName+".mp3");
+//				downloadHandler(DataConstants.DOWNLOAD_URL+imgId,  FileDataHandler.COVER_PIC_DIR_PATH+"/"+imgId+".jpg");
+				fileDownloadTask=new DownloadTask(this, FileDataHandler.COVER_PIC_DIR_PATH, getResources().getString(R.string.dbcol_cover_pic), imgId,date);
+				fileDownloadTask.execute();
+				songDownloadTask=new DownloadTask(this, FileDataHandler.COVER_SONG_DIR_PATH, getResources().getString(R.string.dbcol_cover_song), songId,date);
+				songDownloadTask.execute();
+				fpInfo=new FootprintInfo("", songName, "", "", date,encourage, days, daysLeft);
+				 TextView experienceTv=(TextView)listViews.get(0).findViewById(R.id.experience);
+				 TextView encourageTv=(TextView)listViews.get(0).findViewById(R.id.encourage);
+				 encourageTv.setText(encourage);
+				DataConstants.dbHelper.insertFootprintInfoRecord(getApplicationContext(), db, fpInfo);
+			}
+			db.close();
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return fpInfo;
+    }
+//    public void downloadHandler(String url,String path )
+//	{
+//    	FinalHttp fh = new FinalHttp();  
+//        //调用download方法开始下载
+//    	Log.e(DataConstants.TAG,"downloadurl:"+url);
+//        HttpHandler handler = fh.download(url, //这里是下载的路径
+//        path, //这是保存到本地的路径
+//        new AjaxCallBack<File>() {  
+//                    @Override  
+//                    public void onLoading(long count, long current) {  
+//                        // textView.setText("下载进度："+current+"/"+count);  
+//                    }  
+//
+//                    @Override  
+//                    public void onSuccess(File t) {  
+//                        //textView.setText(t==null?"null":t.getAbsoluteFile().toString());  
+//                    	Log.e(DataConstants.TAG,"success");
+//                    }  
+//
+//                });  
+//
+//       //调用stop()方法停止下载
+//      // handler.stop();
+//	}
+    
 }

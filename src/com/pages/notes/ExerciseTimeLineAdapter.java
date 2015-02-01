@@ -7,6 +7,7 @@ import java.util.TreeSet;
 
 import com.app.ydd.R;
 import com.data.model.DataConstants;
+import com.data.model.FileDataHandler;
 import com.pages.notes.NotesClassAdapter.ViewHolder;
 import com.squareup.picasso.Picasso;
 
@@ -86,7 +87,7 @@ public class ExerciseTimeLineAdapter extends BaseAdapter {
 		SQLiteDatabase db = DataConstants.dbHelper.getReadableDatabase();
 		 List<String> photoNames=DataConstants.dbHelper.queryPhotoNamesAtDate(context, db, tableName, dates.get(position));
 		List<String> photoPaths=new ArrayList<String>();
-		String dirPath=DataConstants.SD_PATH+"/"+DataConstants.PHOTO_DIR_PATH+"/"+context.getResources().getString(R.string.english_dir);
+		String dirPath=FileDataHandler.APP_DIR_PATH+"/"+context.getResources().getString(R.string.dir_english);
 		 for(String name:photoNames)
 			photoPaths.add(dirPath+"/"+name);
 		db.close();

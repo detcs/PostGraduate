@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.TreeSet;
 
 import com.app.ydd.R;
+import com.pages.notes.footprint.FootprintInfo;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -46,6 +47,64 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.e(DataConstants.TAG, "sql:"+sql);
     	db.execSQL(sql);
     }
+    public static void createFootprintTable( Context context,SQLiteDatabase db)
+    {
+    	String sql = "create table if not exists "+context.getResources().getString(R.string.db_footprint_table)+"(_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+    			+context.getResources().getString(R.string.dbcol_cover_pic)+" TEXT not null , "
+    			+context.getResources().getString(R.string.dbcol_cover_song)+" TEXT not null,"
+    			+context.getResources().getString(R.string.dbcol_footprint_pic)+" TEXT not null,"
+    			+context.getResources().getString(R.string.dbcol_diary)+" TEXT not null,"
+    			+context.getResources().getString(R.string.dbcol_encourage)+" TEXT not null,"
+    			+context.getResources().getString(R.string.dbcol_days)+" TEXT not null,"
+    			+context.getResources().getString(R.string.dbcol_daysleft)+" TEXT not null,"
+    			+context.getResources().getString(R.string.dbcol_date)+" TEXT not null );";          
+        Log.e(DataConstants.TAG, "sql:"+sql);
+    	db.execSQL(sql);
+    }
+    public static FootprintInfo queryFootPrintInfo(Context context,SQLiteDatabase db,String date)
+    {
+    	FootprintInfo fpInfo=null;
+    	Cursor result=db.rawQuery("SELECT * FROM "+context.getResources().getString(R.string.db_footprint_table)+" where "+context.getResources().getString(R.string.dbcol_date)+"=' "+date+"'",null); 
+	    result.moveToFirst(); 
+	    while (!result.isAfterLast()) { 
+	         
+	        String coverPicPath=result.getString(1); 
+	        String coverSongName=result.getString(2);
+	        String footprintPic=result.getString(3);
+	        String diary=result.getString(4);
+	        String encourage=result.getString(5);
+	        String days=result.getString(6);
+	        String daysleft=result.getString(7);
+	        fpInfo=new FootprintInfo(coverPicPath,coverSongName,footprintPic,diary,encourage,days,daysleft,date); 
+	       // Log.e(DataConstants.TAG,"db:query "+id+","+name);
+	        result.moveToNext(); 
+	      } 
+	      result.close();
+	      return fpInfo;
+    }
+    
+    public static void insertFootprintInfoRecord(Context context,SQLiteDatabase db,FootprintInfo fpInfo)
+    {
+    	ContentValues cv=new ContentValues();
+    	cv.put(context.getResources().getString(R.string.dbcol_cover_pic), fpInfo.getCoverPicName());
+    	cv.put(context.getResources().getString(R.string.dbcol_footprint_pic), fpInfo.getFootprintPicName());
+    	cv.put(context.getResources().getString(R.string.dbcol_cover_song), fpInfo.getCoverSongName());
+    	cv.put(context.getResources().getString(R.string.dbcol_encourage), fpInfo.getEncourage());
+    	cv.put(context.getResources().getString(R.string.dbcol_date), fpInfo.getDate());
+    	cv.put(context.getResources().getString(R.string.dbcol_diary), fpInfo.getDiary());
+    	cv.put(context.getResources().getString(R.string.dbcol_days), fpInfo.getDays());
+    	cv.put(context.getResources().getString(R.string.dbcol_daysleft), fpInfo.getDaysLeft());
+    	long rowid=db.insert(context.getResources().getString(R.string.db_footprint_table), null, cv);
+    	Log.e(DataConstants.TAG,"insert footprint rowid:"+rowid);
+    }
+    public static void updateFootprintRecord(Context context,SQLiteDatabase db,String updateCol,String updateValue,String date)
+    {
+    	ContentValues cv=new ContentValues();
+       	cv.put(updateCol, updateValue);
+    	String whereClause =context.getResources().getString(R.string.dbcol_date)+ "=?";//修改条件
+    	String[] whereArgs = { date };//修改条件的参数
+    	db.update(context.getResources().getString(R.string.db_footprint_table),cv,whereClause,whereArgs);//执行修改
+    }
     public static void insertCourseRecord(Context context,SQLiteDatabase db,String tableName,String photoname,String photobase64,String remark,String date,String time,int flag)
     {
     	ContentValues cv=new ContentValues();
@@ -57,6 +116,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     	cv.put(context.getResources().getString(R.string.dbcol_flag), flag);
     	long rowid=db.insert(tableName, null, cv);
     	Log.e(DataConstants.TAG,"rowid:"+rowid);
+    }
+    public static void updateCourseRecord(Context context,SQLiteDatabase db,String tableName,String updateCol,String updateValue,String date)
+    {
+    	ContentValues cv=new ContentValues();
+       	cv.put(updateCol, updateValue);
+    	String whereClause =context.getResources().getString(R.string.dbcol_date)+ "=?";//修改条件
+    	String[] whereArgs = { date };//修改条件的参数
+    	db.update(tableName,cv,whereClause,whereArgs);//执行修改
     }
     public static void updateCourseRecordFlag(Context context,SQLiteDatabase db,String tableName,String photoname,int flag)
     {

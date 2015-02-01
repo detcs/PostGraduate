@@ -35,6 +35,26 @@
      <string name="db_profess1_table">professOneTable</string>
      <string name="db_profess2_table">professTwoTable</string>
      
+     <string name="db_footprint_table">footprintTable</string>
+     <string name="dbcol_cover_pic">dbCoverPic</string>
+     <string name="dbcol_cover_song">dbCoverSong</string>
+     <!--  <string name="dbcol_cover_song_name">dbCoverSongName</string>-->
+     <string name="dbcol_footprint_pic">dbFootprintPic</string>
+     <string name="dbcol_diary">dbDiary</string>
+     <string name="dbcol_encourage">dbDiary</string>
+     <string name="dbcol_days">dbDays</string>
+     <string name="dbcol_daysleft">dbDaysleft</string>
+
+     <!--  file dir-->
+     <string name="dir_app">Android/data/ydd</string>
+     <string name="dir_cover_song">coverSong</string>
+     <string name="dir_cover_pic">coverPic</string>
+     <string name="dir_footprint_pic">footprintPic</string>
+     <string name="dir_english">EnglishDir</string>
+     <string name="dir_politics">PoliticsDir</string>
+     <string name="dir_math">MathDir</string>
+     <string name="dir_profess1">ProfessDir1</string>
+	 <string name="dir_profess2">ProfessDir2</string>
     <!-- login -->
     <string name="account">账号</string>
     <string name="password">密码</string>
@@ -57,21 +77,20 @@
 	<string name="today_rec">今日推荐</string>
 	<string name="diary">今天是复习的第1天</string>
 	<string name="course_choose">你只能选择四门科目</string>
-	<string name="english_dir">EnglishDir</string>
+	
 	<string name="english">英语</string>
 	<string name="english1">英语1</string>
 	<string name="english2">英语2</string>
 	<string name="english3">英语3</string>
 	<string name="politics">政治</string>
-	<string name="politics_dir">PoliticsDir</string>
+	
 	<string name="math">数学</string>
-	<string name="math_dir">MathDir</string>
+	
 	<string name="math1">数学1</string>
 	<string name="math2">数学2</string>
 	<string name="math3">数学3</string>
 	<string name="professional_course">专业课</string>
-	<string name="profess_dir1">ProfessDir1</string>
-	<string name="profess_dir2">ProfessDir2</string>
+	
 	<string name="input_professional_course">请输入专业课名称</string>
 	<string name="back">返回</string>
 	<string name="is_first_take_photo">isFirstTakePhoto</string>

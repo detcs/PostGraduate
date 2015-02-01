@@ -10,6 +10,7 @@ import java.util.Date;
 import com.app.ydd.R;
 import com.data.model.DataConstants;
 import com.data.model.DatabaseHelper;
+import com.data.model.FileDataHandler;
 import com.data.model.UserConfigs;
 
 import android.app.Activity;
@@ -91,13 +92,13 @@ public class ShowFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(DataConstants.SD_PATH==null)// no sd card
+				if(!FileDataHandler.sdCardExist())// no sd card
 				{
 					
 				}
 				else
 				{
-					String storePath=DataConstants.SD_PATH+"/"+DataConstants.PHOTO_DIR_PATH+"/"+getResources().getString(R.string.english_dir);
+					String storePath=FileDataHandler.APP_DIR_PATH+"/"+getResources().getString(R.string.dir_english);
 					SimpleDateFormat sdf=new SimpleDateFormat("yyyy_MM_dd|HH:mm:ss");
 					String time=sdf.format(new Date());
 					//test date

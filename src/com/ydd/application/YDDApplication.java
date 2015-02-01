@@ -1,10 +1,12 @@
 package com.ydd.application;
 
 import java.io.File;
+import java.util.zip.DataFormatException;
 
 import com.app.ydd.R;
 import com.data.model.DataConstants;
 import com.data.model.DatabaseHelper;
+import com.data.model.FileDataHandler;
 import com.data.model.UserConfigs;
 import com.pages.login.LoginActivity;
 
@@ -27,19 +29,28 @@ public class YDDApplication extends Application{
 		super.onCreate();
 		Log.e(DataConstants.TAG,"app create");
 		initUserConfig();
-		initSD();
+		initAppDIr();
+		//initSD();
 		initDataBase();
 		initScreenParam();
 		
 	}
 	
-	private void initSD()
+	private void initAppDIr()
 	{
-		boolean sdCardExist = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);   //判断sd卡是否存在 
-		if   (sdCardExist)      //如果SD卡存在，则获取跟目录
-		{                               
-			DataConstants.SD_PATH = Environment.getExternalStorageDirectory().toString();//获取跟目录 
-			File dir=new File(DataConstants.SD_PATH+"/"+DataConstants.PHOTO_DIR_PATH);
+		FileDataHandler.init(getApplicationContext());
+		if(FileDataHandler.SD_PATH!=null)
+		{
+			File dir=new File(FileDataHandler.APP_DIR_PATH);
+			if(!dir.exists())
+				dir.mkdir();
+			dir=new File(FileDataHandler.COVER_PIC_DIR_PATH);
+			if(!dir.exists())
+				dir.mkdir();
+			dir=new File(FileDataHandler.COVER_SONG_DIR_PATH);
+			if(!dir.exists())
+				dir.mkdir();
+			dir=new File(FileDataHandler.FOOTPRINT_PIC_DIR_PATH);
 			if(!dir.exists())
 				dir.mkdir();
 		}   
@@ -53,6 +64,8 @@ public class YDDApplication extends Application{
 	{
 		DataConstants.dbHelper= new DatabaseHelper(this);//这段代码放到Activity类中才用this
 		SQLiteDatabase db = DataConstants.dbHelper.getReadableDatabase();
+		//if(!DataConstants.dbHelper.tableIsExist(db, getResources().getString(R.string.db_footprint_table)))
+			DataConstants.dbHelper.createFootprintTable(getApplicationContext(), db);
 		db.close();
 	}
 	private void initScreenParam() 
