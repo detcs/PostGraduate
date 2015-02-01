@@ -8,9 +8,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import net.tsz.afinal.FinalHttp;
-import net.tsz.afinal.http.AjaxCallBack;
-import net.tsz.afinal.http.HttpHandler;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
