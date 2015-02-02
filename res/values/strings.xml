@@ -41,7 +41,7 @@
      <!--  <string name="dbcol_cover_song_name">dbCoverSongName</string>-->
      <string name="dbcol_footprint_pic">dbFootprintPic</string>
      <string name="dbcol_diary">dbDiary</string>
-     <string name="dbcol_encourage">dbDiary</string>
+     <string name="dbcol_encourage">dbEncourage</string>
      <string name="dbcol_days">dbDays</string>
      <string name="dbcol_daysleft">dbDaysleft</string>
 
@@ -108,7 +108,9 @@
 	<string name="date">2015.1.25</string>
 	<string name="problems">重难点</string>
 	<string name="myfootprint">我的足迹</string>
-	
+	<string name="count_clock">累计打卡</string>
+	<string name="count_note">累计笔记</string>
+	<string name="today_add">今日新增</string>
 	<!-- functions square -->
 	<string name="essence">精华</string>
 	<string name="square">广场</string>

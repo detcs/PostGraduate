@@ -49,7 +49,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     public static void createFootprintTable( Context context,SQLiteDatabase db)
     {
-    	String sql = "create table if not exists "+context.getResources().getString(R.string.db_footprint_table)+"(_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+    	String sql = "create table if not exists "+context.getResources().getString(R.string.db_footprint_table)
+    			+"(_id INTEGER PRIMARY KEY AUTOINCREMENT,"
     			+context.getResources().getString(R.string.dbcol_cover_pic)+" TEXT not null , "
     			+context.getResources().getString(R.string.dbcol_cover_song)+" TEXT not null,"
     			+context.getResources().getString(R.string.dbcol_footprint_pic)+" TEXT not null,"
@@ -133,14 +134,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     	String[] whereArgs = {photoname};//修改条件的参数
     	db.update(tableName,cv,whereClause,whereArgs);//执行修改
     }
-    public static void updateCourseRecordRemark(Context context,SQLiteDatabase db,String tableName,String photoname,String remark)
-    {
-    	ContentValues cv=new ContentValues();
-       	cv.put(context.getResources().getString(R.string.dbcol_remark), remark);
-    	String whereClause =context.getResources().getString(R.string.dbcol_photo_name)+ "=?";//修改条件
-    	String[] whereArgs = {photoname};//修改条件的参数
-    	db.update(tableName,cv,whereClause,whereArgs);//执行修改
-    }
+    
     public static void dropTable(SQLiteDatabase db,String tableName){
         try
         {

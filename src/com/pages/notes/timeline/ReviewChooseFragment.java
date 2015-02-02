@@ -1,4 +1,4 @@
-package com.pages.notes;
+package com.pages.notes.timeline;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -7,6 +7,7 @@ import java.util.TreeSet;
 
 import com.app.ydd.R;
 import com.data.model.DataConstants;
+import com.pages.notes.ReviewFragment;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -38,7 +39,7 @@ public class ReviewChooseFragment extends Fragment{
 		//choosePaths(DataConstants.SD_PATH+"/"+DataConstants.PHOTO_DIR_PATH+"/"+tableName);
 		SQLiteDatabase db = DataConstants.dbHelper.getReadableDatabase();
 		TreeSet<String> dateSet=DataConstants.dbHelper.queryDates(getActivity(), db, tableName);
-		List<String> dates=new ArrayList<String>();
+		final List<String> dates=new ArrayList<String>();
 		for(String date:dateSet)
 			dates.add(date);
 		db.close();
@@ -49,7 +50,7 @@ public class ReviewChooseFragment extends Fragment{
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				jumpToReview();
+				jumpToReview(dates.get(0));
 			}
 		});
 		return rootView;
@@ -61,11 +62,12 @@ public class ReviewChooseFragment extends Fragment{
 		super.onCreate(savedInstanceState);
 		
 	}
-	public void jumpToReview()
+	public void jumpToReview(String date)
 	{
 		Fragment fragment=new ReviewFragment();
 		Bundle bundle = new Bundle();  
-        bundle.putString("type", "");  
+        bundle.putString("type", "");
+        bundle.putString("date", date);
         fragment.setArguments(bundle);
 		FragmentManager fm=getActivity().getSupportFragmentManager();
 		FragmentTransaction trans = fm.beginTransaction();  

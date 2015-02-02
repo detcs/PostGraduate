@@ -1,4 +1,4 @@
-package com.pages.notes;
+package com.pages.notes.timeline;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -8,7 +8,6 @@ import java.util.TreeSet;
 import com.app.ydd.R;
 import com.data.model.DataConstants;
 import com.data.model.FileDataHandler;
-import com.pages.notes.NotesClassAdapter.ViewHolder;
 import com.squareup.picasso.Picasso;
 
 import android.content.Context;
@@ -93,7 +92,7 @@ public class ExerciseTimeLineAdapter extends BaseAdapter {
 		db.close();
 		
 	    // Bind the data efficiently with the holder.
-	    holder.grid.setAdapter(new GridAdapter(photoPaths));
+	    holder.grid.setAdapter(new PhotoShowGridAdapter(context,photoPaths));
 	    holder.day.setText(dates.get(position));
 	    return convertView; 
 	}
@@ -103,59 +102,7 @@ public class ExerciseTimeLineAdapter extends BaseAdapter {
 	    GridView grid;
 
 	} 
-	class GridAdapter extends BaseAdapter
-	{
-
-		List<String> imgPaths;
-		
-		public GridAdapter(List<String> imgPaths) {
-			super();
-			this.imgPaths = imgPaths;
-		}
-
-		@Override
-		public int getCount() {
-			// TODO Auto-generated method stub
-			return imgPaths.size();
-		}
-
-		@Override
-		public Object getItem(int arg0) {
-			// TODO Auto-generated method stub
-			return imgPaths.get(arg0);
-		}
-
-		@Override
-		public long getItemId(int arg0) {
-			// TODO Auto-generated method stub
-			return arg0;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
-			GridViewHolder holder; 
-		    if (convertView == null) { 
-		        convertView = mInflater.inflate(R.layout.item_timeline_grid_item, null); 
-		        holder = new GridViewHolder(); 
-		        holder.img = (ImageView) convertView.findViewById(R.id.exercise_timeline_img); 
-		        convertView.setTag(holder); 
-		    } else { 
-		        holder = (GridViewHolder) convertView.getTag(); 
-		    }
-		    // Bind the data efficiently with the holder.
-		    //Log.e(DataConstants.TAG,"pos:"+position+" path:"+ imgPaths.get(position));
-		    int width=(DataConstants.screenWidth-10)/4;
-		    Log.e(DataConstants.TAG,"width:"+width);
-		    Picasso.with(context).load(new File(imgPaths.get(position))).centerInside().resize(width,width).into(holder.img);
-		    return convertView; 
-		}
-		
-	}
-	static class GridViewHolder { 
-
-	    ImageView img; 
-	} 
+	
 	private List<String> getPicPathsOfDate(String date,String fileDir)
 	{
 		List<String> pics=null;

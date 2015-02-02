@@ -25,14 +25,14 @@ public class NoteFragment  extends Fragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_notes, container, false);
-		funcGridView=(GridView)rootView.findViewById(R.id.notes_grid);
-		List<String> names=new ArrayList<String>();
-		names.add(getResources().getString(R.string.english));
-		names.add(getResources().getString(R.string.politics));	
-		names.add(getResources().getString(R.string.math));
-		names.add(getResources().getString(R.string.professional_course));	
-		
-		funcGridView.setAdapter(new ButtonsGridViewAdapter(names,getActivity()));
+//		funcGridView=(GridView)rootView.findViewById(R.id.notes_grid);
+//		List<String> names=new ArrayList<String>();
+//		names.add(getResources().getString(R.string.english));
+//		names.add(getResources().getString(R.string.politics));	
+//		names.add(getResources().getString(R.string.math));
+//		names.add(getResources().getString(R.string.professional_course));	
+//		
+//		funcGridView.setAdapter(new ButtonsGridViewAdapter(names,getActivity()));
 		
 		return rootView;
 	}

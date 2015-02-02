@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.app.ydd.R;
+import com.data.model.DataConstants;
+import com.data.model.FileDataHandler;
 import com.squareup.picasso.Picasso;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -41,9 +44,19 @@ public class ReviewFragment extends Fragment{
 		}
 		else
 		{
-			 reviewImgPaths=new ArrayList<String>();
+			String date=bundle.getString("date");
+			String tableName=getResources().getString(R.string.db_english_table);
+			SQLiteDatabase db = DataConstants.dbHelper.getReadableDatabase();
+			List<String> photoNames=DataConstants.dbHelper.queryPhotoNamesAtDate(getActivity(), db, tableName, date);
+			List<String> photoPaths=new ArrayList<String>();
+			String dirPath=FileDataHandler.APP_DIR_PATH+"/"+getResources().getString(R.string.dir_english);
+			reviewImgPaths=new ArrayList<String>();
+			for(String name:photoNames)
+				//photoPaths.add(dirPath+"/"+name);
+				reviewImgPaths.add(dirPath+"/"+name);
+			db.close();
+			 
 			//choosePaths(getSDPath()+"/DCIM/Camera");
-			choosePaths("/storage/sdcard1/DCIM/Camera");
 			Picasso.with(getActivity()).load(new File(reviewImgPaths.get(0))).into(reviewImg);
 			leftBtn.setOnClickListener(new OnClickListener() {
 				

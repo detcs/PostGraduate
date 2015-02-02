@@ -61,6 +61,8 @@ import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -222,7 +224,7 @@ public class MainActivity extends FragmentActivity {
 		//Log.e(DataConstants.TAG,"date:"+date);
 
 		
-		requestFirstPageJasonInfo(getFirstPageURL(date),date);
+		//requestFirstPageJasonInfo(getFirstPageURL(date),date);
 		 
 		 mp = MediaPlayer.create(this, R.raw.song);
 		 final ImageView play=(ImageView)v.findViewById(R.id.music_play);
@@ -308,13 +310,36 @@ public class MainActivity extends FragmentActivity {
 				
 			}
 		});
-		GridView gv=(GridView)v.findViewById(R.id.notes_grid);
-		List<String> names=new ArrayList<String>();
+//		GridView gv=(GridView)v.findViewById(R.id.notes_grid);
+		ListView courseNamelist=(ListView)v.findViewById(R.id.course_list);
+		final List<String> names=new ArrayList<String>();
 		names.add(getResources().getString(R.string.english));
 		names.add(getResources().getString(R.string.politics));	
 		names.add(getResources().getString(R.string.math));
 		names.add(getResources().getString(R.string.professional_course));	
-		gv.setAdapter(new NotesClassAdapter(names, MainActivity.this));
+		
+		courseNamelist.setAdapter(new NotesClassAdapter(names, MainActivity.this));
+		courseNamelist.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				// TODO Auto-generated method stub
+				Intent intent=new Intent();
+				intent.setClass(MainActivity.this, ExerciseActivity.class);
+				boolean isFirstUse=UserConfigs.getIsFirstTakePhoto()==null?true:false;
+				if(isFirstUse)
+				{
+					intent.putExtra("tag", getResources().getString(R.string.first_use));
+				}
+				else
+				{
+					intent.putExtra("course_name",names.get(position));
+					intent.putExtra("tag",getResources().getString(R.string.note_class));
+				}
+				startActivity(intent);
+			}
+		});
 		TextView myFootPrint=(TextView)v.findViewById(R.id.my_footprint);
 		myFootPrint.setOnClickListener(new OnClickListener() {
 			
