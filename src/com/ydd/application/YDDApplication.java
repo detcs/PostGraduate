@@ -1,22 +1,16 @@
 package com.ydd.application;
 
 import java.io.File;
-import java.util.zip.DataFormatException;
 
-import com.app.ydd.R;
 import com.data.model.DataConstants;
 import com.data.model.DatabaseHelper;
 import com.data.model.FileDataHandler;
 import com.data.model.UserConfigs;
 import com.data.util.GloableData;
-import com.pages.login.LoginActivity;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
@@ -33,7 +27,7 @@ public class YDDApplication extends Application {
 		// initSD();
 		initDataBase();
 		initScreenParam();
-		GloableData.init(getApplicationContext());
+		GloableData.initRequestQueue(getApplicationContext());
 	}
 
 	private void initAppDIr() {

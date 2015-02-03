@@ -4,6 +4,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
 import android.content.Context;
+import android.telephony.TelephonyManager;
 
 public class GloableData {
 	// attention type-value:affects the EssenseFragment
@@ -55,12 +56,14 @@ public class GloableData {
 
 	public static void init(Context context) {
 
-		// TelephonyManager tm = (TelephonyManager) context
-		// .getSystemService(Context.TELEPHONY_SERVICE);
-		// param = "&deviceid=" + tm.getDeviceId() + "&userid=" + userid
-		// + "&verify=" + verify;
-		param = "&deviceid=" + 1 + "&userid=" + userid + "&verify=" + verify;
+		TelephonyManager tm = (TelephonyManager) context
+				.getSystemService(Context.TELEPHONY_SERVICE);
+		param = "&deviceid=" + tm.getDeviceId() + "&userid=" + userid
+				+ "&verify=" + verify;
+		// param = "&deviceid=" + 1 + "&userid=" + userid + "&verify=" + verify;
+	}
 
+	public static void initRequestQueue(Context context) {
 		requestQueue = Volley.newRequestQueue(context);
 	}
 
