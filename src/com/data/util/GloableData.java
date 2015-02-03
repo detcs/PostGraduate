@@ -2,8 +2,10 @@ package com.data.util;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.data.model.UserConfigs;
 
 import android.content.Context;
+import android.telephony.TelephonyManager;
 
 public class GloableData {
 	// attention type-value:affects the EssenseFragment
@@ -27,8 +29,10 @@ public class GloableData {
 	public static final String UPLOAD_SUCCESS_MSG = "发布成功";
 	public static RequestQueue requestQueue;
 	private static String param;
-	private static String userid = "6dfae24f-a77a-11e4-9812-ac853dac2305";
-	private static String verify = "1";
+	// private static String userid = "6dfae24f-a77a-11e4-9812-ac853dac2305";
+	private static String userid;
+	// private static String verify = "1";
+	private static String verify;
 	private static String email;
 
 	public static String getEmail() {
@@ -54,13 +58,17 @@ public class GloableData {
 	}
 
 	public static void init(Context context) {
+		userid = UserConfigs.getId();
+		verify = UserConfigs.getVerify();
 
-		// TelephonyManager tm = (TelephonyManager) context
-		// .getSystemService(Context.TELEPHONY_SERVICE);
-		// param = "&deviceid=" + tm.getDeviceId() + "&userid=" + userid
-		// + "&verify=" + verify;
-		param = "&deviceid=" + 1 + "&userid=" + userid + "&verify=" + verify;
+		TelephonyManager tm = (TelephonyManager) context
+				.getSystemService(Context.TELEPHONY_SERVICE);
+		param = "&deviceid=" + tm.getDeviceId() + "&userid=" + userid
+				+ "&verify=" + verify;
+		// param = "&deviceid=" + 1 + "&userid=" + userid + "&verify=" + verify;
+	}
 
+	public static void initRequestQueue(Context context) {
 		requestQueue = Volley.newRequestQueue(context);
 	}
 
