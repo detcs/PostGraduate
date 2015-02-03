@@ -1,25 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/essense_top_bar_height" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/essense_head_words"
+                android:textColor="@color/essense_head_words_color"
+                android:textSize="@dimen/essense_head_words_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/essense_back_words"
+                android:textColor="@color/essense_back_words_color"
+                android:textSize="@dimen/essense_head_words_size" />
+        </LinearLayout>
+    </FrameLayout>
 
     <TabHost
         android:id="@+id/tabhost"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="0dp"
+        android:layout_weight="1" >
 
         <LinearLayout
-            android:id="@+id/LinearLayout1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
-            <TabWidget
-                android:id="@android:id/tabs"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-            </TabWidget>
+                android:layout_height="@dimen/essense_tabs_bar_height"
+                android:gravity="center" >
+
+                <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="@dimen/essense_tabs_Width"
+                    android:layout_height="@dimen/essense_tabs_height"
+                    android:gravity="center" >
+                </TabWidget>
+            </LinearLayout>
 
             <SearchView
                 android:id="@+id/searchView1"
@@ -41,7 +83,8 @@
                         android:id="@+id/listView1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" >
+                        android:layout_weight="1"
+                        android:fastScrollEnabled="false" >
                     </ListView>
                 </LinearLayout>
 
@@ -54,7 +97,8 @@
                         android:id="@+id/listView2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" >
+                        android:layout_weight="1"
+                        android:fastScrollEnabled="false" >
                     </ListView>
                 </LinearLayout>
 
@@ -67,7 +111,8 @@
                         android:id="@+id/listView3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" >
+                        android:layout_weight="1"
+                        android:fastScrollEnabled="false" >
                     </ListView>
                 </LinearLayout>
             </FrameLayout>

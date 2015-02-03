@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/FrameLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="@color/background" >
 
-    <Button
-        android:id="@+id/backBu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="back" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="detail" />
+        <Button
+            android:id="@+id/backBu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="back" />
 
-    <Button
-        android:id="@+id/downBu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="down" />
+        <WebView
+            android:id="@+id/webView1"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent" />
 
-</LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

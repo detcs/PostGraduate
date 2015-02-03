@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/headView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/default_head" />
+
+        <TextView
+            android:id="@+id/nickName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/name_size"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/headView"
+            android:text="nickName" />
+
+        <TextView
+            android:id="@+id/timeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/nickName"
+            android:layout_below="@+id/nickName"
+            android:text="time" />
+
+        <TextView
+            android:id="@+id/countView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:text="Count" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/titleView"
+        android:textSize="@dimen/title_size"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="title" />
+
+    <TextView
+        android:id="@+id/contentView"
+        android:ellipsize="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:text="content" />
+
+</LinearLayout>

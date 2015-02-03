@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="20dp"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/headView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/default_head" />
+
+        <TextView
+            android:id="@+id/nickNameView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/headView"
+            android:text="nickName"
+            android:textSize="@dimen/name_size" />
+
+        <TextView
+            android:id="@+id/timeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/nickNameView"
+            android:layout_below="@+id/nickNameView"
+            android:text="time" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/contentView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="content" />
+
+</LinearLayout>

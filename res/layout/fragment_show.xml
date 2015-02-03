@@ -2,12 +2,14 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/FrameLayout1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    
+    android:layout_height="match_parent"
+    android:background="@color/background" >
+
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -15,26 +17,132 @@
         android:layout_height="match_parent" >
 
         <LinearLayout
+            android:id="@+id/bottomBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/againView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="try again" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true" >
+            android:layout_height="@dimen/camera_bottom_bar_height"
+            android:layout_alignParentBottom="true"
+            android:background="@color/camera_float_bar"
+            android:gravity="center" >
 
             <Button
                 android:id="@+id/saveBu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="save" />
+                android:text="保存" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/hideBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/chooseBar"
+            android:orientation="vertical"
+            android:visibility="invisible" >
+
+            <RelativeLayout
+                android:id="@+id/hideChoose"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/camera_hide_edit_bar_height"
+                android:background="@color/camera_float_bar"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/quitView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/camera_edit_quit"
+                    android:textColor="@color/camera_top_bar_word"
+                    android:textSize="@dimen/clickable_words_size" />
+
+                <TextView
+                    android:id="@+id/saveView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/camera_edit_save"
+                    android:textColor="@color/camera_top_bar_word"
+                    android:textSize="@dimen/clickable_words_size" />
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/remarksView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/camera_float_bar"
+                android:ems="10"
+                android:gravity="top"
+                android:minHeight="@dimen/camera_edit_min_height"
+                android:textColor="@color/camera_edit_word_color" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/camera_top_bar_height"
+            android:background="@color/camera_float_bar"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/againView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/camera_retake"
+                android:textColor="@color/camera_top_bar_word"
+                android:textSize="@dimen/clickable_words_size" />
+
+            <TextView
+                android:id="@+id/editView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/againView"
+                android:layout_alignParentRight="true"
+                android:text="@string/camera_edit"
+                android:textColor="@color/camera_top_bar_word"
+                android:textSize="@dimen/clickable_words_size" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/chooseBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/camera_choose_bar_height"
+            android:layout_above="@+id/bottomBar"
+            android:background="@color/camera_float_bar"
+            android:gravity="center" >
+
+            <RadioGroup
+                android:id="@+id/gendergroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/radioButton1"
+                    android:background="@color/camera_choose_background"
+                    android:text="@string/camera_choose_default"
+                    android:textColor="@color/camera_choose_word" />
+
+                <RadioButton
+                    android:id="@+id/radioButton2"
+                    android:layout_marginLeft="@dimen/camera_choose_item_gap"
+                    android:background="@color/camera_choose_background"
+                    android:text="@string/camera_choose_default"
+                    android:textColor="@color/camera_choose_word" />
+
+                <RadioButton
+                    android:id="@+id/radioButton3"
+                    android:layout_marginLeft="@dimen/camera_choose_item_gap"
+                    android:background="@color/camera_choose_background"
+                    android:text="@string/camera_choose_default"
+                    android:textColor="@color/camera_choose_word" />
+
+                <RadioButton
+                    android:id="@+id/radioButton4"
+                    android:layout_marginLeft="@dimen/camera_choose_item_gap"
+                    android:background="@color/camera_choose_background"
+                    android:text="@string/camera_choose_default"
+                    android:textColor="@color/camera_choose_word" />
+            </RadioGroup>
         </LinearLayout>
     </RelativeLayout>
 

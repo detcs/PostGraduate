@@ -5,15 +5,14 @@ import com.pages.notes.camera.ShowFragment.ShowJump;
 import com.pages.notes.camera.TakeFragment.TakeJump;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class CameraActivity extends FragmentActivity implements TakeJump,ShowJump{
+public class CameraActivity extends Activity implements TakeJump, ShowJump {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,25 +42,25 @@ public class CameraActivity extends FragmentActivity implements TakeJump,ShowJum
 
 	// *************switch fragment*************
 	private void toTake() {
-		FragmentManager fragmentManager = getSupportFragmentManager();
+		FragmentManager fragmentManager = getFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager
 				.beginTransaction();
-		TakeFragment takeFragment=new TakeFragment();
+		TakeFragment takeFragment = new TakeFragment();
 		fragmentTransaction.replace(R.id.FrameLayout1, takeFragment);
 		fragmentTransaction.commit();
 	}
-	
-	private void toShow(Bitmap bitmap){
-		FragmentManager fragmentManager = getSupportFragmentManager();
+
+	private void toShow(Bitmap bitmap) {
+		FragmentManager fragmentManager = getFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager
 				.beginTransaction();
-		ShowFragment showFragment=new ShowFragment();
+		ShowFragment showFragment = new ShowFragment();
 		showFragment.setBitmap(bitmap);
 		fragmentTransaction.replace(R.id.FrameLayout1, showFragment);
 		fragmentTransaction.commit();
 	}
 
-//	**************interface jump**************
+	// **************interface jump**************
 	@Override
 	public void show(Bitmap bitmap) {
 		// TODO Auto-generated method stub

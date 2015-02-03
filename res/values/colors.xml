@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#FFFFFF</color>
+    <color name="camera_float_bar">#80f1f1f1</color>
+    <color name="camera_top_bar_word">#3385ff</color>
+    <color name="camera_pick_album">#ffffff</color>
+    <color name="camera_choose_word">#000000</color>
+    <color name="camera_choose_background">#ffffff</color>
+    <color name="camera_hide_bar">#ffffff</color>
+    <color name="camera_edit_word_color">#ffffff</color>
+    <color name="essense_head_words_color">#000000</color>
+    <color name="essense_back_words_color">#3385ff</color>
+    <color name="essense_tabhost_background">#ffffff</color>
+    <color name="essense_tabhost_word">#000000</color>
+    
+</resources>

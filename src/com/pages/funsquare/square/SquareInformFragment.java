@@ -1,36 +1,48 @@
 package com.pages.funsquare.square;
+
 import com.app.ydd.R;
-import com.view.util.SysCall;
+import com.data.util.SysCall;
+import com.view.util.AdapterFresh;
+import com.view.util.InformAdapter;
+import com.view.util.InformAdapter.ViewHolder;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class SquareInformFragment extends Fragment {
+	private static final String TAG = "SquareInformFragment";
 	private View rootView;
+	private SquareJump jump;
+	private InformAdapter adapter;
+
 	private Button backBu;
 	private ListView listView1;
-	private InformDetail informDetail;
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		informDetail = (InformDetail) activity;
+		jump = (SquareJump) activity;
 	};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+	}
+	
+	@Override
+	public void onPause(){
+		super.onPause();
+		adapter.fresh();
 	}
 
 	@Override
@@ -44,8 +56,11 @@ public class SquareInformFragment extends Fragment {
 		return rootView;
 	}
 
-	public interface InformDetail {
-		public void checkInformDetail(int index);
+	@Override
+	public void onResume() {
+		super.onResume();
+		Log.i(TAG, "resume");
+		((AdapterFresh) adapter).fresh();
 	}
 
 	// ****************init****************
@@ -58,38 +73,12 @@ public class SquareInformFragment extends Fragment {
 
 	private void findViews(View view) {
 		backBu = (Button) view.findViewById(R.id.backBu);
-		listView1 = (ListView) view.findViewById(R.id.listView1);
+		listView1 = (ListView) view.findViewById(R.id.hintListView);
 	}
 
 	private void initListView() {
-		listView1.setAdapter(new BaseAdapter() {
-
-			@Override
-			public View getView(int position, View convertView, ViewGroup parent) {
-				// TODO Auto-generated method stub
-				TextView textView = new TextView(getActivity());
-				textView.setText("inform" + position);
-				return textView;
-			}
-
-			@Override
-			public long getItemId(int position) {
-				// TODO Auto-generated method stub
-				return 0;
-			}
-
-			@Override
-			public Object getItem(int position) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public int getCount() {
-				// TODO Auto-generated method stub
-				return 30;
-			}
-		});
+		adapter = new InformAdapter(getActivity());
+		listView1.setAdapter(adapter);
 	}
 
 	private void setListener() {
@@ -108,7 +97,9 @@ public class SquareInformFragment extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				informDetail.checkInformDetail(position);
+				ViewHolder holder = (ViewHolder) view.getTag();
+				String pid = holder.pid;
+				jump.detail(pid);
 			}
 		});
 	}

@@ -2,24 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <Button
+        android:id="@+id/backBu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <Button
-            android:id="@+id/backBu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="back" />
-
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:text="back" />
 
     <ListView
-        android:id="@+id/listView1"
+        android:id="@+id/hintListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:fastScrollEnabled="false" >
     </ListView>
 
 </LinearLayout>

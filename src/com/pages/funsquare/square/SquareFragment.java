@@ -1,14 +1,14 @@
 package com.pages.funsquare.square;
 
-
 import com.app.ydd.R;
-import com.data.model.Post;
-import com.view.util.MyAdapter;
+import com.data.util.SysCall;
+import com.view.util.SquareAdapter;
+import com.view.util.SquareAdapter.ViewHolder;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,13 +24,13 @@ public class SquareFragment extends Fragment {
 	private Button backBu;
 	private Button publishBu;
 	private Button informBu;
-	private MyAdapter postAdapter;
-	private PubOrDetail pubOrDetail;
+	private SquareAdapter postAdapter;
+	private SquareJump pubOrDetail;
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		pubOrDetail = (PubOrDetail) activity;
+		pubOrDetail = (SquareJump) activity;
 	};
 
 	@Override
@@ -49,12 +49,10 @@ public class SquareFragment extends Fragment {
 		return rootView;
 	}
 
-	public interface PubOrDetail {
-		public void publish();
-
-		public void detail(int index);
-
-		public void inform();
+	@Override
+	public void onPause() {
+		super.onPause();
+		postAdapter.fresh();
 	}
 
 	// ******************init******************
@@ -74,7 +72,7 @@ public class SquareFragment extends Fragment {
 
 	private void initListView() {
 		Context context = getActivity().getBaseContext();
-		postAdapter = new MyAdapter(context, Post.TYPE);
+		postAdapter = new SquareAdapter(context);
 		listView1.setAdapter(postAdapter);
 	}
 
@@ -84,7 +82,7 @@ public class SquareFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-
+				SysCall.clickBack();
 			}
 		});
 		publishBu.setOnClickListener(new OnClickListener() {
@@ -111,7 +109,8 @@ public class SquareFragment extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				pubOrDetail.detail(position);
+				ViewHolder holder = (ViewHolder) view.getTag();
+				pubOrDetail.detail(holder.vg);
 			}
 		});
 	}

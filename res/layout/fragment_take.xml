@@ -3,46 +3,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-     <com.pages.notes.camera.MySurfaceView
+    <com.pages.notes.camera.MySurfaceView
         android:id="@+id/mySurfaceView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-     <RelativeLayout
-         android:layout_width="match_parent"
-         android:layout_height="match_parent" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-         <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/camera_top_bar_height"
+            android:background="@color/camera_float_bar"
+            android:gravity="center_vertical" >
 
-             <TextView
-                 android:id="@+id/closeView"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="close" />
+            <TextView
+                android:id="@+id/closeView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/camera_close_preview"
+                android:textColor="@color/camera_top_bar_word"
+                android:textSize="@dimen/clickable_words_size" />
+        </LinearLayout>
 
-         </LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/camera_bottom_bar_height"
+            android:layout_alignParentBottom="true" >
 
-         <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_alignParentBottom="true" >
+            <LinearLayout
+                android:id="@+id/LinearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center" >
 
-             <TextView
-                 android:id="@+id/pickView"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="從相冊選取" />
+                <Button
+                    android:id="@+id/takeBu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="take"
+                    android:textSize="@dimen/clickable_words_size" />
+            </LinearLayout>
 
-             <Button
-                 android:id="@+id/takeBu"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="take" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/camera_float_bar"
+                android:gravity="center_vertical" >
 
-         </LinearLayout>
-
-     </RelativeLayout>
+                <TextView
+                    android:id="@+id/pickView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/camera_pick_album"
+                    android:textColor="@color/camera_pick_album"
+                    android:textSize="@dimen/clickable_words_size" />
+            </LinearLayout>
+        </FrameLayout>
+    </RelativeLayout>
 
 </FrameLayout>

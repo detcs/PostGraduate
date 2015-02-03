@@ -1,20 +1,18 @@
 package com.pages.funsquare.square;
 
-
-
 import com.app.ydd.R;
-import com.pages.funsquare.square.SquareFragment.PubOrDetail;
-import com.pages.funsquare.square.SquareInformFragment.InformDetail;
+import com.data.model.Post;
+import com.data.util.NetCall;
+import com.data.util.NetCall.PullViewGenerator;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 
-public class SquareActivity extends FragmentActivity implements PubOrDetail,
-		InformDetail {
+public class SquareActivity extends Activity implements SquareJump,
+		PullViewGenerator {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +21,7 @@ public class SquareActivity extends FragmentActivity implements PubOrDetail,
 		showSquare();
 	}
 
-	// 从广场第一页向其他页面跳转
+	// SquareJump
 	@Override
 	public void publish() {
 		// TODO Auto-generated method stub
@@ -32,10 +30,16 @@ public class SquareActivity extends FragmentActivity implements PubOrDetail,
 	}
 
 	@Override
-	public void detail(int index) {
+	public void detail(Post vg) {
 		// TODO Auto-generated method stub
-		SquareDetailFragment fragment = new SquareDetailFragment();
+		SquareDetailFragment fragment = new SquareDetailFragment(vg);
 		jumpTo(fragment);
+	}
+
+	@Override
+	public void detail(String pid) {
+		// TODO Auto-generated method stub
+		NetCall.getPost(pid, this);
 	}
 
 	@Override
@@ -46,27 +50,34 @@ public class SquareActivity extends FragmentActivity implements PubOrDetail,
 	}
 
 	private void jumpTo(Fragment fragment) {
-		FragmentManager manager = getSupportFragmentManager();
+		FragmentManager manager = getFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
 		transaction.replace(R.id.FrameLayout1, fragment);
 		transaction.addToBackStack(null);
 		transaction.commit();
 	}
 
-	// 从广场消息提醒界面向其他界面跳转
+	// PullViewGenerator
 	@Override
-	public void checkInformDetail(int index) {
+	public void pullVGFail() {
 		// TODO Auto-generated method stub
-		detail(index);
+
+	}
+
+	@Override
+	public void pullVGSuccess(Post vg) {
+		// TODO Auto-generated method stub
+		detail(vg);
 	}
 
 	// ***************init***************
 
 	private void showSquare() {
 		Fragment fragment = new SquareFragment();
-		FragmentManager manager = getSupportFragmentManager();
+		FragmentManager manager = getFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
-		transaction.replace(R.id.FrameLayout1, fragment).commit();
+		transaction.replace(R.id.FrameLayout1, fragment);
+		// transaction.addToBackStack(null);//此处不该有，因为本身是想看上去像一个界面
+		transaction.commit();
 	}
-
 }

@@ -3,6 +3,7 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -12,14 +13,16 @@
 
         <Button
             android:id="@+id/backBu"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="back" />
 
         <Button
             android:id="@+id/informBu"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="inform" />
     </LinearLayout>
 
@@ -33,13 +36,14 @@
         <ListView
             android:id="@+id/listView1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:fastScrollEnabled="false" >
         </ListView>
     </LinearLayout>
 
     <Button
         android:id="@+id/publishBu"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"

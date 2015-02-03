@@ -5,11 +5,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
-        android:targetSdkVersion="18" />
-    <!-- wsy 2015/1/29 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+        android:minSdkVersion="14"
+        android:targetSdkVersion="19" />
 
     <application
         android:name="com.ydd.application.YDDApplication"
@@ -30,14 +27,13 @@
             android:name="com.pages.login.RegisterActivity"
             android:label="@string/app_name" >
         </activity>
-         <activity
+        <activity
             android:name="com.pages.notes.camera.CameraActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
             android:name="com.pages.viewpager.MainActivity"
             android:label="@string/app_name" >
-            
         </activity>
         <activity
             android:name="com.pages.notes.ExerciseActivity"
@@ -78,5 +74,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- wsy 2015/1/30 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
 </manifest>

@@ -1,7 +1,7 @@
 package com.pages.funsquare.reserve;
 
 import com.app.ydd.R;
-import com.view.util.SysCall;
+import com.data.util.SysCall;
 
 import android.app.Activity;
 import android.content.SharedPreferences;

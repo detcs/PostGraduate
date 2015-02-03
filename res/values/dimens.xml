@@ -3,5 +3,22 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="name_size">20dp</dimen>
+    <dimen name="title_size">20dp</dimen>
+    <dimen name="small_head_size">70dp</dimen>
+    <dimen name="comment_height">40dp</dimen>
+    <dimen name="clickable_words_size">20dp</dimen>
+    <dimen name="essense_item_height">70dp</dimen>
+    <dimen name="camera_top_bar_height">50dp</dimen>
+    <dimen name="camera_bottom_bar_height">70dp</dimen>
+    <dimen name="camera_choose_item_gap">5dp</dimen>
+    <dimen name="camera_choose_bar_height">60dp</dimen>
+    <dimen name="camera_hide_edit_bar_height">40dp</dimen>
+    <dimen name="camera_edit_min_height">50dp</dimen>
+    <dimen name="essense_top_bar_height">40dp</dimen>
+    <dimen name="essense_head_words_size">20dp</dimen>
+    <dimen name="essense_tabs_Width">200dp</dimen>
+    <dimen name="essense_tabs_height">30dp</dimen>
+    <dimen name="essense_tabs_bar_height">40dp</dimen>
 
 </resources>

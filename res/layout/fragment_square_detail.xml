@@ -1,42 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/RelativeLayout1"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical" >
 
     <LinearLayout
         android:id="@+id/actionBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true" >
+        android:layout_height="wrap_content" >
 
         <Button
             android:id="@+id/backBu"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="back" />
 
         <Button
             android:id="@+id/shareBu"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="share" />
     </LinearLayout>
 
     <ListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bottomBar"
-        android:layout_below="@id/actionBar" >
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:fastScrollEnabled="false" >
     </ListView>
 
     <RelativeLayout
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
+        android:layout_height="wrap_content" >
 
         <EditText
             android:id="@+id/editText"
@@ -55,4 +56,4 @@
             android:text="comment" />
     </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>
