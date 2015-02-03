@@ -28,6 +28,8 @@ public class ReviewFragment extends Fragment{
 	Button rightBtn;
 	ImageView reviewImg;
 	List<String> reviewImgPaths;
+	SQLiteDatabase db;
+	String tableName;
 	int index=0;
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
@@ -45,51 +47,19 @@ public class ReviewFragment extends Fragment{
 		else
 		{
 			String date=bundle.getString("date");
-			String tableName=getResources().getString(R.string.db_english_table);
-			SQLiteDatabase db = DataConstants.dbHelper.getReadableDatabase();
+			tableName=getArguments().getString("course_table_name");
+			db = DataConstants.dbHelper.getReadableDatabase();
 			List<String> photoNames=DataConstants.dbHelper.queryPhotoNamesAtDate(getActivity(), db, tableName, date);
 			List<String> photoPaths=new ArrayList<String>();
-			String dirPath=FileDataHandler.APP_DIR_PATH+"/"+getResources().getString(R.string.dir_english);
+			String dirPath=FileDataHandler.APP_DIR_PATH+"/"+DataConstants.TABLE_DIR_MAP.get(tableName);
 			reviewImgPaths=new ArrayList<String>();
 			for(String name:photoNames)
-				//photoPaths.add(dirPath+"/"+name);
 				reviewImgPaths.add(dirPath+"/"+name);
 			db.close();
-			 
-			//choosePaths(getSDPath()+"/DCIM/Camera");
 			Picasso.with(getActivity()).load(new File(reviewImgPaths.get(0))).into(reviewImg);
-			leftBtn.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View arg0) {
-					// TODO Auto-generated method stub
-					if(index==reviewImgPaths.size())
-					{
-						jumpToCompleteFragment();
-					}
-					else
-					{
-						Picasso.with(getActivity()).load(new File(reviewImgPaths.get(index))).into(reviewImg);
-						index++;
-					}
-				}
-			});
-			rightBtn.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View arg0) {
-					// TODO Auto-generated method stub
-					if(index==reviewImgPaths.size())
-					{
-						jumpToCompleteFragment();
-					}
-					else
-					{
-						Picasso.with(getActivity()).load(new File(reviewImgPaths.get(index))).into(reviewImg);
-						index++;
-					}
-				}
-			});
+			leftBtn.setOnClickListener(new CourseMasterListener(photoNames.get(index), tableName, getResources().getString(R.string.state_master)));
+			rightBtn.setOnClickListener(new CourseMasterListener(photoNames.get(index), tableName, getResources().getString(R.string.state_unmaster)));
+			
 		}
 		return rootView;
 	}
@@ -103,6 +73,50 @@ public class ReviewFragment extends Fragment{
 		FragmentTransaction trans = fm.beginTransaction();  
 		trans.replace(R.id.exercise_frame, fragment);
 		trans.commit();
+	}
+	class CourseMasterListener implements OnClickListener
+	{
+
+		String photoName;
+		String tableName;
+		String masterState;
+		public CourseMasterListener(String photoName, String tableName,
+				String masterState) {
+			super();
+			this.photoName = photoName;
+			this.tableName = tableName;
+			this.masterState = masterState;
+		}
+		@Override
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+		
+				//rootView.startAnimation(animation);
+				DataConstants.dbHelper.updateCourseMasterState(getActivity(), db, tableName, masterState, photoName);
+				index++;
+				if(index==reviewImgPaths.size())
+				{
+					jumpToCompleteFragment();
+				}
+				else
+				Picasso.with(getActivity()).load(new File(reviewImgPaths.get(index))).into(reviewImg);
+				
+			}
+
+		
+	}
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		db = DataConstants.dbHelper.getReadableDatabase();
+	}
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		db.close();
 	}
 	private void choosePaths(String fileDir)
 	{

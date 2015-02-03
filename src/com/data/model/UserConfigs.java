@@ -1,11 +1,15 @@
 package com.data.model;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.app.ydd.R;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 
 public class UserConfigs 
 {
@@ -149,5 +153,17 @@ public class UserConfigs
 		return sp.getString(context.getResources().getString(R.string.course_profess2_name),null);
 	}
 	
+	public static List<String> getCourseNames()
+	{	List<String> names=new ArrayList<String>();
+		names.add(context.getResources().getString(R.string.english)+getCourseEnglishName());
+		names.add(context.getResources().getString(R.string.politics));
+		if(getCourseMathName()!=null)
+			names.add(context.getResources().getString(R.string.math)+getCourseMathName());
+		names.add(getCourseProfessOneName());
+		if(getCourseProfessTwoName()!=null)
+			names.add(getCourseProfessTwoName());
+		Log.e(DataConstants.TAG,"names.size() "+names.size());
+		return names;
+	}
 
 }

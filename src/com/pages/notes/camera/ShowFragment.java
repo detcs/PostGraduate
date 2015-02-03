@@ -1,12 +1,27 @@
 package com.pages.notes.camera;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import com.app.ydd.R;
+import com.data.model.DataConstants;
+import com.data.model.DatabaseHelper;
+import com.data.model.FileDataHandler;
+import com.data.model.UserConfigs;
 import com.data.util.SysCall;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,6 +31,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -24,7 +41,7 @@ public class ShowFragment extends Fragment {
 	private View rootView;
 	private Bitmap bitmap;
 	private ShowJump jump;
-	private String[] items = { "英語1", "數學2", "政治", "物理" };
+	private List<String> items = UserConfigs.getCourseNames();
 	private String finalRemarks = "";
 
 	private TextView againView;
@@ -36,11 +53,11 @@ public class ShowFragment extends Fragment {
 	private TextView saveView;
 	private EditText remarksView;// is empty before edit
 
-	// private RadioGroup gendergroup;
+	private RadioGroup gendergroup;
 	private RadioButton[] radios = new RadioButton[4];
 	private Button saveBu;
 	private ImageView imageView1;
-
+	int selectIndex=0;
 	public void setBitmap(Bitmap bitmap) {
 		// TODO Auto-generated constructor stub
 		this.bitmap = bitmap;
@@ -90,11 +107,12 @@ public class ShowFragment extends Fragment {
 		saveView = (TextView) view.findViewById(R.id.saveView);
 		remarksView = (EditText) view.findViewById(R.id.remarksView);
 
-		// gendergroup = (RadioGroup) view.findViewById(R.id.gendergroup);
+		gendergroup = (RadioGroup) view.findViewById(R.id.gendergroup);
 		radios[0] = (RadioButton) view.findViewById(R.id.radioButton1);
 		radios[1] = (RadioButton) view.findViewById(R.id.radioButton2);
 		radios[2] = (RadioButton) view.findViewById(R.id.radioButton3);
 		radios[3] = (RadioButton) view.findViewById(R.id.radioButton4);
+		
 		saveBu = (Button) view.findViewById(R.id.saveBu);
 	}
 
@@ -102,7 +120,7 @@ public class ShowFragment extends Fragment {
 		imageView1.setImageBitmap(CameraUtil.scaleToScreen(getActivity(),
 				bitmap));
 		for (int i = 0; i < 4; i++) {
-			radios[i].setText(items[i]);
+			radios[i].setText(items.get(i));
 		}
 	}
 
@@ -139,7 +157,22 @@ public class ShowFragment extends Fragment {
 				hideRemark();
 			}
 		});
-
+		gendergroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(RadioGroup arg0, int arg1) {
+				// TODO Auto-generated method stub
+				for(int i=0;i<4;i++)
+				{
+					if(arg1==radios[i].getId())
+					{
+						selectIndex=i;break;
+					}
+				}
+				saveBu.setOnClickListener(new SaveListener(selectIndex));
+				Log.e(DataConstants.TAG,"radio "+selectIndex);
+			}
+		});
 		saveView.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -155,14 +188,7 @@ public class ShowFragment extends Fragment {
 			}
 		});
 
-		saveBu.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-
-			}
-		});
+		
 	}
 
 	private void canEdit() {
@@ -194,6 +220,114 @@ public class ShowFragment extends Fragment {
 		}
 	}
 
+	public void saveMyBitmap(String path) throws IOException {
+        File f = new File(path);
+        f.createNewFile();
+        FileOutputStream fOut = null;
+        try {
+                fOut = new FileOutputStream(f);
+        } catch (FileNotFoundException e) {
+                e.printStackTrace();
+        }
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+        try {
+                fOut.flush();
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
+        try {
+                fOut.close();
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
+	}
+	class SaveListener implements OnClickListener
+	{
+
+		int index;
+		
+		public SaveListener(int index) {
+			super();
+			this.index = index;
+		}
+
+		@Override
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+			if(!FileDataHandler.sdCardExist())// no sd card
+			{
+				
+			}
+			else
+			{
+				String storePath=FileDataHandler.APP_DIR_PATH+"/";
+				SimpleDateFormat sdf=new SimpleDateFormat("yyyy_MM_dd|HH:mm:ss");
+				String time=sdf.format(new Date());
+				//test date
+				sdf=new  SimpleDateFormat("yyyy_MM_dd");
+				String date=sdf.format(new Date());
+				//test date
+				String photoName=UserConfigs.getAccount()+"|"+time+".jpg";
+				try 
+				{
+					
+					
+					String tableName=null;
+					if(index==0)
+					{
+						tableName=getResources().getString(R.string.db_english_table);
+						storePath+=getResources().getString(R.string.dir_english);
+					}
+					else if(index==1)
+					{
+						tableName=getResources().getString(R.string.db_politics_table);
+						storePath+=getResources().getString(R.string.dir_politics);
+					}
+					else if(index==2)
+					{
+						if(UserConfigs.getCourseMathName()!=null)
+						{
+							tableName=getResources().getString(R.string.db_math_table);
+							storePath+=getResources().getString(R.string.dir_math);
+						}
+						else
+						{	
+							tableName=getResources().getString(R.string.db_profess1_table);
+							storePath+=getResources().getString(R.string.dir_profess1);
+						}
+					}
+					else if(index==3)
+					{
+						if(UserConfigs.getCourseProfessOneName()==null)
+						{
+							tableName=getResources().getString(R.string.db_profess1_table);
+							storePath+=getResources().getString(R.string.dir_profess1);
+						}
+						else
+						{
+							tableName=getResources().getString(R.string.db_profess2_table);
+							storePath+=getResources().getString(R.string.dir_profess2);
+						}
+					}
+					Log.e(DataConstants.TAG,"save "+storePath);
+					saveMyBitmap(storePath+"/"+photoName);
+					savePhotoRecordToDataBase(tableName,photoName, "photobase64", "remark",date, time, 0);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
+	private void savePhotoRecordToDataBase(String tableName,String photoName,String photobase64,String remark,String date,String time,int flag)
+	{
+		DatabaseHelper dbHelper = DataConstants.dbHelper;
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+		dbHelper.insertCourseRecord(getActivity(), db,tableName , photoName, photobase64, remark,date, time,getResources().getString(R.string.state_unknow) ,flag);
+		dbHelper.queryShowRecords(db, tableName);
+		db.close();
+	}
 	// ****************interface call back****************
 	public interface ShowJump {
 		public void take();

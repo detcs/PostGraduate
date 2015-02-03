@@ -55,8 +55,10 @@ public class ExerciseActivity extends FragmentActivity{
 		{
 			frame=(FrameLayout)findViewById(R.id.exercise_frame);
 			fragment=new ReviewChooseFragment();
+			String tableName=getIntent().getStringExtra("course_table_name");
 			Bundle bundle = new Bundle();  
 	        bundle.putString("type", "");  
+	        bundle.putString("course_table_name", tableName);  
 	        fragment.setArguments(bundle);
 			fm=getSupportFragmentManager();
 			FragmentTransaction trans = fm.beginTransaction();  

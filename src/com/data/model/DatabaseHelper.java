@@ -43,6 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     			+context.getResources().getString(R.string.dbcol_remark)+" TEXT not null,"
     			+context.getResources().getString(R.string.dbcol_flag)+" INTEGER,"
     			+context.getResources().getString(R.string.dbcol_date)+" TEXT not null,"
+    			+context.getResources().getString(R.string.dbcol_master_state)+" TEXT not null,"
     			+context.getResources().getString(R.string.dbcol_time)+" TEXT not null );";          
         Log.e(DataConstants.TAG, "sql:"+sql);
     	db.execSQL(sql);
@@ -106,7 +107,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     	String[] whereArgs = { date };//修改条件的参数
     	db.update(context.getResources().getString(R.string.db_footprint_table),cv,whereClause,whereArgs);//执行修改
     }
-    public static void insertCourseRecord(Context context,SQLiteDatabase db,String tableName,String photoname,String photobase64,String remark,String date,String time,int flag)
+    public static void insertCourseRecord(Context context,SQLiteDatabase db,String tableName,String photoname,String photobase64,String remark,String date,String time,String masterState,int flag)
     {
     	ContentValues cv=new ContentValues();
     	cv.put(context.getResources().getString(R.string.dbcol_photo_name), photoname);
@@ -114,6 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     	cv.put(context.getResources().getString(R.string.dbcol_remark), remark);
     	cv.put(context.getResources().getString(R.string.dbcol_date), date);
     	cv.put(context.getResources().getString(R.string.dbcol_time), time);
+    	cv.put(context.getResources().getString(R.string.dbcol_master_state), masterState);
     	cv.put(context.getResources().getString(R.string.dbcol_flag), flag);
     	long rowid=db.insert(tableName, null, cv);
     	Log.e(DataConstants.TAG,"rowid:"+rowid);
@@ -124,6 +126,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
        	cv.put(updateCol, updateValue);
     	String whereClause =context.getResources().getString(R.string.dbcol_date)+ "=?";//修改条件
     	String[] whereArgs = { date };//修改条件的参数
+    	db.update(tableName,cv,whereClause,whereArgs);//执行修改
+    }
+    public static void updateCourseMasterState(Context context,SQLiteDatabase db,String tableName,String updateValue,String photoName)
+    {
+    	ContentValues cv=new ContentValues();
+       	cv.put(context.getResources().getString(R.string.dbcol_master_state), updateValue);
+    	String whereClause =context.getResources().getString(R.string.dbcol_photo_name)+ "=?";//修改条件
+    	String[] whereArgs = { photoName };//修改条件的参数
     	db.update(tableName,cv,whereClause,whereArgs);//执行修改
     }
     public static void updateCourseRecordFlag(Context context,SQLiteDatabase db,String tableName,String photoname,int flag)

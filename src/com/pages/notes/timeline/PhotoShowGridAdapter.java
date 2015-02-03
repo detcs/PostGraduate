@@ -61,7 +61,7 @@ public class PhotoShowGridAdapter extends BaseAdapter
 	    // Bind the data efficiently with the holder.
 	    //Log.e(DataConstants.TAG,"pos:"+position+" path:"+ imgPaths.get(position));
 	    int width=(DataConstants.screenWidth-10)/4;
-	    Log.e(DataConstants.TAG,"width:"+width);
+	    //Log.e(DataConstants.TAG,"width:"+width);
 	    Picasso.with(context).load(new File(imgPaths.get(position))).centerInside().resize(width,width).into(holder.img);
 	    return convertView; 
 	}

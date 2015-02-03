@@ -39,6 +39,7 @@
                 android:id="@+id/today_rec"
                 android:layout_width="wrap_content"
     			android:layout_height="wrap_content"
+    			android:text="@string/today_rec"
                 />
             <TextView
                 android:id="@+id/my_footprint"
@@ -60,6 +61,7 @@
              android:layout_width="wrap_content"
     		 android:layout_height="wrap_content"
     		 android:gravity="center"
+    		 android:text="diary"
             />
          <ImageView
              android:id="@+id/edit_diary"

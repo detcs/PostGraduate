@@ -160,6 +160,7 @@ public class CourseSettingFragment extends Fragment {
 				info.storeToConfig();
 				makeCourseFileDir(info);
 				UserConfigs.storeIsFirstTakePhoto("no");
+				getActivity().setResult(DataConstants.RESULTCODE_COURSE_SETTING);
 				getActivity().finish();
 			}
 		});

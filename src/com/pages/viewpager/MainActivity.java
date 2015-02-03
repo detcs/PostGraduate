@@ -316,14 +316,28 @@ public class MainActivity extends FragmentActivity {
 		});
 		// GridView gv=(GridView)v.findViewById(R.id.notes_grid);
 		ListView courseNamelist = (ListView) v.findViewById(R.id.course_list);
+		final List<String> courseTableNames=new ArrayList<>();
 		final List<String> names = new ArrayList<String>();
-		names.add(getResources().getString(R.string.english));
+		names.add(getResources().getString(R.string.english)+UserConfigs.getCourseEnglishName());
+		courseTableNames.add(getResources().getString(R.string.db_english_table));
 		names.add(getResources().getString(R.string.politics));
-		names.add(getResources().getString(R.string.math));
-		names.add(getResources().getString(R.string.professional_course));
-
+		courseTableNames.add(getResources().getString(R.string.db_politics_table));
+		if(UserConfigs.getCourseMathName()!=null)
+		{
+			names.add(getResources().getString(R.string.math)+UserConfigs.getCourseMathName());
+			courseTableNames.add(getResources().getString(R.string.db_math_table));
+		}
+		names.add(UserConfigs.getCourseProfessOneName());
+		courseTableNames.add(getResources().getString(R.string.db_profess1_table));
+		if(UserConfigs.getCourseProfessTwoName()!=null)
+		{
+			names.add(UserConfigs.getCourseProfessTwoName());
+			courseTableNames.add(getResources().getString(R.string.db_profess2_table));
+		}
+		
 		courseNamelist.setAdapter(new NotesClassAdapter(names,
 				MainActivity.this));
+	
 		courseNamelist.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -335,14 +349,14 @@ public class MainActivity extends FragmentActivity {
 				boolean isFirstUse = UserConfigs.getIsFirstTakePhoto() == null ? true
 						: false;
 				if (isFirstUse) {
-					intent.putExtra("tag",
-							getResources().getString(R.string.first_use));
+					intent.putExtra("tag",getResources().getString(R.string.first_use));
+					startActivityForResult(intent, 0);
 				} else {
-					intent.putExtra("course_name", names.get(position));
-					intent.putExtra("tag",
-							getResources().getString(R.string.note_class));
+					intent.putExtra("course_table_name", courseTableNames.get(position));
+					intent.putExtra("tag",getResources().getString(R.string.note_class));
+					startActivity(intent);
 				}
-				startActivity(intent);
+				
 			}
 		});
 		TextView myFootPrint = (TextView) v.findViewById(R.id.my_footprint);
@@ -490,6 +504,18 @@ public class MainActivity extends FragmentActivity {
 		}
 		return fpInfo;
 	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode==DataConstants.RESULTCODE_COURSE_SETTING)
+		{
+			ListView courseNamelist = (ListView) listViews.get(1).findViewById(R.id.course_list);
+			courseNamelist.invalidate();
+		}
+	}
+	
 	// public void downloadHandler(String url,String path )
 	// {
 	// FinalHttp fh = new FinalHttp();

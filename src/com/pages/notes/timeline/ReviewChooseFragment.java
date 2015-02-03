@@ -29,13 +29,14 @@ public class ReviewChooseFragment extends Fragment{
 	ListView exerciseTimeLine;
 	Button reviewReverse;
 	Button reviewEbbin;
-	//List<String> paths;
+	String tableName;
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_reviewchoose, container, false);
 		exerciseTimeLine=(ListView)rootView.findViewById(R.id.exercise_timeline_list);
 		//paths=new ArrayList<String>();
-		String tableName=getResources().getString(R.string.db_english_table);
+		
+		tableName=getArguments().getString("course_table_name");//getResources().getString(R.string.db_english_table);
 		//choosePaths(DataConstants.SD_PATH+"/"+DataConstants.PHOTO_DIR_PATH+"/"+tableName);
 		SQLiteDatabase db = DataConstants.dbHelper.getReadableDatabase();
 		TreeSet<String> dateSet=DataConstants.dbHelper.queryDates(getActivity(), db, tableName);
@@ -43,7 +44,7 @@ public class ReviewChooseFragment extends Fragment{
 		for(String date:dateSet)
 			dates.add(date);
 		db.close();
-		exerciseTimeLine.setAdapter(new ExerciseTimeLineAdapter(getActivity(),dates));
+		exerciseTimeLine.setAdapter(new ExerciseTimeLineAdapter(getActivity(),tableName,dates));
 		reviewReverse=(Button)rootView.findViewById(R.id.reverse_review);
 		reviewReverse.setOnClickListener(new OnClickListener() {
 			
@@ -68,31 +69,32 @@ public class ReviewChooseFragment extends Fragment{
 		Bundle bundle = new Bundle();  
         bundle.putString("type", "");
         bundle.putString("date", date);
+        bundle.putString("course_table_name", tableName);
         fragment.setArguments(bundle);
 		FragmentManager fm=getActivity().getSupportFragmentManager();
 		FragmentTransaction trans = fm.beginTransaction();  
 		trans.replace(R.id.exercise_frame, fragment);
 		trans.commit();
 	}
-	private void choosePaths(String fileDir)
-	{
-		Log.i("flip","dir "+fileDir);
-		File dir=new File(fileDir);
-		if(dir.exists())
-		{
-			Log.i("flip","dir exist");
-		}
-		File[] tempList = dir.listFiles();
-		Log.i("flip","len "+tempList.length);
-		for (int i = 0; i < tempList.length; i++) 
-		{
-			   if (tempList[i].isFile()) 
-			   {
-				 //  paths.add(tempList[i].getPath());
-			   Log.i("flip","path"+tempList[i].getPath());
-			   }
-		}
-	}
+//	private void choosePaths(String fileDir)
+//	{
+//		Log.i("flip","dir "+fileDir);
+//		File dir=new File(fileDir);
+//		if(dir.exists())
+//		{
+//			Log.i("flip","dir exist");
+//		}
+//		File[] tempList = dir.listFiles();
+//		Log.i("flip","len "+tempList.length);
+//		for (int i = 0; i < tempList.length; i++) 
+//		{
+//			   if (tempList[i].isFile()) 
+//			   {
+//				 //  paths.add(tempList[i].getPath());
+//			   Log.i("flip","path"+tempList[i].getPath());
+//			   }
+//		}
+//	}
 	public String getSDPath(){
 		File sdDir = null;
 		boolean sdCardExist = Environment.getExternalStorageState()

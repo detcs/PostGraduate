@@ -2,6 +2,7 @@ package com.ydd.application;
 
 import java.io.File;
 
+import com.app.ydd.R;
 import com.data.model.DataConstants;
 import com.data.model.DatabaseHelper;
 import com.data.model.FileDataHandler;
@@ -26,6 +27,7 @@ public class YDDApplication extends Application {
 		initAppDIr();
 		// initSD();
 		initDataBase();
+		initDBandDirMap();
 		initScreenParam();
 		GloableData.initRequestQueue(getApplicationContext());
 	}
@@ -62,7 +64,14 @@ public class YDDApplication extends Application {
 				.createFootprintTable(getApplicationContext(), db);
 		db.close();
 	}
-
+	private void initDBandDirMap()
+	{
+		DataConstants.TABLE_DIR_MAP.put(getResources().getString(R.string.db_english_table), getResources().getString(R.string.dir_english));
+		DataConstants.TABLE_DIR_MAP.put(getResources().getString(R.string.db_politics_table), getResources().getString(R.string.dir_politics));
+		DataConstants.TABLE_DIR_MAP.put(getResources().getString(R.string.db_math_table), getResources().getString(R.string.dir_math));
+		DataConstants.TABLE_DIR_MAP.put(getResources().getString(R.string.db_profess1_table), getResources().getString(R.string.dir_profess1));
+		DataConstants.TABLE_DIR_MAP.put(getResources().getString(R.string.db_profess2_table), getResources().getString(R.string.dir_profess2));
+	}
 	private void initScreenParam() {
 		DisplayMetrics dm = new DisplayMetrics();
 		WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
