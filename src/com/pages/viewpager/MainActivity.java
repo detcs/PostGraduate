@@ -26,6 +26,7 @@ import com.data.model.FileDataHandler;
 import com.data.model.NormalPostRequest;
 import com.data.model.UserConfigs;
 import com.data.util.GloableData;
+import com.data.util.SysCall;
 import com.pages.funsquare.ButtonsGridViewAdapter;
 import com.pages.funsquare.FunctionsSquareFragment;
 import com.pages.login.LoginActivity;
@@ -67,6 +68,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -254,31 +256,52 @@ public class MainActivity extends FragmentActivity {
 	public void initNoteView(View v) {
 		// final boolean
 		// isFirstUse=UserConfigs.getIsFirstTakePhoto()==null?true:false;
-
+		final LinearLayout editDiaryLayout=(LinearLayout)v.findViewById(R.id.diary_hideBar);
+		final EditText editDiary = (EditText) v.findViewById(R.id.diary_remarksView);
+		TextView cancelEdit=(TextView)v.findViewById(R.id.diary_quitView);
+		TextView saveEdit=(TextView)v.findViewById(R.id.diary_saveView);
 		TextView diary = (TextView) v.findViewById(R.id.diary);
 		diary.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
-				final EditText inputServer = new EditText(MainActivity.this);
-				inputServer.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
-				AlertDialog.Builder builder = new AlertDialog.Builder(
-						MainActivity.this);
-				builder.setTitle("Server")
-						.setIcon(android.R.drawable.ic_dialog_info)
-						.setView(inputServer).setNegativeButton("Cancel", null);
-				builder.setPositiveButton("Ok",
-						new DialogInterface.OnClickListener() {
-
-							public void onClick(DialogInterface dialog,
-									int which) {
-								inputServer.getText().toString();
-							}
-						});
-				builder.show();
+				editDiaryLayout.setVisibility(View.VISIBLE);
+				SysCall.bumpSoftInput(editDiary, MainActivity.this);
 			}
 		});
-
+		cancelEdit.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				if(editDiaryLayout.getVisibility()==View.VISIBLE)
+				{
+					editDiaryLayout.setVisibility(View.INVISIBLE);
+					SysCall.hideSoftInput(editDiaryLayout, MainActivity.this);
+					editDiary.clearFocus();
+					editDiary.setFocusable(false);
+					editDiary.setFocusableInTouchMode(false);
+				}
+			}
+		});
+		saveEdit.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				editDiaryLayout.setVisibility(View.INVISIBLE);
+				SysCall.hideSoftInput(editDiaryLayout, MainActivity.this);
+				editDiary.clearFocus();
+				editDiary.setFocusable(false);
+				editDiary.setFocusableInTouchMode(false);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Calendar calendar = Calendar.getInstance();
+				String date = sdf.format(calendar.getTime());
+				SQLiteDatabase db = DataConstants.dbHelper.getReadableDatabase();
+				DataConstants.dbHelper.updateFootprintRecord(getApplicationContext(), db, getResources().getString(R.string.dbcol_diary), editDiary.getText().toString(), date);
+				db.close();
+			}
+		});
 		TextView todayRec = (TextView) v.findViewById(R.id.today_rec);
 		todayRec.setOnClickListener(new OnClickListener() {
 
@@ -290,13 +313,14 @@ public class MainActivity extends FragmentActivity {
 				boolean isFirstUse = UserConfigs.getIsFirstTakePhoto() == null ? true
 						: false;
 				if (isFirstUse) {
-					intent.putExtra("tag",
-							getResources().getString(R.string.first_use));
-				} else {
-					intent.putExtra("tag",
-							getResources().getString(R.string.today_rec));
+					intent.putExtra("tag",getResources().getString(R.string.first_use));
+					startActivityForResult(intent, 0);
 				}
-				startActivity(intent);
+			   else {
+					intent.putExtra("tag",getResources().getString(R.string.today_rec));
+					startActivity(intent);
+				}
+				
 			}
 		});
 		Button takePhoto = (Button) v.findViewById(R.id.take_photo);
@@ -379,6 +403,11 @@ public class MainActivity extends FragmentActivity {
 				startActivity(intent);
 			}
 		});
+		TextView count_note=(TextView)v.findViewById(R.id.count_note);
+		SQLiteDatabase db = DataConstants.dbHelper.getReadableDatabase();
+		int count=DataConstants.dbHelper.queryAllCourseRecordsCount(getApplicationContext(), db);
+		db.close();
+		count_note.setText(count+"");
 	}
 
 	public void initFunctionsSquareView(View v) {

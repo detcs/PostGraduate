@@ -101,6 +101,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     public static void updateFootprintRecord(Context context,SQLiteDatabase db,String updateCol,String updateValue,String date)
     {
+    	Log.e(DataConstants.TAG, "updateFootprint "+updateCol+"="+updateValue+" at "+date);
     	ContentValues cv=new ContentValues();
        	cv.put(updateCol, updateValue);
     	String whereClause =context.getResources().getString(R.string.dbcol_date)+ "=?";//修改条件
@@ -144,7 +145,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     	String[] whereArgs = {photoname};//修改条件的参数
     	db.update(tableName,cv,whereClause,whereArgs);//执行修改
     }
-    
+    public static int queryAllCourseRecordsCount(Context context,SQLiteDatabase db)
+    {
+    	int count=0;
+    	count+=queryCourseRecordsCount(db, context.getResources().getString(R.string.db_english_table));
+    	count+=queryCourseRecordsCount(db, context.getResources().getString(R.string.db_politics_table));
+    	count+=queryCourseRecordsCount(db, context.getResources().getString(R.string.db_profess1_table));
+    	if(UserConfigs.getCourseMathName()!=null)
+    		count+=queryCourseRecordsCount(db, context.getResources().getString(R.string.db_math_table));
+    	if(UserConfigs.getCourseProfessTwoName()!=null)
+    		count+=queryCourseRecordsCount(db, context.getResources().getString(R.string.db_profess2_table));
+	      return count;
+    }
+    public static int queryCourseRecordsCount(SQLiteDatabase db,String tableName)
+    {
+    	Cursor result=db.rawQuery("SELECT count(*) FROM "+tableName,null); 
+	    result.moveToFirst(); 
+	    int count=0;
+	    while (!result.isAfterLast()) { 
+	         
+	        count=result.getInt(0); 
+	       // String name=result.getString(1); 
+	        Log.e(DataConstants.TAG,"db:query count:"+tableName+":"+count);
+	        result.moveToNext(); 
+	      } 
+	      result.close();
+	      return count;
+    }
     public static void dropTable(SQLiteDatabase db,String tableName){
         try
         {
