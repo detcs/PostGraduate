@@ -17,58 +17,45 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int background=0x7f090002;
-        public static final int camera_choose_background=0x7f090007;
-        public static final int camera_choose_word=0x7f090006;
-        public static final int camera_edit_word_color=0x7f090009;
-        public static final int camera_float_bar=0x7f090003;
-        public static final int camera_hide_bar=0x7f090008;
-        public static final int camera_pick_album=0x7f090005;
-        public static final int camera_top_bar_word=0x7f090004;
-        public static final int com_sina_weibo_sdk_blue=0x7f090000;
-        public static final int com_sina_weibo_sdk_loginview_text_color=0x7f090001;
-        public static final int essense_back_words_color=0x7f09000b;
-        public static final int essense_head_words_color=0x7f09000a;
-        public static final int essense_tabhost_background=0x7f09000c;
-        public static final int essense_tabhost_word=0x7f09000d;
+        public static final int background=0x7f060000;
+        public static final int camera_choose_background=0x7f060005;
+        public static final int camera_choose_word=0x7f060004;
+        public static final int camera_edit_word_color=0x7f060007;
+        public static final int camera_float_bar=0x7f060001;
+        public static final int camera_hide_bar=0x7f060006;
+        public static final int camera_pick_album=0x7f060003;
+        public static final int camera_top_bar_word=0x7f060002;
+        public static final int essense_back_words_color=0x7f060009;
+        public static final int essense_head_words_color=0x7f060008;
+        public static final int essense_tabhost_background=0x7f06000a;
+        public static final int essense_tabhost_word=0x7f06000b;
     }
     public static final class dimen {
-        /**      <dimen name="weibosdk_dialog_left_margin">10dp</dimen>
-    <dimen name="weibosdk_dialog_top_margin">30dp</dimen>
-    <dimen name="weibosdk_dialog_right_margin">10dp</dimen>
-    <dimen name="weibosdk_dialog_bottom_margin">10dp</dimen> 
- Default screen margins, per the Android Design guidelines. 
+        /**  Default screen margins, per the Android Design guidelines. 
 
          Customize dimensions originally defined in res/values/dimens.xml (such as
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f060000;
-        public static final int activity_vertical_margin=0x7f060001;
-        public static final int camera_bottom_bar_height=0x7f060010;
-        public static final int camera_choose_bar_height=0x7f060012;
-        public static final int camera_choose_item_gap=0x7f060011;
-        public static final int camera_edit_min_height=0x7f060014;
-        public static final int camera_hide_edit_bar_height=0x7f060013;
-        public static final int camera_top_bar_height=0x7f06000f;
-        public static final int clickable_words_size=0x7f06000d;
-        public static final int com_sina_weibo_sdk_loginview_compound_drawable_padding=0x7f060008;
-        public static final int com_sina_weibo_sdk_loginview_padding=0x7f060003;
-        public static final int com_sina_weibo_sdk_loginview_padding_bottom=0x7f060007;
-        public static final int com_sina_weibo_sdk_loginview_padding_left=0x7f060004;
-        public static final int com_sina_weibo_sdk_loginview_padding_right=0x7f060005;
-        public static final int com_sina_weibo_sdk_loginview_padding_top=0x7f060006;
-        public static final int com_sina_weibo_sdk_loginview_text_size=0x7f060002;
-        public static final int comment_height=0x7f06000c;
-        public static final int essense_head_words_size=0x7f060016;
-        public static final int essense_item_height=0x7f06000e;
-        public static final int essense_tabs_Width=0x7f060017;
-        public static final int essense_tabs_bar_height=0x7f060019;
-        public static final int essense_tabs_height=0x7f060018;
-        public static final int essense_top_bar_height=0x7f060015;
-        public static final int name_size=0x7f060009;
-        public static final int small_head_size=0x7f06000b;
-        public static final int title_size=0x7f06000a;
+        public static final int activity_horizontal_margin=0x7f070000;
+        public static final int activity_vertical_margin=0x7f070001;
+        public static final int camera_bottom_bar_height=0x7f070009;
+        public static final int camera_choose_bar_height=0x7f07000b;
+        public static final int camera_choose_item_gap=0x7f07000a;
+        public static final int camera_edit_min_height=0x7f07000d;
+        public static final int camera_hide_edit_bar_height=0x7f07000c;
+        public static final int camera_top_bar_height=0x7f070008;
+        public static final int clickable_words_size=0x7f070006;
+        public static final int comment_height=0x7f070005;
+        public static final int essense_head_words_size=0x7f07000f;
+        public static final int essense_item_height=0x7f070007;
+        public static final int essense_tabs_Width=0x7f070010;
+        public static final int essense_tabs_bar_height=0x7f070012;
+        public static final int essense_tabs_height=0x7f070011;
+        public static final int essense_top_bar_height=0x7f07000e;
+        public static final int name_size=0x7f070002;
+        public static final int small_head_size=0x7f070004;
+        public static final int title_size=0x7f070003;
     }
     public static final class drawable {
         public static final int biz_ad_new_version1_img0=0x7f020000;
@@ -79,31 +66,12 @@ public final class R {
         public static final int biz_ad_show_new_version_btn_pressed=0x7f020005;
         public static final int btn_selector=0x7f020006;
         public static final int choose=0x7f020007;
-        public static final int com_sina_weibo_sdk_button_blue=0x7f020008;
-        public static final int com_sina_weibo_sdk_button_grey=0x7f020009;
-        public static final int com_sina_weibo_sdk_login_button_with_account_text=0x7f02000a;
-        public static final int com_sina_weibo_sdk_login_button_with_frame_logo=0x7f02000b;
-        public static final int com_sina_weibo_sdk_login_button_with_original_logo=0x7f02000c;
-        public static final int default_head=0x7f02000d;
-        public static final int ic_com_sina_weibo_sdk_button_blue_focused=0x7f02000e;
-        public static final int ic_com_sina_weibo_sdk_button_blue_normal=0x7f02000f;
-        public static final int ic_com_sina_weibo_sdk_button_blue_pressed=0x7f020010;
-        public static final int ic_com_sina_weibo_sdk_button_grey_focused=0x7f020011;
-        public static final int ic_com_sina_weibo_sdk_button_grey_normal=0x7f020012;
-        public static final int ic_com_sina_weibo_sdk_button_grey_pressed=0x7f020013;
-        public static final int ic_com_sina_weibo_sdk_login_button_with_frame_logo_focused=0x7f020014;
-        public static final int ic_com_sina_weibo_sdk_login_button_with_frame_logo_normal=0x7f020015;
-        public static final int ic_com_sina_weibo_sdk_login_button_with_frame_logo_pressed=0x7f020016;
-        public static final int ic_com_sina_weibo_sdk_login_with_account_text_focused=0x7f020017;
-        public static final int ic_com_sina_weibo_sdk_login_with_account_text_normal=0x7f020018;
-        public static final int ic_com_sina_weibo_sdk_login_with_account_text_pressed=0x7f020019;
-        public static final int ic_com_sina_weibo_sdk_login_with_text=0x7f02001a;
-        public static final int ic_com_sina_weibo_sdk_logo=0x7f02001b;
-        public static final int ic_launcher=0x7f02001c;
-        public static final int pause=0x7f02001d;
-        public static final int play=0x7f02001e;
-        public static final int takephoto=0x7f02001f;
-        public static final int year=0x7f020020;
+        public static final int default_head=0x7f020008;
+        public static final int ic_launcher=0x7f020009;
+        public static final int pause=0x7f02000a;
+        public static final int play=0x7f02000b;
+        public static final int takephoto=0x7f02000c;
+        public static final int year=0x7f02000d;
     }
     public static final class id {
         public static final int FrameLayout1=0x7f0b0000;
@@ -307,184 +275,172 @@ public final class R {
     public static final class string {
         /**  login 
          */
-        public static final int account=0x7f070033;
-        public static final int account_setting=0x7f070038;
-        public static final int action_settings=0x7f070004;
-        public static final int app_name=0x7f070003;
-        public static final int back=0x7f070052;
-        public static final int backup=0x7f07006b;
-        public static final int camera_choose_default=0x7f070091;
-        public static final int camera_close_preview=0x7f07008d;
-        public static final int camera_edit=0x7f070090;
-        public static final int camera_edit_quit=0x7f070092;
-        public static final int camera_edit_save=0x7f070093;
-        public static final int camera_pick_album=0x7f07008e;
-        public static final int camera_retake=0x7f07008f;
-        public static final int clock=0x7f07005f;
-        public static final int collect=0x7f070058;
-        public static final int com_sina_weibo_sdk_login=0x7f070001;
-        public static final int com_sina_weibo_sdk_login_with_weibo_account=0x7f070000;
-        public static final int com_sina_weibo_sdk_logout=0x7f070002;
-        public static final int complete=0x7f070042;
-        public static final int count_clock=0x7f070065;
-        public static final int count_note=0x7f070066;
-        public static final int course_choose=0x7f070046;
-        public static final int course_english_name=0x7f070010;
-        public static final int course_math_name=0x7f070011;
-        public static final int course_politics_name=0x7f070012;
-        public static final int course_profess1_name=0x7f070013;
-        public static final int course_profess2_name=0x7f070014;
-        public static final int date=0x7f070062;
-        public static final int day=0x7f070060;
-        public static final int db_english_table=0x7f07001c;
-        public static final int db_footprint_table=0x7f070021;
-        public static final int db_math_table=0x7f07001d;
-        public static final int db_politics_table=0x7f07001e;
-        public static final int db_profess1_table=0x7f07001f;
-        public static final int db_profess2_table=0x7f070020;
-        public static final int dbcol_cover_pic=0x7f070022;
-        public static final int dbcol_cover_song=0x7f070023;
-        public static final int dbcol_date=0x7f07001a;
-        public static final int dbcol_days=0x7f070027;
-        public static final int dbcol_daysleft=0x7f070028;
-        public static final int dbcol_diary=0x7f070025;
-        public static final int dbcol_encourage=0x7f070026;
-        public static final int dbcol_flag=0x7f07001b;
+        public static final int account=0x7f080030;
+        public static final int account_setting=0x7f080035;
+        public static final int action_settings=0x7f080001;
+        public static final int app_name=0x7f080000;
+        public static final int back=0x7f08004f;
+        public static final int backup=0x7f080068;
+        public static final int camera_choose_default=0x7f08008e;
+        public static final int camera_close_preview=0x7f08008a;
+        public static final int camera_edit=0x7f08008d;
+        public static final int camera_edit_quit=0x7f08008f;
+        public static final int camera_edit_save=0x7f080090;
+        public static final int camera_pick_album=0x7f08008b;
+        public static final int camera_retake=0x7f08008c;
+        public static final int clock=0x7f08005c;
+        public static final int collect=0x7f080055;
+        public static final int complete=0x7f08003f;
+        public static final int count_clock=0x7f080062;
+        public static final int count_note=0x7f080063;
+        public static final int course_choose=0x7f080043;
+        public static final int course_english_name=0x7f08000d;
+        public static final int course_math_name=0x7f08000e;
+        public static final int course_politics_name=0x7f08000f;
+        public static final int course_profess1_name=0x7f080010;
+        public static final int course_profess2_name=0x7f080011;
+        public static final int date=0x7f08005f;
+        public static final int day=0x7f08005d;
+        public static final int db_english_table=0x7f080019;
+        public static final int db_footprint_table=0x7f08001e;
+        public static final int db_math_table=0x7f08001a;
+        public static final int db_politics_table=0x7f08001b;
+        public static final int db_profess1_table=0x7f08001c;
+        public static final int db_profess2_table=0x7f08001d;
+        public static final int dbcol_cover_pic=0x7f08001f;
+        public static final int dbcol_cover_song=0x7f080020;
+        public static final int dbcol_date=0x7f080017;
+        public static final int dbcol_days=0x7f080024;
+        public static final int dbcol_daysleft=0x7f080025;
+        public static final int dbcol_diary=0x7f080022;
+        public static final int dbcol_encourage=0x7f080023;
+        public static final int dbcol_flag=0x7f080018;
         /**  <string name="dbcol_cover_song_name">dbCoverSongName</string> 
          */
-        public static final int dbcol_footprint_pic=0x7f070024;
-        public static final int dbcol_ifupload=0x7f070029;
-        public static final int dbcol_master_state=0x7f070019;
-        public static final int dbcol_photo_base64=0x7f070016;
+        public static final int dbcol_footprint_pic=0x7f080021;
+        public static final int dbcol_ifupload=0x7f080026;
+        public static final int dbcol_master_state=0x7f080016;
+        public static final int dbcol_photo_base64=0x7f080013;
         /**  database 
          */
-        public static final int dbcol_photo_name=0x7f070015;
-        public static final int dbcol_remark=0x7f070017;
-        public static final int dbcol_time=0x7f070018;
-        public static final int diary=0x7f070045;
+        public static final int dbcol_photo_name=0x7f080012;
+        public static final int dbcol_remark=0x7f080014;
+        public static final int dbcol_time=0x7f080015;
+        public static final int diary=0x7f080042;
         /**  file dir 
          */
-        public static final int dir_app=0x7f07002a;
-        public static final int dir_cover_pic=0x7f07002c;
-        public static final int dir_cover_song=0x7f07002b;
-        public static final int dir_english=0x7f07002e;
-        public static final int dir_footprint_pic=0x7f07002d;
-        public static final int dir_math=0x7f070030;
-        public static final int dir_politics=0x7f07002f;
-        public static final int dir_profess1=0x7f070031;
-        public static final int dir_profess2=0x7f070032;
-        public static final int ebbinghaus_review=0x7f070056;
-        public static final int english=0x7f070047;
-        public static final int english1=0x7f070048;
-        public static final int english2=0x7f070049;
-        public static final int english3=0x7f07004a;
+        public static final int dir_app=0x7f080027;
+        public static final int dir_cover_pic=0x7f080029;
+        public static final int dir_cover_song=0x7f080028;
+        public static final int dir_english=0x7f08002b;
+        public static final int dir_footprint_pic=0x7f08002a;
+        public static final int dir_math=0x7f08002d;
+        public static final int dir_politics=0x7f08002c;
+        public static final int dir_profess1=0x7f08002e;
+        public static final int dir_profess2=0x7f08002f;
+        public static final int ebbinghaus_review=0x7f080053;
+        public static final int english=0x7f080044;
+        public static final int english1=0x7f080045;
+        public static final int english2=0x7f080046;
+        public static final int english3=0x7f080047;
         /**  functions square 
          */
-        public static final int essence=0x7f070068;
-        public static final int essense_back_words=0x7f070095;
-        public static final int essense_head_words=0x7f070094;
-        public static final int female=0x7f070041;
+        public static final int essence=0x7f080065;
+        public static final int essense_back_words=0x7f080092;
+        public static final int essense_head_words=0x7f080091;
+        public static final int female=0x7f08003e;
         /**  note 
          */
-        public static final int first_use=0x7f070043;
-        public static final int get=0x7f070057;
-        public static final int hello_world=0x7f070005;
-        public static final int input_professional_course=0x7f070051;
-        public static final int is_first_take_photo=0x7f070053;
-        public static final int login=0x7f070036;
-        public static final int login_way=0x7f070007;
-        public static final int male=0x7f070040;
-        public static final int master=0x7f070059;
-        public static final int math=0x7f07004c;
-        public static final int math1=0x7f07004d;
-        public static final int math2=0x7f07004e;
-        public static final int math3=0x7f07004f;
-        public static final int myfootprint=0x7f070064;
-        public static final int next_step=0x7f07003c;
-        public static final int note_class=0x7f070054;
-        public static final int obtain_verify_num=0x7f07003b;
-        public static final int password=0x7f070034;
-        public static final int phone_num=0x7f070035;
-        public static final int politics=0x7f07004b;
-        public static final int problems=0x7f070063;
-        public static final int professional_course=0x7f070050;
-        public static final int register=0x7f070037;
-        public static final int register_illustration=0x7f070039;
-        public static final int remark=0x7f07005e;
-        public static final int reverse_review=0x7f070055;
-        public static final int set_nickname=0x7f07003e;
-        public static final int set_password=0x7f07003d;
-        public static final int sex_select=0x7f07003f;
-        public static final int square=0x7f070069;
-        public static final int state_master=0x7f07005b;
-        public static final int state_unknow=0x7f07005d;
-        public static final int state_unmaster=0x7f07005c;
-        public static final int task_complete=0x7f070061;
-        public static final int title_activity_group_search=0x7f07008c;
-        public static final int today_add=0x7f070067;
-        public static final int today_rec=0x7f070044;
-        public static final int unmaster=0x7f07005a;
-        public static final int user_account=0x7f070008;
+        public static final int first_use=0x7f080040;
+        public static final int get=0x7f080054;
+        public static final int hello_world=0x7f080002;
+        public static final int input_professional_course=0x7f08004e;
+        public static final int is_first_take_photo=0x7f080050;
+        public static final int login=0x7f080033;
+        public static final int login_way=0x7f080004;
+        public static final int male=0x7f08003d;
+        public static final int master=0x7f080056;
+        public static final int math=0x7f080049;
+        public static final int math1=0x7f08004a;
+        public static final int math2=0x7f08004b;
+        public static final int math3=0x7f08004c;
+        public static final int myfootprint=0x7f080061;
+        public static final int next_step=0x7f080039;
+        public static final int note_class=0x7f080051;
+        public static final int obtain_verify_num=0x7f080038;
+        public static final int password=0x7f080031;
+        public static final int phone_num=0x7f080032;
+        public static final int politics=0x7f080048;
+        public static final int problems=0x7f080060;
+        public static final int professional_course=0x7f08004d;
+        public static final int register=0x7f080034;
+        public static final int register_illustration=0x7f080036;
+        public static final int remark=0x7f08005b;
+        public static final int reverse_review=0x7f080052;
+        public static final int set_nickname=0x7f08003b;
+        public static final int set_password=0x7f08003a;
+        public static final int sex_select=0x7f08003c;
+        public static final int square=0x7f080066;
+        public static final int state_master=0x7f080058;
+        public static final int state_unknow=0x7f08005a;
+        public static final int state_unmaster=0x7f080059;
+        public static final int task_complete=0x7f08005e;
+        public static final int title_activity_group_search=0x7f080089;
+        public static final int today_add=0x7f080064;
+        public static final int today_rec=0x7f080041;
+        public static final int unmaster=0x7f080057;
+        public static final int user_account=0x7f080005;
         /**  user configs 
          */
-        public static final int user_config_file=0x7f070006;
-        public static final int user_id=0x7f07000f;
-        public static final int user_nickname=0x7f07000d;
-        public static final int user_password=0x7f070009;
-        public static final int user_phone=0x7f07000a;
-        public static final int user_qq=0x7f07000c;
-        public static final int user_verify=0x7f07000e;
-        public static final int user_weibo=0x7f07000b;
-        public static final int verify_num=0x7f07003a;
-        public static final int vip=0x7f07006a;
-        public static final int weibosdk_demo_code_text_hint=0x7f070081;
+        public static final int user_config_file=0x7f080003;
+        public static final int user_id=0x7f08000c;
+        public static final int user_nickname=0x7f08000a;
+        public static final int user_password=0x7f080006;
+        public static final int user_phone=0x7f080007;
+        public static final int user_qq=0x7f080009;
+        public static final int user_verify=0x7f08000b;
+        public static final int user_weibo=0x7f080008;
+        public static final int verify_num=0x7f080037;
+        public static final int vip=0x7f080067;
+        public static final int weibosdk_demo_code_text_hint=0x7f08007e;
         /**  登录/注销按钮 
          */
-        public static final int weibosdk_demo_login_hint=0x7f07006c;
-        public static final int weibosdk_demo_login_with_text_hint=0x7f07006d;
-        public static final int weibosdk_demo_logout=0x7f07006f;
-        public static final int weibosdk_demo_logout_failed=0x7f070071;
-        public static final int weibosdk_demo_logout_failed_1=0x7f070072;
-        public static final int weibosdk_demo_logout_hint=0x7f07006e;
-        public static final int weibosdk_demo_logout_success=0x7f070070;
-        public static final int weibosdk_demo_obtain_token_hint=0x7f07007c;
-        public static final int weibosdk_demo_obtain_token_logout=0x7f070079;
-        public static final int weibosdk_demo_obtain_token_via_code=0x7f070078;
-        public static final int weibosdk_demo_obtain_token_via_code_hint=0x7f07007e;
-        public static final int weibosdk_demo_obtain_token_via_quick_sso=0x7f070077;
-        public static final int weibosdk_demo_obtain_token_via_signature=0x7f070076;
-        public static final int weibosdk_demo_obtain_token_via_sso=0x7f070075;
+        public static final int weibosdk_demo_login_hint=0x7f080069;
+        public static final int weibosdk_demo_login_with_text_hint=0x7f08006a;
+        public static final int weibosdk_demo_logout=0x7f08006c;
+        public static final int weibosdk_demo_logout_failed=0x7f08006e;
+        public static final int weibosdk_demo_logout_failed_1=0x7f08006f;
+        public static final int weibosdk_demo_logout_hint=0x7f08006b;
+        public static final int weibosdk_demo_logout_success=0x7f08006d;
+        public static final int weibosdk_demo_obtain_token_hint=0x7f080079;
+        public static final int weibosdk_demo_obtain_token_logout=0x7f080076;
+        public static final int weibosdk_demo_obtain_token_via_code=0x7f080075;
+        public static final int weibosdk_demo_obtain_token_via_code_hint=0x7f08007b;
+        public static final int weibosdk_demo_obtain_token_via_quick_sso=0x7f080074;
+        public static final int weibosdk_demo_obtain_token_via_signature=0x7f080073;
+        public static final int weibosdk_demo_obtain_token_via_sso=0x7f080072;
         /**  获取 Token 
          */
-        public static final int weibosdk_demo_obtain_token_via_sso_all_in_one=0x7f070073;
-        public static final int weibosdk_demo_obtain_token_via_sso_hint=0x7f07007d;
-        public static final int weibosdk_demo_obtain_token_via_web=0x7f070074;
-        public static final int weibosdk_demo_step_to_obtain_code=0x7f07007f;
-        public static final int weibosdk_demo_step_to_obtain_token=0x7f070080;
-        public static final int weibosdk_demo_toast_auth_canceled=0x7f070087;
-        public static final int weibosdk_demo_toast_auth_failed=0x7f070086;
-        public static final int weibosdk_demo_toast_auth_success=0x7f070085;
-        public static final int weibosdk_demo_toast_obtain_code_failed=0x7f070089;
-        public static final int weibosdk_demo_toast_obtain_code_success=0x7f070088;
-        public static final int weibosdk_demo_toast_obtain_token_failed=0x7f07008b;
-        public static final int weibosdk_demo_toast_obtain_token_success=0x7f07008a;
-        public static final int weibosdk_demo_token_has_existed=0x7f07007b;
-        public static final int weibosdk_demo_token_info=0x7f07007a;
-        public static final int weibosdk_demo_token_text_hint=0x7f070082;
-        public static final int weibosdk_demo_token_to_string_format=0x7f070083;
-        public static final int weibosdk_demo_token_to_string_format_1=0x7f070084;
+        public static final int weibosdk_demo_obtain_token_via_sso_all_in_one=0x7f080070;
+        public static final int weibosdk_demo_obtain_token_via_sso_hint=0x7f08007a;
+        public static final int weibosdk_demo_obtain_token_via_web=0x7f080071;
+        public static final int weibosdk_demo_step_to_obtain_code=0x7f08007c;
+        public static final int weibosdk_demo_step_to_obtain_token=0x7f08007d;
+        public static final int weibosdk_demo_toast_auth_canceled=0x7f080084;
+        public static final int weibosdk_demo_toast_auth_failed=0x7f080083;
+        public static final int weibosdk_demo_toast_auth_success=0x7f080082;
+        public static final int weibosdk_demo_toast_obtain_code_failed=0x7f080086;
+        public static final int weibosdk_demo_toast_obtain_code_success=0x7f080085;
+        public static final int weibosdk_demo_toast_obtain_token_failed=0x7f080088;
+        public static final int weibosdk_demo_toast_obtain_token_success=0x7f080087;
+        public static final int weibosdk_demo_token_has_existed=0x7f080078;
+        public static final int weibosdk_demo_token_info=0x7f080077;
+        public static final int weibosdk_demo_token_text_hint=0x7f08007f;
+        public static final int weibosdk_demo_token_to_string_format=0x7f080080;
+        public static final int weibosdk_demo_token_to_string_format_1=0x7f080081;
     }
     public static final class style {
         /** 
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    
-
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        
-
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     
@@ -505,14 +461,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f080000;
+        public static final int AppBaseTheme=0x7f090000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
- Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f080001;
-        public static final int com_sina_weibo_sdk_loginview_default_style=0x7f080002;
-        public static final int com_sina_weibo_sdk_loginview_silver_style=0x7f080003;
+        public static final int AppTheme=0x7f090001;
     }
 }
