@@ -3,11 +3,13 @@ package com.pages.notes;
 import java.util.List;
 
 import com.app.ydd.R;
+import com.data.model.DataConstants;
 import com.data.model.UserConfigs;
 import com.pages.viewpager.MainActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,11 +22,13 @@ import android.widget.TextView;
 
 public class NotesClassAdapter extends BaseAdapter{
 	List<String> names;
+	List<String> courseTableNames;
 	Context context;
 	LayoutInflater mInflater;
-	public NotesClassAdapter(List<String> names, Context context) {
+	public NotesClassAdapter(List<String> names, List<String> courseTableNames,Context context) {
 		super();
 		this.names = names;
+		this.courseTableNames=courseTableNames;
 		this.context = context;
 		mInflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -67,7 +71,12 @@ public class NotesClassAdapter extends BaseAdapter{
 	        holder = (ViewHolder) convertView.getTag(); 
 	    } 
 	    holder.courseName.setText(names.get(position));
-	    holder.courseInfo.setText("45笔记");
+	    SQLiteDatabase db = DataConstants.dbHelper.getReadableDatabase();
+		// if(!DataConstants.dbHelper.tableIsExist(db,
+		// getResources().getString(R.string.db_footprint_table)))
+		int count=DataConstants.dbHelper.queryCourseRecordsCount(db,courseTableNames.get(position));
+		db.close();
+	    holder.courseInfo.setText(count+context.getResources().getString(R.string.piece));
 	    // Bind the data efficiently with the holder. 
 //	    holder.button.setText(names.get(position)); 
 //	    final int pos=position;
@@ -92,6 +101,11 @@ public class NotesClassAdapter extends BaseAdapter{
 //			}
 //		});
 	    return convertView; 
+	}
+	public void refresh()
+	{
+		Log.e(DataConstants.TAG,"refresh");
+		notifyDataSetChanged();
 	}
 	static class ViewHolder { 
 

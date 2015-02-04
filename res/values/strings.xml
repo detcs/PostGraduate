@@ -44,7 +44,8 @@
     <string name="dbcol_days">dbDays</string>
     <string name="dbcol_daysleft">dbDaysleft</string>
     <string name="dbcol_ifupload">dbIfUpload</string>
-
+    <string name="upload_no">uploadNO</string>
+	<string name="upload_yes">uploadYes</string>
     <!-- file dir -->
     <string name="dir_app">Android/data/ydd</string>
     <string name="dir_cover_song">coverSong</string>
@@ -110,11 +111,14 @@
     <string name="count_clock">累计打卡</string>
     <string name="count_note">累计笔记</string>
     <string name="today_add">今日新增</string>
+    <string name="piece">篇</string>
+    <string name="look_all">查看全部</string>
     <!-- functions square -->
     <string name="essence">精华</string>
     <string name="square">广场</string>
     <string name="vip">vip</string>
     <string name="backup">备份</string>
+    <string name="personal_center">个人中心</string>
 
     <!-- 登录/注销按钮 -->
     <string name="weibosdk_demo_login_hint"><b>一键登录按钮：</b>\n（有以下三种样式，第一种为默认效果）</string>

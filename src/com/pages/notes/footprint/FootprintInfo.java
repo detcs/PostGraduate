@@ -11,22 +11,33 @@ public class FootprintInfo {
 	String encourage;
 	String days;
 	String daysLeft;
-	
-	
-	
-	public FootprintInfo(String coverPicPath, 
-			String coverSongName, String footprintPicPath, String diary,
-			String date, String encourage, String days, String daysLeft) {
+	String ifUpload;
+
+	public FootprintInfo(String coverPicName, String coverSongName,
+			String footprintPicName, String diary, String date,
+			String encourage, String days, String daysLeft, String ifUpload) {
 		super();
-		this.coverPicName = coverPicPath;
-		//this.coverSongPath = coverSongPath;
+		this.coverPicName = coverPicName;
 		this.coverSongName = coverSongName;
-		this.footprintPicName = footprintPicPath;
+		this.footprintPicName = footprintPicName;
 		this.diary = diary;
 		this.date = date;
 		this.encourage = encourage;
 		this.days = days;
 		this.daysLeft = daysLeft;
+		this.ifUpload = ifUpload;
+	}
+
+
+
+	public String getIfUpload() {
+		return ifUpload;
+	}
+
+
+
+	public void setIfUpload(String ifUpload) {
+		this.ifUpload = ifUpload;
 	}
 
 

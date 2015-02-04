@@ -1,56 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-     >
-   
-<LinearLayout
-       	android:id="@+id/direction_choose"
-       	android:orientation="horizontal"
-       	android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:layout_alignParentBottom="true"
-       >
-       <Button
-           	android:id="@+id/master"
-            android:text="@string/master"
-            android:layout_width="match_parent"
-    		android:layout_height="wrap_content"
-    		android:layout_weight="1"
-           />
-       <Button
-           	android:id="@+id/unmaster"
-            android:text="@string/unmaster"
-            android:layout_width="match_parent"
-    		android:layout_height="wrap_content"
-    		android:layout_weight="1"
-           />
-       </LinearLayout> 
-       <LinearLayout
-           android:id="@+id/remark_linear"
-           android:layout_above="@id/direction_choose"
-            android:layout_width="match_parent"
-	    	android:layout_height="wrap_content" 
-	    	android:orientation="vertical">
-       <TextView
-            android:text="@string/remark"
-	        android:layout_width="wrap_content"
-	    	android:layout_height="wrap_content"
-	    	
-           />
-        <TextView
-            android:id="@+id/remark_content"
-            android:text="remark_context"
-	        android:layout_width="wrap_content"
-	    	android:layout_height="wrap_content"
-	    	
-           />
-       
-       </LinearLayout>
-        <ImageView
-            android:id="@+id/review_img"
+	android:layout_height="match_parent">
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="vertical"
+	     >
+	     <FrameLayout
+	          android:layout_width="match_parent"
+			  android:layout_height="wrap_content"
+			  android:layout_weight="4"
+	         >
+		    <ImageView
+		            android:id="@+id/review_img"
+			        android:layout_width="match_parent"
+			    	android:layout_height="wrap_content"
+		        />
+		    <FrameLayout
+	            android:layout_gravity="bottom"
+	            android:layout_width="match_parent"
+		    	android:layout_height="wrap_content" 
+		    	android:background="#ffffff"
+		    	android:orientation="vertical"> 
+	        	<TextView
+		            android:id="@+id/remark_content"
+		            android:text="remark_context"
+			        android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:lines="2"
+			    	android:maxEms="10"
+			    	android:ellipsize="end"
+		           />
+	        	<TextView
+		            android:layout_gravity="bottom|right"
+		            android:text="@string/look_all"
+			        android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+		           />
+	       </FrameLayout>
+	    </FrameLayout>
+	    <RelativeLayout 
 	        android:layout_width="match_parent"
-	    	android:layout_height="match_parent"
-	    	android:layout_above="@id/remark_linear"
-        />
-</RelativeLayout>
+	    	android:layout_height="wrap_content"
+	    	android:layout_weight="1"
+	    	android:paddingTop="5dp"
+	    	android:paddingBottom="5dp"
+	    	>
+	    <LinearLayout
+	       	android:orientation="horizontal"
+	       	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:layout_alignParentRight="true"
+		       >
+		       <ImageView
+		           	android:id="@+id/set_flag_img"
+		            android:src="@drawable/setflag"
+		            android:layout_width="wrap_content"
+		    		android:layout_height="wrap_content"
+		    		
+		           />
+		       <ImageView
+		           	android:id="@+id/rotate_img"
+		            android:src="@drawable/rotate"
+		            android:layout_width="wrap_content"
+		    		android:layout_height="wrap_content"
+		           />
+		       <ImageView
+		           	android:id="@+id/edit_remark_img"
+		            android:src="@drawable/edit_remark"
+		            android:layout_width="wrap_content"
+		    		android:layout_height="wrap_content"
+		           />
+		       </LinearLayout> 
+	       </RelativeLayout>
+		<LinearLayout
+	       	android:id="@+id/direction_choose"
+	       	android:orientation="horizontal"
+	       	android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	    	android:layout_gravity="bottom"
+	    	android:layout_weight="1"
+	    	
+	       >
+	       <Button
+	           	android:id="@+id/master"
+	            android:text="@string/master"
+	            android:layout_width="match_parent"
+	    		android:layout_height="wrap_content"
+	    		android:layout_weight="1"
+	           />
+	       <Button
+	           	android:id="@+id/unmaster"
+	            android:text="@string/unmaster"
+	            android:layout_width="match_parent"
+	    		android:layout_height="wrap_content"
+	    		android:layout_weight="1"
+	           />
+	       </LinearLayout>  
+	</LinearLayout>
+<!-- edit remark -->
+ 	<LinearLayout
+            android:id="@+id/remark_edit_hideBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:visibility="invisible" >
+
+            <RelativeLayout
+                android:id="@+id/remark_edit_hideChoose"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/camera_hide_edit_bar_height"
+                android:background="#ffffff"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/remark_edit_quitView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/camera_edit_quit"
+                    android:textColor="@color/camera_top_bar_word"
+                    android:textSize="@dimen/clickable_words_size" />
+
+                <TextView
+                    android:id="@+id/remark_edit_saveView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/camera_edit_save"
+                    android:textColor="@color/camera_top_bar_word"
+                    android:textSize="@dimen/clickable_words_size" />
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/remark_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:ems="10"
+                android:gravity="top"
+                android:lines="4"
+                android:minHeight="@dimen/camera_edit_min_height"
+                android:textColor="#000000" />
+        </LinearLayout>
+</FrameLayout>

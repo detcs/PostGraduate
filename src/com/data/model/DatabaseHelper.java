@@ -44,6 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     			+context.getResources().getString(R.string.dbcol_flag)+" INTEGER,"
     			+context.getResources().getString(R.string.dbcol_date)+" TEXT not null,"
     			+context.getResources().getString(R.string.dbcol_master_state)+" TEXT not null,"
+    			+context.getResources().getString(R.string.dbcol_ifupload)+" TEXT not null,"
     			+context.getResources().getString(R.string.dbcol_time)+" TEXT not null );";          
         Log.e(DataConstants.TAG, "sql:"+sql);
     	db.execSQL(sql);
@@ -59,6 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     			+context.getResources().getString(R.string.dbcol_encourage)+" TEXT not null,"
     			+context.getResources().getString(R.string.dbcol_days)+" TEXT not null,"
     			+context.getResources().getString(R.string.dbcol_daysleft)+" TEXT not null,"
+    			+context.getResources().getString(R.string.dbcol_ifupload)+" TEXT not null,"
     			+context.getResources().getString(R.string.dbcol_date)+" TEXT not null );";          
         Log.e(DataConstants.TAG, "sql:"+sql);
     	db.execSQL(sql);
@@ -77,7 +79,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	        String encourage=result.getString(5);
 	        String days=result.getString(6);
 	        String daysleft=result.getString(7);
-	        fpInfo=new FootprintInfo(coverPicPath,coverSongName,footprintPic,diary,encourage,days,daysleft,date); 
+	        fpInfo=new FootprintInfo(coverPicPath,coverSongName,footprintPic,diary,encourage,days,daysleft,date,context.getResources().getString(R.string.upload_no)); 
 	       // Log.e(DataConstants.TAG,"db:query "+id+","+name);
 	        result.moveToNext(); 
 	      } 
@@ -96,6 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     	cv.put(context.getResources().getString(R.string.dbcol_diary), fpInfo.getDiary());
     	cv.put(context.getResources().getString(R.string.dbcol_days), fpInfo.getDays());
     	cv.put(context.getResources().getString(R.string.dbcol_daysleft), fpInfo.getDaysLeft());
+    	cv.put(context.getResources().getString(R.string.dbcol_ifupload), fpInfo.getIfUpload());
     	long rowid=db.insert(context.getResources().getString(R.string.db_footprint_table), null, cv);
     	Log.e(DataConstants.TAG,"insert footprint rowid:"+rowid);
     }
@@ -108,16 +111,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     	String[] whereArgs = { date };//修改条件的参数
     	db.update(context.getResources().getString(R.string.db_footprint_table),cv,whereClause,whereArgs);//执行修改
     }
-    public static void insertCourseRecord(Context context,SQLiteDatabase db,String tableName,String photoname,String photobase64,String remark,String date,String time,String masterState,int flag)
+//    public static void insertCourseRecord(Context context,SQLiteDatabase db,String tableName,String photoname,String photobase64,String remark,String date,String time,String masterState,int flag)
+//    {
+//    	ContentValues cv=new ContentValues();
+//    	cv.put(context.getResources().getString(R.string.dbcol_photo_name), photoname);
+//    	cv.put(context.getResources().getString(R.string.dbcol_photo_base64), photobase64);
+//    	cv.put(context.getResources().getString(R.string.dbcol_remark), remark);
+//    	cv.put(context.getResources().getString(R.string.dbcol_date), date);
+//    	cv.put(context.getResources().getString(R.string.dbcol_time), time);
+//    	cv.put(context.getResources().getString(R.string.dbcol_master_state), masterState);
+//    	cv.put(context.getResources().getString(R.string.dbcol_flag), flag);
+//    	long rowid=db.insert(tableName, null, cv);
+//    	Log.e(DataConstants.TAG,"rowid:"+rowid);
+//    }
+    public static void insertCourseRecord(Context context,SQLiteDatabase db,String tableName,CourseRecordInfo cri)
     {
     	ContentValues cv=new ContentValues();
-    	cv.put(context.getResources().getString(R.string.dbcol_photo_name), photoname);
-    	cv.put(context.getResources().getString(R.string.dbcol_photo_base64), photobase64);
-    	cv.put(context.getResources().getString(R.string.dbcol_remark), remark);
-    	cv.put(context.getResources().getString(R.string.dbcol_date), date);
-    	cv.put(context.getResources().getString(R.string.dbcol_time), time);
-    	cv.put(context.getResources().getString(R.string.dbcol_master_state), masterState);
-    	cv.put(context.getResources().getString(R.string.dbcol_flag), flag);
+    	cv.put(context.getResources().getString(R.string.dbcol_photo_name), cri.getPhotoName());
+    	cv.put(context.getResources().getString(R.string.dbcol_photo_base64), cri.getPhotobase64());
+    	cv.put(context.getResources().getString(R.string.dbcol_remark), cri.getRemark());
+    	cv.put(context.getResources().getString(R.string.dbcol_date), cri.getDate());
+    	cv.put(context.getResources().getString(R.string.dbcol_time), cri.getTime());
+    	cv.put(context.getResources().getString(R.string.dbcol_master_state), cri.getMasterState());
+    	cv.put(context.getResources().getString(R.string.dbcol_flag), cri.getFlag());
+    	cv.put(context.getResources().getString(R.string.dbcol_ifupload), cri.getIfUpload());
     	long rowid=db.insert(tableName, null, cv);
     	Log.e(DataConstants.TAG,"rowid:"+rowid);
     }
@@ -129,10 +146,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     	String[] whereArgs = { date };//修改条件的参数
     	db.update(tableName,cv,whereClause,whereArgs);//执行修改
     }
-    public static void updateCourseMasterState(Context context,SQLiteDatabase db,String tableName,String updateValue,String photoName)
+//    public static void updateCourseMasterState(Context context,SQLiteDatabase db,String tableName,String updateValue,String photoName)
+//    {
+//    	ContentValues cv=new ContentValues();
+//       	cv.put(context.getResources().getString(R.string.dbcol_master_state), updateValue);
+//    	String whereClause =context.getResources().getString(R.string.dbcol_photo_name)+ "=?";//修改条件
+//    	String[] whereArgs = { photoName };//修改条件的参数
+//    	db.update(tableName,cv,whereClause,whereArgs);//执行修改
+//    }
+    // masterState or remark update
+    public static void updateCourseRecordByPhotoName(Context context,SQLiteDatabase db,String tableName,String updateCol,String updateValue,String photoName)
     {
+    	Log.e(DataConstants.TAG,"updateCourseRecord "+updateCol+" "+updateValue+" where photoname="+photoName);
     	ContentValues cv=new ContentValues();
-       	cv.put(context.getResources().getString(R.string.dbcol_master_state), updateValue);
+       	cv.put(updateCol, updateValue);
     	String whereClause =context.getResources().getString(R.string.dbcol_photo_name)+ "=?";//修改条件
     	String[] whereArgs = { photoName };//修改条件的参数
     	db.update(tableName,cv,whereClause,whereArgs);//执行修改
@@ -159,6 +186,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     public static int queryCourseRecordsCount(SQLiteDatabase db,String tableName)
     {
+    	//if(tableIsExist(db,tableName)==false)
+    	//	return 0;
     	Cursor result=db.rawQuery("SELECT count(*) FROM "+tableName,null); 
 	    result.moveToFirst(); 
 	    int count=0;

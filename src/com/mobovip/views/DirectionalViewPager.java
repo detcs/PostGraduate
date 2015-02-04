@@ -1116,4 +1116,272 @@ public class DirectionalViewPager extends ViewPager {
 			dataSetChanged();
 		}
 	}
+	/*
+	public class MyPagerAdapter extends PagerAdapter {
+		public List<View> mListViews;
+
+		// public List<Fragment> mFragList;
+
+		public MyPagerAdapter(List<View> mListViews) {
+			this.mListViews = mListViews;
+		}
+
+		@Override
+		public void destroyItem(View arg0, int arg1, Object arg2) {
+			((ViewPager) arg0).removeView(mListViews.get(arg1));
+			// ((ViewPager)
+			// arg0).removeViewAt(arg1);//.removeView(mFragList.get(arg1));
+		}
+
+		@Override
+		public void finishUpdate(View arg0) {
+		}
+
+		@Override
+		public int getCount() {
+			return mListViews.size();
+		}
+
+		@Override
+		public Object instantiateItem(View view, int position) {
+			View v = mListViews.get(position);
+			Log.i("flip", " v==null?" + (v == null));
+			// ImageView iv=(ImageView)v.findViewById(R.id.iv);
+			// iv.setImageResource(ids[position]);
+			((ViewPager) view).addView(v, 0);
+			if (position == 0)// todayfragment
+			{
+				initTodayView(v);
+			} else if (position == 1)// notefragment
+			{
+				initNoteView(v);
+			} else if (position == 2) {
+				initFunctionsSquareView(v);
+			}
+			return v;
+		}
+
+		@Override
+		public boolean isViewFromObject(View arg0, Object arg1) {
+			return arg0 == (arg1);
+		}
+
+		@Override
+		public void restoreState(Parcelable arg0, ClassLoader arg1) {
+		}
+
+		@Override
+		public Parcelable saveState() {
+			Log.i("flip", "Parcelable saveState()");
+			return null;
+		}
+
+		@Override
+		public void startUpdate(View arg0) {
+		}
+	}
+	*/
+/*
+	public void initTodayView(View v) {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar = Calendar.getInstance();
+		// calendar.roll(Calendar.DAY_OF_YEAR,1);//tomorrow
+		String date = sdf.format(calendar.getTime());
+		// Log.e(DataConstants.TAG,"date:"+date);
+
+		// requestFirstPageJasonInfo(getFirstPageURL(date),date);
+
+		mp = MediaPlayer.create(this, R.raw.song);
+		final ImageView play = (ImageView) v.findViewById(R.id.music_play);
+		play.setImageResource(R.drawable.play);
+		TextView musicName = (TextView) v.findViewById(R.id.music_name);
+		musicName.setText("可惜没如果");
+		play.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				if (mp.isPlaying()) {
+					play.setImageResource(R.drawable.play);
+					mp.pause();
+				} else {
+					play.setImageResource(R.drawable.pause);
+					mp.start();
+				}
+			}
+		});
+
+		// mp.start();
+	}
+*/
+	/*
+	public void initNoteView(View v) {
+		// final boolean
+		// isFirstUse=UserConfigs.getIsFirstTakePhoto()==null?true:false;
+		final LinearLayout editDiaryLayout=(LinearLayout)v.findViewById(R.id.diary_hideBar);
+		final EditText editDiary = (EditText) v.findViewById(R.id.diary_remarksView);
+		TextView cancelEdit=(TextView)v.findViewById(R.id.diary_quitView);
+		TextView saveEdit=(TextView)v.findViewById(R.id.diary_saveView);
+		TextView diary = (TextView) v.findViewById(R.id.diary);
+		diary.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				editDiaryLayout.setVisibility(View.VISIBLE);
+				SysCall.bumpSoftInput(editDiary, MainActivity.this);
+			}
+		});
+		cancelEdit.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				if(editDiaryLayout.getVisibility()==View.VISIBLE)
+				{
+					editDiaryLayout.setVisibility(View.INVISIBLE);
+					SysCall.hideSoftInput(editDiaryLayout, MainActivity.this);
+					editDiary.clearFocus();
+					editDiary.setFocusable(false);
+					editDiary.setFocusableInTouchMode(false);
+				}
+			}
+		});
+		saveEdit.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				editDiaryLayout.setVisibility(View.INVISIBLE);
+				SysCall.hideSoftInput(editDiaryLayout, MainActivity.this);
+				editDiary.clearFocus();
+				editDiary.setFocusable(false);
+				editDiary.setFocusableInTouchMode(false);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Calendar calendar = Calendar.getInstance();
+				String date = sdf.format(calendar.getTime());
+				SQLiteDatabase db = DataConstants.dbHelper.getReadableDatabase();
+				DataConstants.dbHelper.updateFootprintRecord(getApplicationContext(), db, getResources().getString(R.string.dbcol_diary), editDiary.getText().toString(), date);
+				db.close();
+			}
+		});
+		TextView todayRec = (TextView) v.findViewById(R.id.today_rec);
+		todayRec.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, ExerciseActivity.class);
+				boolean isFirstUse = UserConfigs.getIsFirstTakePhoto() == null ? true
+						: false;
+				if (isFirstUse) {
+					intent.putExtra("tag",getResources().getString(R.string.first_use));
+					startActivityForResult(intent, 0);
+				}
+			   else {
+					intent.putExtra("tag",getResources().getString(R.string.today_rec));
+					startActivity(intent);
+				}
+				
+			}
+		});
+		Button takePhoto = (Button) v.findViewById(R.id.take_photo);
+
+		takePhoto.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Log.i("filp", "" + arg0.getId() + " button 1");
+
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, CameraActivity.class);
+				startActivity(intent);
+
+			}
+		});
+		// GridView gv=(GridView)v.findViewById(R.id.notes_grid);
+		ListView courseNamelist = (ListView) v.findViewById(R.id.course_list);
+		final List<String> courseTableNames=new ArrayList<>();
+		final List<String> names = new ArrayList<String>();
+		names.add(getResources().getString(R.string.english)+UserConfigs.getCourseEnglishName());
+		courseTableNames.add(getResources().getString(R.string.db_english_table));
+		names.add(getResources().getString(R.string.politics));
+		courseTableNames.add(getResources().getString(R.string.db_politics_table));
+		if(UserConfigs.getCourseMathName()!=null)
+		{
+			names.add(getResources().getString(R.string.math)+UserConfigs.getCourseMathName());
+			courseTableNames.add(getResources().getString(R.string.db_math_table));
+		}
+		names.add(UserConfigs.getCourseProfessOneName());
+		courseTableNames.add(getResources().getString(R.string.db_profess1_table));
+		if(UserConfigs.getCourseProfessTwoName()!=null)
+		{
+			names.add(UserConfigs.getCourseProfessTwoName());
+			courseTableNames.add(getResources().getString(R.string.db_profess2_table));
+		}
+		
+		courseNamelist.setAdapter(new NotesClassAdapter(names,courseTableNames,MainActivity.this));
+		courseNamelist.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, ExerciseActivity.class);
+				boolean isFirstUse = UserConfigs.getIsFirstTakePhoto() == null ? true
+						: false;
+				if (isFirstUse) {
+					intent.putExtra("tag",getResources().getString(R.string.first_use));
+					startActivityForResult(intent, 0);
+				} else {
+					intent.putExtra("course_table_name", courseTableNames.get(position));
+					intent.putExtra("tag",getResources().getString(R.string.note_class));
+					startActivity(intent);
+				}
+				
+			}
+		});
+		TextView myFootPrint = (TextView) v.findViewById(R.id.my_footprint);
+		myFootPrint.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+
+				boolean isFirstUse = UserConfigs.getIsFirstTakePhoto() == null ? true
+						: false;
+				if (isFirstUse) {
+					intent.putExtra("tag",
+							getResources().getString(R.string.first_use));
+					intent.setClass(MainActivity.this, ExerciseActivity.class);
+				} else {
+					intent.setClass(MainActivity.this, FootPrintActivity.class);
+				}
+				startActivity(intent);
+			}
+		});
+		TextView count_note=(TextView)v.findViewById(R.id.count_note);
+		SQLiteDatabase db = DataConstants.dbHelper.getReadableDatabase();
+		int count=DataConstants.dbHelper.queryAllCourseRecordsCount(getApplicationContext(), db);
+		db.close();
+		count_note.setText(count+"");
+	}
+*/
+	 /*
+	public void initFunctionsSquareView(View v) {
+
+		GridView gv = (GridView) v.findViewById(R.id.funcs_grid);
+		List<String> names = new ArrayList<String>();
+		names.add(getResources().getString(R.string.essence));
+		names.add(getResources().getString(R.string.square));
+		names.add(getResources().getString(R.string.math));
+		names.add(getResources().getString(R.string.backup));
+		names.add(getResources().getString(R.string.personal_center));
+		gv.setAdapter(new ButtonsGridViewAdapter(names, MainActivity.this));
+	}
+*/
 }

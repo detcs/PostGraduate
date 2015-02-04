@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.app.ydd.R;
+import com.data.model.CourseRecordInfo;
 import com.data.model.DataConstants;
 import com.data.model.DatabaseHelper;
 import com.data.model.FileDataHandler;
@@ -324,7 +325,8 @@ public class ShowFragment extends Fragment {
 	{
 		DatabaseHelper dbHelper = DataConstants.dbHelper;
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		dbHelper.insertCourseRecord(getActivity(), db,tableName , photoName, photobase64, remark,date, time,getResources().getString(R.string.state_unknow) ,flag);
+		CourseRecordInfo cri=new CourseRecordInfo(photoName, photobase64, remark, date, time, getResources().getString(R.string.state_unknow), getResources().getString(R.string.upload_no), flag);
+		dbHelper.insertCourseRecord(getActivity(), db,tableName , cri);
 		dbHelper.queryShowRecords(db, tableName);
 		db.close();
 	}

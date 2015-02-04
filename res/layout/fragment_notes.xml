@@ -96,20 +96,19 @@
 	    	android:layout_height="wrap_content"
 	        android:orientation="vertical"
 	        android:layout_weight="1"
-	        
 	        >
-            <TextView
-                android:text="@string/count_clock"
-                android:layout_width="wrap_content"
-	    		android:layout_height="wrap_content"
-	    		android:layout_gravity="center_horizontal"
-                />
             <TextView
                 android:id="@+id/count_clock"
                 android:layout_width="wrap_content"
 	    		android:layout_height="wrap_content"
 	    		android:layout_gravity="center_horizontal"
                 />
+              <TextView
+                android:text="@string/count_clock"
+                android:layout_width="wrap_content"
+	    		android:layout_height="wrap_content"
+	    		android:layout_gravity="center_horizontal"
+                />
         </LinearLayout>
          <LinearLayout
 	        android:layout_width="wrap_content"
@@ -117,18 +116,19 @@
 	        android:orientation="vertical"
 	        android:layout_weight="1"
 	        >
-              <TextView
-                android:text="@string/count_note"
-                android:layout_width="wrap_content"
-	    		android:layout_height="wrap_content"
-	    		android:layout_gravity="center_horizontal"
-                />
+             
             <TextView
                 android:id="@+id/count_note"
                 android:layout_width="wrap_content"
 	    		android:layout_height="wrap_content"
 	    		android:layout_gravity="center_horizontal"
                 />
+             <TextView
+                android:text="@string/count_note"
+                android:layout_width="wrap_content"
+	    		android:layout_height="wrap_content"
+	    		android:layout_gravity="center_horizontal"
+                />
         </LinearLayout>
          <LinearLayout
 	        android:layout_width="wrap_content"
@@ -136,12 +136,7 @@
 	        android:orientation="vertical"
 	        android:layout_weight="1"
 	        >
-              <TextView
-                android:text="@string/today_add"
-                android:layout_width="wrap_content"
-	    		android:layout_height="wrap_content"
-	    		android:layout_gravity="center_horizontal"
-                />
+            
             <TextView
                 android:id="@+id/today_add"
                 android:layout_width="wrap_content"
@@ -150,6 +145,12 @@
 	    		android:gravity="center_horizontal"
 	    		android:textColor="#ff0000"
 	    		 android:text="55"
+                />
+              <TextView
+                android:text="@string/today_add"
+                android:layout_width="wrap_content"
+	    		android:layout_height="wrap_content"
+	    		android:layout_gravity="center_horizontal"
                 />
         </LinearLayout>
         </LinearLayout>
@@ -164,12 +165,12 @@
         android:orientation="horizontal"
         android:layout_weight="5"
         >
-        <ListView
+        <com.pages.notes.NoScrollListView
             android:id="@+id/course_list"
             android:layout_width="match_parent"
     		android:layout_height="wrap_content"
             >
-            </ListView>
+            </com.pages.notes.NoScrollListView>
         </LinearLayout>
         <!-- takephoto -->
         <LinearLayout
