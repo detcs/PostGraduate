@@ -43,6 +43,7 @@
     <string name="dbcol_encourage">dbEncourage</string>
     <string name="dbcol_days">dbDays</string>
     <string name="dbcol_daysleft">dbDaysleft</string>
+    <string name="dbcol_ifupload">dbIfUpload</string>
 
     <!-- file dir -->
     <string name="dir_app">Android/data/ydd</string>
